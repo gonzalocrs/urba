@@ -589,3 +589,29 @@ nav a{font-size:.9rem}
 .ns-stats strong{display:block;font-family:var(--font-ui);font-weight:500;font-size:clamp(3rem,7vw,6.5rem);line-height:1}
 .ns-stats span{font-size:var(--fs-sm)}
 @media (max-width:860px){.still.still-h{grid-template-columns:1fr 1fr;row-gap:2.5rem}.ns-logo-text,.ns-photo-cap{grid-template-columns:1fr}.team{grid-template-columns:1fr 1fr}.ns-stats{grid-template-columns:1fr 1fr}.ns-stats li:nth-child(3){border-left:0;padding-left:0}}
+
+/* Planos: one viewer for building drawings + units (architecture first, sales as a quiet layer) */
+.planos .units-wrap{grid-template-columns:1.7fr 1fr}
+.uv-plan{aspect-ratio:3/2}
+.uv-plan.is-dwg img{padding:4%}
+.uv-info{grid-template-columns:auto 1fr auto}
+.uv-info.is-dwg{grid-template-columns:1fr auto}
+.uv-info ul li:last-child{color:var(--grafito)}
+.ix-list{border-top:1px solid var(--grafito)}
+.ix-list ul{list-style:none;padding:0;margin:0 0 2.25rem}
+.ix-group{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin:0;padding:1.1rem 0 .6rem;font-family:var(--font-ui);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ix-filter{display:flex;gap:1rem}
+.ix-filter button{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--muted);cursor:pointer}
+.ix-filter button[aria-pressed=true]{color:var(--grafito);text-decoration:underline;text-underline-offset:.35em}
+.ix{position:relative;width:100%;display:grid;grid-template-columns:4.5rem 1fr auto;gap:1rem;align-items:baseline;background:none;border:0;border-bottom:1px solid var(--line);padding:1rem 0 1rem 1.1rem;text-align:left;font:var(--fs-base) var(--font-text);color:var(--grafito);cursor:pointer;transition:padding .25s ease,color .2s}
+.ix::before{content:"";position:absolute;left:0;top:50%;width:.45rem;height:.45rem;margin-top:-.225rem;background:var(--line);transition:background-color .2s,transform .2s}
+.ix:hover::before{background:var(--grafito)}
+.ix[aria-current]::before{background:var(--accent);transform:scale(1.35)}
+.ix[aria-current] .ix-name{font-weight:600}
+.ix-name{font-family:var(--font-ui);font-weight:500;grid-column:1/-1}
+.ix[data-beds] .ix-name{grid-column:auto}
+.ix-meta{color:var(--muted);font-size:var(--fs-sm)}
+.ix-price{font-size:var(--fs-sm);color:var(--muted)}
+.ix[aria-current] .ix-price{color:var(--grafito)}
+@media (max-width:860px){.planos .units-wrap{grid-template-columns:1fr}.unit-view{position:static}.uv-info{grid-template-columns:1fr;gap:1rem}.uv-info ul{justify-content:flex-start}}
+.uv-info.is-dwg h3{font-size:clamp(1.25rem,1.8vw,1.6rem)}
