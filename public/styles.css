@@ -273,3 +273,4 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .logo-ur{display:block;height:2.25rem;aspect-ratio:231.16/161.62;background:var(--grafito);-webkit-mask:url(/img/brand/ur-mark.svg) left center/contain no-repeat;mask:url(/img/brand/ur-mark.svg) left center/contain no-repeat}
 /* The header already carries the mark: no isotipo watermark in the top bands */
 .slide .iso,.project-hero .iso,.page-head .iso{display:none}
+.site-header,.slide{transition:background-color .35s ease}.logo-ur{transition:background-color .35s ease}

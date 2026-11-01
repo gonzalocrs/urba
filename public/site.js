@@ -100,8 +100,9 @@ function mountLeadForm(el, project){
   document.querySelectorAll('link[rel~="icon"]').forEach(l => l.remove());
   const link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/svg+xml'; link.href = ICONS[i];
   document.head.appendChild(link);
-  // Header mark: Ur letters only, in a colour that contrasts with the page's accent (rotates per visit)
+  // Header mark: Ur letters only, in a colour that contrasts with the accent behind it
+  const INK = { celeste: ['naranja', 'grafito'], naranja: ['celeste', 'grafito'], amarillo: ['grafito'] };
+  window.urbaInk = (accent, n) => { const list = INK[accent] || ['grafito']; document.querySelectorAll('.logo-ur').forEach(el => el.style.background = 'var(--' + list[(n || 0) % list.length] + ')'); };
   const accent = (document.body.className.match(/theme-(\w+)/) || [, 'celeste'])[1];
-  const INK = { celeste: ['grafito', 'naranja'], naranja: ['grafito', 'celeste'], amarillo: ['grafito'] }[accent] || ['grafito'];
-  document.querySelectorAll('.logo-ur').forEach(el => el.style.background = 'var(--' + INK[i % INK.length] + ')');
+  urbaInk(accent, i);
 })();
