@@ -1,0 +1,10 @@
+name = "urba"
+compatibility_date = "2026-10-01"
+
+# Static site: Cloudflare serves everything in ./public (same setup as the portfolio, minus the passcode worker)
+[assets]
+directory = "./public"
+not_found_handling = "404-page"
+
+[observability]
+enabled = true
