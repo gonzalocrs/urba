@@ -270,6 +270,6 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .slide[hidden]{display:none!important}
 
 /* Header mark = the Ur module, same rotating pair as the favicon */
-.logo-ur{display:block;width:3.25rem;height:3.25rem}
+.logo-ur{display:block;height:2.25rem;aspect-ratio:231.16/161.62;background:var(--grafito);-webkit-mask:url(/img/brand/ur-mark.svg) left center/contain no-repeat;mask:url(/img/brand/ur-mark.svg) left center/contain no-repeat}
 /* The header already carries the mark: no isotipo watermark in the top bands */
 .slide .iso,.project-hero .iso,.page-head .iso{display:none}
