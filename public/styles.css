@@ -294,3 +294,9 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .scroll-cue svg{width:1.25rem;height:1.25rem;animation:cue 2s ease-in-out infinite}
 @keyframes cue{50%{transform:translateY(4px)}}
 @media (prefers-reduced-motion:reduce){.scroll-cue svg{animation:none}}
+
+/* Slimmer ribbon */
+:root{--header:3.25rem}
+.logo-ur{height:1.5rem}
+.nav-wa{padding:.25rem .75rem!important;font-size:.8125rem!important}
+nav a{font-size:.875rem}
