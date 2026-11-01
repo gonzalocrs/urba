@@ -56,17 +56,18 @@ const units = p.units || [];
 const bedsSet = [...new Set(units.map(u => u.beds))].sort((x, y) => x - y);
 const money = v => v ? 'US$ ' + Number(v).toLocaleString('en-US') : 'Consultar';
 const unitRow = (u, i) => `
-  <li class="unit" data-beds="${u.beds}">
-    <button type="button" class="unit-row" aria-expanded="false" aria-controls="u${i}">
-      <span class="u-code">${esc(u.code)}</span><span>${esc(u.type || 'Flat')}</span><span>${esc(String(u.floor ?? ''))}</span><span>${u.beds}</span><span>${u.baths}</span><span>${u.area} m²</span><span class="u-price">${money(u.price)}</span><span class="u-plus" aria-hidden="true"></span>
-    </button>
-    <div class="unit-detail" id="u${i}" hidden>
-      <div class="unit-plan">${u.plan ? `<img src="${esc(u.plan)}" alt="Plano ${esc(u.code)}" loading="lazy">` : '<p>Plano disponible pronto</p>'}</div>
-      <div class="unit-info"><p class="eyebrow">${esc(u.type || 'Flat')} · Piso ${esc(String(u.floor ?? '—'))}</p><h3>${esc(u.code)}</h3>
-        <ul><li><span>Dormitorios</span>${u.beds}</li><li><span>Baños</span>${u.baths}</li><li><span>Área</span>${u.area} m²</li><li><span>Precio</span>${money(u.price)}</li></ul>
-        <a class="btn-pill btn-pill-dark" data-wa="Hola, me interesa el departamento ${esc(u.code)} de ${esc(p.name)} (${u.area} m², ${u.beds} dorm.).">Cotizar ${esc(u.code)} ↗</a></div>
-    </div>
-  </li>`;
+  <li><button type="button" class="unit-pick" data-i="${i}" data-beds="${u.beds}"${i ? '' : ' aria-current="true"'}>
+    <span class="u-code">${esc(u.code)}</span><span>${u.beds} dorm.</span><span>${u.area} m²</span><span class="u-price">${money(u.price)}</span>
+  </button></li>`;
+const unitView = (u) => `
+  <div class="uv-plan">${u.plan ? `<img src="${esc(u.plan)}" alt="Plano del departamento ${esc(u.code)}">` : `<p>Plano del ${esc(u.code)}<br><small>disponible pronto</small></p>`}</div>
+  <div class="uv-info">
+    <div><p class="eyebrow">${esc(u.type || 'Flat')} · Piso ${esc(String(u.floor ?? '—'))}</p><h3>${esc(u.code)}</h3></div>
+    <ul><li><span>Dorm.</span>${u.beds}</li><li><span>Baños</span>${u.baths}</li><li><span>Área</span>${u.area} m²</li><li><span>Precio</span>${money(u.price)}</li></ul>
+    <a class="btn-pill btn-pill-dark" data-wa="Hola, me interesa el departamento ${esc(u.code)} de ${esc(p.name)} (${u.area} m², ${u.beds} dorm.).">Cotizar ${esc(u.code)} ↗</a>
+  </div>`;
+const near = p.nearby || {};
+const mapsQ = encodeURIComponent(p.mapQuery || p.address || '');
 const kind = (p.kicker || '').split('·')[0].trim(), year = ((p.kicker || '').split('·')[1] || '').trim();
 const sub = [kind, p.district].filter(Boolean).join(' · ') + (year ? ', ' + year : '');
 const done = p.stage === 'entregado';
@@ -90,8 +91,24 @@ el.innerHTML = `
   ${units.length ? `<section class="block" id="departamentos"><div class="wrap-wide">
     <div class="sec-head"><div><p class="eyebrow">Departamentos</p><h2 class="title">Elige tu departamento</h2></div>
       <div class="chips chips-light" id="unit-filter"><button type="button" data-b="" aria-pressed="true">Todos</button>${bedsSet.map(b => `<button type="button" data-b="${b}">${b} dorm.</button>`).join('')}</div></div>
-    <div class="unit-head" aria-hidden="true"><span>Código</span><span>Tipo</span><span>Piso</span><span>Dorm.</span><span>Baños</span><span>Área</span><span>Precio</span><span></span></div>
-    <ul class="units">${units.map(unitRow).join('')}</ul>
+    <div class="units-wrap">
+      <div class="unit-view" id="unit-view">${unitView(units[0])}</div>
+      <ul class="unit-list">${units.map(unitRow).join('')}</ul>
+    </div>
+  </div></section>` : ''}
+  ${p.mapQuery ? `<section class="near" id="ubicacion">
+    <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${mapsQ}&output=embed"></iframe>
+    <div class="near-panel">
+      <p class="eyebrow">Ubicación</p>
+      <h2 class="title">Cerca de la vida que te gusta.</h2>
+      <p class="near-addr">${esc(p.address || p.mapQuery)}</p>
+      <div class="near-btns"><a class="btn-pill" href="https://www.google.com/maps/search/?api=1&query=${mapsQ}" target="_blank" rel="noopener">Ver en Google Maps</a><a class="btn-pill btn-pill-accent" href="https://waze.com/ul?q=${mapsQ}&navigate=yes" target="_blank" rel="noopener">Ver en Waze</a></div>
+      ${Object.keys(near).length ? `<div class="near-lists">${Object.entries(near).map(([k, list]) => `<div><h3>${esc(k)}</h3><ol>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>`).join('')}</div>` : ''}
+    </div>
+  </section>` : ''}
+  ${(p.amenities || []).length ? `<section class="block"><div class="wrap-wide">
+    <div class="sec-head"><div><p class="eyebrow">Áreas comunes</p><h2 class="title">Para disfrutar sin salir de casa</h2></div></div>
+    <div class="amen">${p.amenities.map(a => `<figure><div class="amen-img">${a.img ? `<img src="${esc(a.img)}" alt="${esc(a.title)}, ${esc(p.name)}" loading="lazy">` : ''}</div><figcaption>${esc(a.title)}</figcaption></figure>`).join('')}</div>
   </div></section>` : ''}
   ${(p.planImgs || []).length ? `<section class="block plans-band"><div class="wrap-wide">
     <div class="sec-head"><div><p class="eyebrow">Planos</p><h2 class="title">Distribución</h2></div></div>
@@ -99,7 +116,7 @@ el.innerHTML = `
   </div></section>` : ''}
   ${(p.spaces || []).some(x => x.img) ? `<section class="obras"><div class="wrap-wide sec-head"><div><p class="eyebrow">Galería</p><h2 class="title">${esc(p.name)}</h2></div></div>
     <div class="grid3">${p.spaces.filter(x => x.img).slice(0, 3).map(x => `<figure class="g3"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.title)}, ${esc(p.name)}" loading="lazy"></div><p><strong>${esc(x.title)}</strong><span>${esc(x.text.split('.')[0])}</span></p></figure>`).join('')}</div></section>` : ''}
-  ${p.mapQuery ? `<section id="ubicacion" class="map-full"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${encodeURIComponent(p.mapQuery)}&output=embed"></iframe><p class="map-label">${esc(p.address || p.mapQuery)}</p></section>` : ''}
+
   <section class="talk" id="contacto">
     <div class="wrap talk-grid">
       <div class="talk-head">
@@ -113,9 +130,13 @@ el.innerHTML = `
   ${forSale().some(x => x.slug !== p.slug) ? `<section class="block"><div class="wrap-wide"><div class="sec-head"><div><p class="eyebrow">Proyectos en venta</p><h2 class="title">Otros proyectos</h2></div><a class="link-arrow" href="/proyectos.html">Ver todos</a></div><div class="cards" id="others"></div></div></section>` : ''}`;
 
 mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'), done ? '' : p.name);
-const uf = document.getElementById('unit-filter');
-if (uf) uf.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; uf.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); el.querySelectorAll('.unit').forEach(li => li.hidden = !!b.dataset.b && li.dataset.beds !== b.dataset.b); });
-el.querySelectorAll('.unit-row').forEach(r => r.addEventListener('click', () => { const open = r.getAttribute('aria-expanded') === 'true'; r.setAttribute('aria-expanded', !open); document.getElementById(r.getAttribute('aria-controls')).hidden = open; }));
+const uf = document.getElementById('unit-filter'), uv = document.getElementById('unit-view');
+const wire = (root) => root.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
+const pick = (btn) => { el.querySelectorAll('.unit-pick').forEach(x => x.toggleAttribute('aria-current', x === btn)); uv.innerHTML = unitView(units[+btn.dataset.i]); uv.classList.remove('swap'); void uv.offsetWidth; uv.classList.add('swap'); wire(uv); };
+el.querySelectorAll('.unit-pick').forEach(b => b.addEventListener('click', () => pick(b)));
+if (uf) uf.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; uf.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  const vis = [...el.querySelectorAll('.unit-pick')].filter(x => { const show = !b.dataset.b || x.dataset.beds === b.dataset.b; x.parentElement.hidden = !show; return show; });
+  if (vis.length && !vis.some(x => x.hasAttribute('aria-current'))) pick(vis[0]); });
 const others = document.getElementById('others'); if (others) others.innerHTML = forSale().filter(x => x.slug !== p.slug).slice(0, 3).map(projectCard).join('');
 el.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
 })();

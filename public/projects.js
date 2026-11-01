@@ -30,6 +30,10 @@ const PROJECTS = [
       { code: '501', type: 'Flat', floor: 5, beds: 2, baths: 2, area: 82, price: 158000, plan: '' },
       { code: '1001', type: 'Penthouse', floor: 10, beds: 3, baths: 3, area: 140, price: 280000, plan: '' }
     ],
+    // Nearby places shown next to the map (por completar)
+    nearby: { 'Parques': ['Por completar'], 'Cafés y restaurantes': ['Por completar'], 'Colegios': ['Por completar'], 'Clínicas': ['Por completar'] },
+    // Common-area renders (por completar)
+    amenities: [{ title: 'Lobby', img: '' }, { title: 'Coworking', img: '' }, { title: 'Zona BBQ', img: '' }, { title: 'Gimnasio', img: '' }, { title: 'Sala de niños', img: '' }, { title: 'Terraza', img: '' }],
     intro: 'Descripción del proyecto: concepto, entorno y lo que lo hace especial (por completar).',
     hero: '', heroMobile: '',               // e.g. /img/proyectos/proyecto-1/hero.jpg
     cover: '',                              // card image
