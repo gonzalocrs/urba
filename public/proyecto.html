@@ -30,7 +30,6 @@
 const p = PROJECTS.find(x => x.slug === new URLSearchParams(location.search).get('p'));
 const el = document.getElementById('project');
 if (!p) { el.innerHTML = '<section class="page-head band"><div class="wrap"><h1 class="title">Proyecto no encontrado</h1><p><a class="btn" href="/proyectos.html">Ver proyectos</a></p></div></section>'; return; }
-document.body.className = themeOf(p);
 document.title = p.name + ' · ' + p.district + ' · Urba Inmobiliaria';
 document.querySelector('meta[name=description]').content = p.intro;
 const ficha = p.ficha || [
@@ -49,7 +48,7 @@ el.innerHTML = `
     <div class="wrap slide-text">
       <span class="tag">${esc(STAGES[p.stage])}</span>
       <h1>${esc(p.name)}</h1>
-      <p class="slide-meta">${esc((TYPES[p.type] || {}).label || '')} · ${esc(p.district)}</p>
+      <p class="slide-meta">${esc(p.district)}</p>
       <div class="actions"><a class="btn" href="#info">${p.stage === 'entregado' ? 'Contáctanos' : 'Quiero más información'}</a><a class="btn btn-ghost" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a>${p.mapQuery ? '<a class="btn btn-ghost" href="#ubicacion">Ubicación</a>' : ''}</div>
     </div>${p.hero ? '</div>' : ''}
   </section>
