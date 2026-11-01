@@ -25,7 +25,7 @@ function waLink(text){
   if (header) {
     header.innerHTML = `
       <div class="wrap top">
-        <a class="brand" href="/" aria-label="Urba Inmobiliaria, inicio">URBA <span>Inmobiliaria</span></a>
+        <a class="brand" href="/" aria-label="Urba Inmobiliaria, inicio"><span class="logo" aria-hidden="true"></span></a>
         <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menú</button>
         <nav id="nav">${NAV.map(([h, t]) =>
           `<a href="${h}"${(h === here || (h !== '/' && here.startsWith(h.replace('.html','')))) ? ' aria-current="page"' : ''}>${t}</a>`).join('')}
@@ -43,9 +43,9 @@ function waLink(text){
       .map(([n, u]) => `<a href="${u}" rel="noopener" target="_blank">${n}</a>`).join(' · ');
     footer.innerHTML = `
       <div class="wrap foot">
-        <div><strong class="brand">URBA <span>Inmobiliaria</span></strong><p>${URBA.address}</p></div>
+        <div><span class="logo-foot" role="img" aria-label="Urba. Creamos espacios, construimos comunidad"></span></div>
         <div><p><a href="tel:${URBA.phone.replace(/\s/g,'')}">${URBA.phone}</a><br><a href="mailto:${URBA.email}">${URBA.email}</a></p>${social ? `<p>${social}</p>` : ''}</div>
-        <p class="small">© ${new Date().getFullYear()} Urba Inmobiliaria</p>
+        <div><p>${URBA.address}</p><p class="small">© ${new Date().getFullYear()} Urba Inmobiliaria</p></div>
       </div>`;
   }
   // floating WhatsApp button
