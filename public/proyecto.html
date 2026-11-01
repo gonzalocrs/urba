@@ -44,7 +44,7 @@ const icons = {
 };
 el.innerHTML = `
   <section class="project-hero band${p.hero ? ' has-img' : ''}">
-    ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture>` : '<div class="iso" aria-hidden="true"></div>'}
+    ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture>` : ''}<div class="iso" aria-hidden="true"></div>
     <div class="wrap slide-text">
       <span class="tag">${esc(STAGES[p.stage])}</span>
       <h1>${esc(p.name)}</h1>

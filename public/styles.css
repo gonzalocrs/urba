@@ -209,3 +209,34 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .wa-float:hover{transform:scale(1.06);background:var(--accent);color:var(--grafito)}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* "Always in the making": the logo builds and unbuilds itself
+   (logo -> isotipo -> top cut -> bottom cut -> isotipo -> logo), from the isotype studies. */
+.making{position:relative;width:min(100%,30rem);aspect-ratio:506.61/165.16;color:var(--grafito)}
+.making span{position:absolute;inset:0;background:currentColor;-webkit-mask:url(/img/brand/isotipo.svg) center/contain no-repeat;mask:url(/img/brand/isotipo.svg) center/contain no-repeat}
+.making .m-logo{-webkit-mask-image:url(/img/brand/logo.svg);mask-image:url(/img/brand/logo.svg);inset:1.2% 0;animation:m-logo 12s infinite}
+.making .m-iso{animation:m-iso 12s infinite}
+@keyframes m-logo{0%,14%{opacity:1}20%,86%{opacity:0}92%,100%{opacity:1}}
+@keyframes m-iso{0%,14%{opacity:0;clip-path:inset(0 0 0 0)}20%,32%{opacity:1;clip-path:inset(0 0 0 0)}40%,50%{opacity:1;clip-path:inset(0 0 52% 0)}58%,68%{opacity:1;clip-path:inset(74% 0 0 0)}76%,84%{opacity:1;clip-path:inset(0 0 0 0)}90%,100%{opacity:0;clip-path:inset(0 0 0 0)}}
+@media (prefers-reduced-motion:reduce){.making .m-iso{display:none}}
+.making-panel{background:var(--accent);display:grid;place-items:center;padding:12%}
+
+/* isotipo in white over black-and-white photography (brand application) */
+.has-img picture img{filter:grayscale(1) contrast(1.05)}
+.has-img .iso{background:var(--blanco);z-index:1;width:min(52vw,40rem)}
+.photo-iso{position:relative;overflow:hidden}
+.photo-iso img{filter:grayscale(1) contrast(1.05)}
+.photo-iso::before{content:"";position:absolute;top:0;right:0;width:78%;aspect-ratio:506.61/165.16;background:var(--blanco);z-index:1;-webkit-mask:url(/img/brand/isotipo.svg) right top/contain no-repeat;mask:url(/img/brand/isotipo.svg) right top/contain no-repeat}
+.photo-iso::after{display:none}
+
+/* header: always a brand-colour ribbon (page accent), never transparent over photos */
+.site-header,.site-header.over,.site-header.scrolled{position:sticky;top:0;background:var(--accent);color:var(--grafito);box-shadow:none}
+.site-header.over:not(.scrolled):not(.open).on-dark{color:var(--grafito)}
+.site-header.open{background:var(--accent)}
+.nav-wa:hover{background:var(--grafito);color:var(--accent)}
+.slide,.project-hero{padding-top:3rem;min-height:min(48rem,max(32rem,calc(86vh - var(--header))))}
+.project-hero{min-height:min(42rem,max(28rem,calc(72vh - var(--header))))}
+.slide .iso,.project-hero .iso,.has-img .iso{top:0}
+.has-img::after{background:linear-gradient(to top,rgba(20,20,21,.65),rgba(20,20,21,.05) 55%)}
+.page-head{padding-top:3.5rem}
+.page-head.band{background:var(--soft)}
