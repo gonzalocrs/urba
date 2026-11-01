@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Proyectos · Urba Inmobiliaria</title>
-<meta name="description" content="Proyectos de Urba Inmobiliaria en Lima: filtra por distrito, dormitorios y etapa.">
+<meta name="description" content="Proyectos de Urba Inmobiliaria en Cusco y el Valle Sagrado.">
 <meta property="og:title" content="Proyectos · Urba Inmobiliaria">
-<meta property="og:description" content="Proyectos de Urba Inmobiliaria en Lima: filtra por distrito, dormitorios y etapa.">
+<meta property="og:description" content="Proyectos de Urba Inmobiliaria en Cusco y el Valle Sagrado.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#282829">
 <link rel="icon" href="/img/brand/favicon.svg" type="image/svg+xml">
@@ -20,7 +20,7 @@
 <header class="site-header" data-site-header></header>
 <main>
 
-<section class="page-head band"><div class="iso" aria-hidden="true"></div><div class="wrap"><h1 class="title">Proyectos</h1><p class="lead">Encuentra tu próximo hogar en Lima.</p></div></section>
+<section class="page-head band"><div class="iso" aria-hidden="true"></div><div class="wrap"><h1 class="title">Proyectos</h1><p class="lead">Encuentra tu próximo hogar en Cusco.</p></div></section>
 <section class="wrap block-tight">
   <form class="filters" id="filters" aria-label="Filtrar proyectos"></form>
   <div class="cards" id="cards"></div>
@@ -30,6 +30,7 @@
 <footer class="site-footer" data-site-footer></footer>
 <script src="/projects.js"></script>
 <script src="/site.js"></script>
-<script>mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));</script>
+<script>if (forSale().length < 3) { document.getElementById('filters').hidden = true; const c = document.getElementById('cards'); c.className = 'features'; c.innerHTML = forSale().map(featureCard).join(''); c.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; }); }
+else mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));</script>
 </body>
 </html>

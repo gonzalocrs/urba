@@ -831,3 +831,38 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 @media (max-width:900px){.planos-g{max-height:none}.pg-body{grid-template-columns:1fr}.pg-card{min-height:60vw}.pg-tabs-wrap{align-items:flex-start}}
 .planos-g .pg-card{top:auto}.planos-g{height:calc(100svh - var(--header));min-height:34rem}
 .ficha-band{background:var(--blanco)}
+
+/* Lot map (Horizontes del Valle): one drawing, the chosen lot is filled in the project colour */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.pg-lots .pg-body{grid-template-columns:minmax(0,2.2fr) minmax(16rem,1fr)}
+.pg-lots .pg-tabs .ix{padding:.45rem .7rem;min-width:1.1rem;text-align:center}
+.pl-map svg{position:absolute;inset:0;width:100%;height:100%;padding:clamp(1rem,3%,2.5rem);box-sizing:border-box}
+.pl-map polygon{fill:transparent;cursor:pointer;transition:fill .2s}
+.pl-map polygon:hover{fill:color-mix(in srgb,var(--accent,#3fc1d0) 25%,transparent)}
+.pl-map polygon.on{fill:color-mix(in srgb,var(--accent,#3fc1d0) 55%,transparent);stroke:var(--grafito);stroke-width:2}
+.pl-map polygon.st-vendido{fill:rgba(40,40,40,.12)}
+@media (max-width:900px){.pg-lots .pg-body{grid-template-columns:1fr}.pg-lots .pg-card{min-height:42vw}}
+
+/* Home: one wide feature per project when only one or two are for sale */
+.features{display:grid;gap:clamp(2rem,4vw,3.5rem)}
+.feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(18rem,1fr);gap:clamp(1.5rem,4vw,4rem);align-items:center}
+.feature-img{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--soft)}
+.feature-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.feature-img:hover img{transform:scale(1.03)}
+.feature-body .title{margin:.4rem 0 1rem}
+.feature-body p:not(.eyebrow){color:var(--muted);max-width:34rem;margin:0 0 1.5rem}
+.feature-keys{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:.25rem 2.5rem;margin:0 0 1.75rem}
+.feature-keys dt{font-family:var(--font-ui);font-size:var(--fs-sm);color:var(--muted)}
+.feature-keys dd{margin:0;font-family:var(--font-ui);font-weight:500}
+@media (max-width:860px){.feature{grid-template-columns:1fr}}
+.card-static{cursor:default}
+/* Project video */
+.film{background:var(--grafito);padding:0}
+.film video{display:block;width:100%;max-height:calc(100svh - var(--header));aspect-ratio:16/9;object-fit:contain;background:#000}
+/* Project logo in the hero (Horizontes del Valle) */
+.hero-logo{display:block;width:min(30rem,78vw);height:auto;margin:0 auto}
+.pg-lots .pg-body{grid-template-columns:minmax(0,3fr) minmax(15rem,1fr)}
+.pl-map svg{padding:clamp(.5rem,1.5%,1.25rem)}
+.pl-map polygon{mix-blend-mode:multiply}
+.pl-map polygon.on{fill:var(--accent,#f5e500);stroke-width:2.5}
+.feature-body .title{font-size:var(--fs-h2)}

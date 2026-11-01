@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Urba Inmobiliaria · Creamos espacios, construimos comunidad</title>
-<meta name="description" content="Urba Inmobiliaria: proyectos inmobiliarios en Lima. Departamentos en preventa, en construcción y entrega inmediata.">
+<meta name="description" content="Urba Inmobiliaria: proyectos inmobiliarios en Cusco y el Valle Sagrado.">
 <meta property="og:title" content="Urba Inmobiliaria · Creamos espacios, construimos comunidad">
-<meta property="og:description" content="Urba Inmobiliaria: proyectos inmobiliarios en Lima. Departamentos en preventa, en construcción y entrega inmediata.">
+<meta property="og:description" content="Urba Inmobiliaria: proyectos inmobiliarios en Cusco y el Valle Sagrado.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#282829">
 <link rel="icon" href="/img/brand/favicon.svg" type="image/svg+xml">
@@ -21,12 +21,12 @@
 <main>
 
 <section class="hero-photo" aria-label="Proyecto destacado">
-  <img src="/img/proyectos/sierra-hotel/fachada.jpg" alt="" fetchpriority="high">
+  <img src="/img/proyectos/horizontes-del-valle/valle-nevado.jpg" alt="" fetchpriority="high">
   <div class="hero-photo-text" id="hero-text">
-    <p class="hero-kicker">Obra entregada</p>
-    <h1>Sierra Hotel</h1>
-    <p class="hero-sub">Hotel · Cusco, 2023</p>
-    <a class="btn-pill" href="/proyecto.html?p=sierra-hotel">Ver proyecto <span aria-hidden="true">↗</span></a>
+    <p class="hero-kicker">En venta</p>
+    <h1>Horizontes del Valle</h1>
+    <p class="hero-sub">Lotes · Urubamba</p>
+    <a class="btn-pill" href="/proyecto.html?p=horizontes-del-valle">Ver proyecto <span aria-hidden="true">↗</span></a>
   </div>
   <a class="scroll-cue" href="#proyectos">Descubre más<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
 </section>
@@ -37,7 +37,7 @@
 </div></section>
 
 <section class="block" id="proyectos"><div class="wrap-wide">
-  <div class="sec-head"><div><p class="eyebrow">Proyectos en venta</p><h2 class="title">Encuentra tu próximo espacio</h2></div><a class="link-arrow" href="/proyectos.html">Ver todos</a></div>
+  <div class="sec-head"><div><p class="eyebrow">En venta</p><h2 class="title">Encuentra tu próximo espacio</h2></div></div>
   <form class="filters" id="filters" aria-label="Filtrar proyectos"></form>
   <div class="cards" id="cards"></div>
   <p id="empty" class="muted" hidden>No encontramos proyectos con esos filtros.</p>
@@ -59,7 +59,7 @@
   <div class="wrap talk-grid">
     <div class="talk-head">
       <p class="eyebrow">Contacto</p>
-      <h2 class="talk-title">Quiero<br><span class="talk-word" id="talk-word">comprar un depa</span><span class="talk-caret" aria-hidden="true"></span></h2>
+      <h2 class="talk-title">Quiero<br><span class="talk-word" id="talk-word">comprar un lote</span><span class="talk-caret" aria-hidden="true"></span></h2>
       <div class="talk-direct" id="talk-direct"></div>
     </div>
     <div class="talk-box" id="talk"></div>
@@ -70,7 +70,8 @@
 <script src="/projects.js"></script>
 <script src="/site.js"></script>
 <script>
-mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
+if (forSale().length < 3) { document.getElementById('filters').hidden = true; const c = document.getElementById('cards'); c.className = 'features'; c.innerHTML = forSale().map(featureCard).join(''); c.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; }); }
+else mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
 mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'));
 (function(){
   const shots = [];
@@ -78,7 +79,7 @@ mountTalk(document.getElementById('talk'), document.getElementById('talk-word'),
   const lists = delivered().map(p => [...new Set([p.cover, ...(p.spaces || []).filter(x => x.title !== 'Fachada').map(x => x.img), p.hero].filter(Boolean))].map(img => ({ img, p })));
   for (let i = 0; lists.some(l => l[i]); i++) lists.forEach(l => { if (l[i]) shots.push(l[i]); });
   const g = document.getElementById('grid3'); if (!g) return;
-  g.innerHTML = shots.slice(0, 3).map(x => `<a class="g3" href="${projectUrl(x.p)}"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"></div><p><strong>${esc(x.p.name)}</strong><span>${esc(x.p.district)}${x.p.kicker ? ' · ' + esc(x.p.kicker.split('·').pop().trim()) : ''}</span></p></a>`).join('');
+  g.innerHTML = shots.slice(0, 3).map(x => `<a class="g3" href="${x.p.page === false ? '/entregados.html' : projectUrl(x.p)}"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"></div><p><strong>${esc(x.p.name)}</strong><span>${esc(x.p.district)}${x.p.kicker ? ' · ' + esc(x.p.kicker.split('·').pop().trim()) : ''}</span></p></a>`).join('');
 })();
 (function(){
   const p = PROJECTS.find(x => x.featured) || PROJECTS.find(x => x.hero); if (!p) return;

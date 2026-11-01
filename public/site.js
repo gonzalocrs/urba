@@ -5,7 +5,7 @@ const URBA = {
   whatsapp: '51974979393',            // digits only, with country code
   salesEmail: 'contacto@urba.pe',
   email: 'contacto@urba.pe',
-  address: 'Santiago de Surco, Lima, Perú',
+  address: 'Cusco, Perú',
   company: 'Consorcio Mecano S.A.C.',
   ruc: '',                            // TODO RUC
   instagram: '', facebook: '', linkedin: ''
@@ -92,7 +92,7 @@ function mountLeadForm(el, project){
 // Home contact: one question at a time, ends in a prefilled WhatsApp message.
 // The headline word cycles through the options until the visitor picks one.
 function mountTalk(box, word, direct, preset){
-  const OPTS = [['comprar un depa', 'Quiero comprar un departamento'], ['invertir', 'Quiero invertir en un proyecto'], ['vender mi terreno', 'Tengo un terreno y quiero conversar'], ['visitar un proyecto', 'Quiero visitar un proyecto'], ['saber más', 'Quisiera más información']];
+  const OPTS = [['comprar un lote', 'Quiero comprar un lote en Horizontes del Valle'], ['invertir', 'Quiero invertir en un proyecto'], ['vender mi terreno', 'Tengo un terreno y quiero conversar'], ['visitar un proyecto', 'Quiero visitar un proyecto'], ['saber más', 'Quisiera más información']];
   const names = (typeof PROJECTS !== 'undefined' ? PROJECTS.filter(p => p.stage !== 'entregado') : []).map(p => p.name);
   const st = { opt: null, proj: preset || '', name: '', tel: '' };
   const total = preset ? 2 : 3, num = (k) => (preset && k === 2 ? 2 : k + 1) + '/' + total;

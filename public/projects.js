@@ -1,87 +1,66 @@
 // All projects live here. Photos go in /img/proyectos/<slug>/.
-// stage: 'lanzamiento' | 'preventa' | 'en-construccion' | 'pronta-entrega' | 'entrega-inmediata' | 'entregado'
+// stage: 'en-venta' | 'proximamente' | 'lanzamiento' | 'preventa' | 'en-construccion' | 'pronta-entrega' | 'entrega-inmediata' | 'entregado'
 const STAGES = {
   'lanzamiento': 'Lanzamiento',
   'preventa': 'Preventa',
   'en-construccion': 'En construcción',
   'pronta-entrega': 'Pronta entrega',
   'entrega-inmediata': 'Entrega inmediata',
+  'en-venta': 'En venta',
+  'proximamente': 'Próximamente',
   'entregado': 'Entregado'
 };
 
 const PROJECTS = [
   {
-    slug: 'proyecto-1',
-    color: 'naranja',                 // celeste | naranja | amarillo: slide, header and project page colour
-    name: 'Proyecto 1',
-    district: 'Santiago de Surco',
-    stage: 'preventa',
-    headline: 'Vive en Surco',               // big line on the home slider
-    bedrooms: [2, 3],
-    areas: 'De 80 a 140 m²',
-    floors: '10 pisos',
-    delivery: 'Diciembre 2027',            // por confirmar
-    priceFrom: 'US$ 150,000',              // por confirmar
-    address: 'Dirección por confirmar, Santiago de Surco',
-    // Units / floor plans table (por completar). plan = image of the unit's floor plan
-    units: [
-      { code: '201', type: 'Flat', floor: 2, beds: 2, baths: 2, area: 80, price: 150000, plan: '' },
-      { code: '202', type: 'Flat', floor: 2, beds: 3, baths: 2, area: 105, price: 195000, plan: '' },
-      { code: '501', type: 'Flat', floor: 5, beds: 2, baths: 2, area: 82, price: 158000, plan: '' },
-      { code: '1001', type: 'Penthouse', floor: 10, beds: 3, baths: 3, area: 140, price: 280000, plan: '' }
-    ],
-    // Nearby places shown next to the map (por completar)
-    nearby: { 'Parques': ['Por completar'], 'Cafés y restaurantes': ['Por completar'], 'Colegios': ['Por completar'], 'Clínicas': ['Por completar'] },
-    // Common-area renders (por completar)
-    amenities: [{ title: 'Lobby', img: '' }, { title: 'Coworking', img: '' }, { title: 'Zona BBQ', img: '' }, { title: 'Gimnasio', img: '' }, { title: 'Sala de niños', img: '' }, { title: 'Terraza', img: '' }],
-    intro: 'Descripción del proyecto: concepto, entorno y lo que lo hace especial (por completar).',
-    hero: '', heroMobile: '',               // e.g. /img/proyectos/proyecto-1/hero.jpg
-    cover: '',                              // card image
-    spaces: [                               // alternating image + text blocks on the project page
-      { title: 'Sala comedor', text: 'Texto sobre la sala comedor (por completar).', img: '' },
-      { title: 'Cocina', text: 'Texto sobre la cocina (por completar).', img: '' },
-      { title: 'Dormitorio principal', text: 'Texto sobre el dormitorio principal (por completar).', img: '' }
-    ],
-    brochure: '', plans: '',                // PDF links
-    mapQuery: 'Santiago de Surco, Lima'
-  },
-  {
-    slug: 'proyecto-2',
+    slug: 'horizontes-del-valle',
+    featured: true,                 // shown in the home hero
     color: 'amarillo',
-    name: 'Proyecto 2',
-    district: 'Miraflores',
-    stage: 'en-construccion',
-    headline: 'Departamentos en Miraflores',
-    bedrooms: [1, 2, 3],
-    areas: 'Desde 65 m²',
-    floors: '12 pisos',
-    address: 'Dirección por confirmar, Miraflores',
-    intro: 'Descripción del proyecto (por completar).',
-    hero: '', heroMobile: '', cover: '',
+    name: 'Horizontes del Valle',
+    district: 'Urubamba',
+    stage: 'en-venta',
+    kicker: 'Lotes · Valle Sagrado',
+    bedrooms: [],
+    areas: 'De 202 a 367 m²',
+    address: 'Calle Chahuar, vía a Palcaraqui, Urubamba, Cusco',
+    intro: 'Lotes con ingreso independiente al costado de la Iglesia Señor de Torrechayoc, a 7 cuadras de la Plaza de Armas de Urubamba.',
+    hero: '/img/proyectos/horizontes-del-valle/valle-nevado.jpg', heroMobile: '/img/proyectos/horizontes-del-valle/valle-nevado.jpg',
+    pageHero: '/img/proyectos/horizontes-del-valle/valle-norte.jpg',
+    cover: '/img/proyectos/horizontes-del-valle/valle-nevado-2.jpg',
+    logo: '/img/proyectos/horizontes-del-valle/logo-hdv-blanco.png',
+    ficha: [['ubicacion', 'Ubicación', 'Urubamba, Cusco'], ['uso', 'Tipo', 'Lotes'], ['areas', 'Áreas', '202 a 367 m²'], ['pisos', 'Lotes', '13']],
+    // Lots from the plan dated 06/12/2023. status: 'disponible' | 'separado' | 'vendido' (empty = not shown). price in US$, 0 = Consultar
+    lots: [
+      { code: '1', area: 332.42 }, { code: '2', area: 367.00 }, { code: '3', area: 203.53 }, { code: '5', area: 204.08 },
+      { code: '6', area: 295.60 }, { code: '7', area: 204.08 }, { code: '8', area: 203.78 }, { code: '9', area: 204.08 },
+      { code: '10', area: 206.05 }, { code: '11', area: 204.67 }, { code: '12', area: 289.84 }, { code: '13', area: 202.06 },
+      { code: '14', area: 291.62 }
+    ],
+    lotMap: {                         // polygons traced over lotes.png, in its 2000-wide coordinates
+      img: '/img/proyectos/horizontes-del-valle/lotes.png', viewBox: '0 0 2000 717',
+      polys: {
+        '1': '735,103 884,99 884,425 750,396', '2': '884,99 1021,97 1021,473 884,425',
+        '3': '1021,97 1158,94 1158,288 1021,291', '5': '1158,94 1296,91 1296,285 1158,288',
+        '7': '1296,91 1433,88 1433,282 1296,285', '9': '1433,88 1571,85 1571,278 1433,282',
+        '11': '1571,85 1708,82 1708,275 1571,278', '13': '1708,82 1845,80 1845,272 1708,275',
+        '14': '1845,80 1980,80 1980,361 1845,363',
+        '6': '1113,376 1341,376 1341,567 1198,544 1113,512', '8': '1341,376 1479,373 1479,560 1435,572 1341,567',
+        '10': '1479,373 1640,370 1640,518 1479,560', '12': '1640,370 1980,361 1980,451 1815,465 1812,472 1640,518'
+      }
+    },
+    nearby: { 'Cerca de': ['Plaza de Armas de Urubamba, a 7 cuadras', 'Tiendas y servicios', 'Bancos y cajas municipales', 'Av. principal de Urubamba'] },
+    video: '/media/horizontes-del-valle.mp4', videoPoster: '/media/horizontes-del-valle.jpg',
     spaces: [],
+    gallery: [
+      { title: 'El valle', imgs: ['/img/proyectos/horizontes-del-valle/valle-nevado.jpg', '/img/proyectos/horizontes-del-valle/valle-cerros.jpg', '/img/proyectos/horizontes-del-valle/valle-norte.jpg', '/img/proyectos/horizontes-del-valle/rio-urubamba.jpg', '/img/proyectos/horizontes-del-valle/valle-nevado-2.jpg'] },
+      { title: 'El terreno', imgs: ['/img/proyectos/horizontes-del-valle/terreno.jpg', '/img/proyectos/horizontes-del-valle/terreno-cenital.jpg', '/img/proyectos/horizontes-del-valle/terreno-entorno.jpg', '/img/proyectos/horizontes-del-valle/terreno-entorno-2.jpg', '/img/proyectos/horizontes-del-valle/terreno-entorno-3.jpg'] },
+      { title: 'Urubamba', imgs: ['/img/proyectos/horizontes-del-valle/urubamba.jpg', '/img/proyectos/horizontes-del-valle/rio-curva.jpg', '/img/proyectos/horizontes-del-valle/urubamba-rio.jpg', '/img/proyectos/horizontes-del-valle/urubamba-centro.jpg', '/img/proyectos/horizontes-del-valle/urubamba-vista.jpg'] }
+    ],
     brochure: '', plans: '',
-    mapQuery: 'Miraflores, Lima'
-  },
-  {
-    slug: 'proyecto-3',
-    color: 'celeste',
-    name: 'Proyecto 3',
-    district: 'Barranco',
-    stage: 'entrega-inmediata',
-    headline: 'Entrega inmediata en Barranco',
-    bedrooms: [3],
-    areas: 'Desde 150 m²',
-    floors: '8 pisos',
-    address: 'Dirección por confirmar, Barranco',
-    intro: 'Descripción del proyecto (por completar).',
-    hero: '', heroMobile: '', cover: '',
-    spaces: [],
-    brochure: '', plans: '',
-    mapQuery: 'Barranco, Lima'
+    mapQuery: 'Iglesia Señor de Torrechayoc, Urubamba, Cusco'
   },
   {
     slug: 'sierra-hotel',
-    featured: true,                 // shown in the home hero (photo, name, what it is)
     color: 'celeste',
     name: 'Sierra Hotel',
     district: 'Cusco',
@@ -147,7 +126,12 @@ const PROJECTS = [
       { title: 'Dormitorios y baños', imgs: ['/img/proyectos/edificio-murano/dormitorio-principal.jpg', '/img/proyectos/edificio-murano/dormitorio-secundario.jpg', '/img/proyectos/edificio-murano/bano-principal.jpg', '/img/proyectos/edificio-murano/bano-visita.jpg'] }
     ],
     brochure: '', plans: '', mapQuery: 'Parque Amauta 206, San Sebastián, Cusco'
-  }
+  },
+  { slug: 'centro-empresarial-amauta', name: 'Centro Empresarial Amauta', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/centro-empresarial-amauta/cover.jpg' },
+  { slug: 'residencial-alta-vista', name: 'Residencial Alta Vista', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/residencial-alta-vista/cover.jpg' },
+  { slug: 'residencial-las-margaritas', name: 'Residencial Las Margaritas', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/residencial-las-margaritas/cover.jpg' },
+  { slug: 'condominio-el-pino', name: 'Condominio El Pino', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/condominio-el-pino/cover.jpg' },
+  { slug: 'residencial-villasol', name: 'Residencial Villasol', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/residencial-villasol/cover.jpg' }
 ];
 
 const projectColor = (p, i) => p.color || ['celeste', 'naranja', 'amarillo'][(i || 0) % 3];
@@ -162,6 +146,9 @@ function projectUrl(p){ return '/proyecto.html?p=' + encodeURIComponent(p.slug);
 function projectCard(p){
   const img = p.cover ? `<img src="${esc(p.cover)}" alt="${esc(p.name)}" loading="lazy">` : '';
   const line = [p.areas, bedroomsText(p.bedrooms)].filter(Boolean).join(' · ') || p.kicker || '';
+  if (p.page === false) return `<div class="card card-static">
+    <div class="ph">${img}<span class="tag">${esc(STAGES[p.stage] || '')}</span></div>
+    <div class="card-body"><div><h3>${esc(p.name)}</h3><p class="card-district">${esc(p.district)}</p></div></div></div>`;
   return `<a class="card" href="${projectUrl(p)}">
     <div class="ph">${img}<span class="tag">${esc(STAGES[p.stage] || '')}</span></div>
     <div class="card-body">
@@ -170,9 +157,23 @@ function projectCard(p){
     </div></a>`;
 }
 
+// One big card per project when there are only one or two for sale (home)
+function featureCard(p){
+  return `<article class="feature">
+    <a class="feature-img" href="${projectUrl(p)}"><img src="${esc(p.cover || p.hero)}" alt="${esc(p.name)}" loading="lazy"></a>
+    <div class="feature-body">
+      <p class="eyebrow">${esc(STAGES[p.stage] || '')} · ${esc(p.district)}</p>
+      <h3 class="title">${esc(p.name)}</h3>
+      ${p.intro ? `<p>${esc(p.intro)}</p>` : ''}
+      <dl class="feature-keys">${(p.ficha || []).filter(f => f[0] !== 'ubicacion').map(f => `<div><dt>${esc(f[1])}</dt><dd>${esc(f[2])}</dd></div>`).join('')}</dl>
+      <div class="hero-actions left"><a class="btn-pill btn-pill-dark" href="${projectUrl(p)}">${p.lots ? 'Ver lotes' : 'Ver proyecto'}</a><a class="btn-pill btn-pill-line" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a></div>
+    </div></article>`;
+}
+
 // Filter bar (district / bedrooms / stage) used on home, listing and project pages
 function mountFilters(form, grid, source, empty){
   const items = source();
+  form.hidden = items.length < 4;   // filters only earn their place with a real catalogue
   const districts = [...new Set(items.map(p => p.district))].sort();
   const beds = [...new Set(items.flatMap(p => p.bedrooms || []))].sort();
   const stages = Object.keys(STAGES).filter(s => items.some(p => p.stage === s));

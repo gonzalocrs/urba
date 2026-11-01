@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Proyecto · Urba Inmobiliaria</title>
-<meta name="description" content="Proyecto de Urba Inmobiliaria en Lima.">
+<meta name="description" content="Proyecto de Urba Inmobiliaria en Cusco.">
 <meta property="og:title" content="Proyecto · Urba Inmobiliaria">
-<meta property="og:description" content="Proyecto de Urba Inmobiliaria en Lima.">
+<meta property="og:description" content="Proyecto de Urba Inmobiliaria en Cusco.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#282829">
 <link rel="icon" href="/img/brand/favicon.svg" type="image/svg+xml">
@@ -57,12 +57,19 @@ const bedsSet = [...new Set(units.map(u => u.beds))].sort((x, y) => x - y);
 const money = v => v ? 'US$ ' + Number(v).toLocaleString('en-US') : 'Consultar';
 // One drawings viewer: building drawings (planImgs) and units share the same plate and index
 const dwgs = (p.planImgs || []).map(x => ({ kind: 'dwg', title: x.title, img: x.img }));
-const items = [...dwgs, ...units.map(u => ({ kind: 'unit', u, img: u.plan }))];
-const idxRow = (it, i) => `<li><button type="button" class="ix" data-i="${i}"${it.kind === 'unit' ? ` data-beds="${it.u.beds}"` : ''}${i ? '' : ' aria-current="true"'}>${esc(it.kind === 'dwg' ? it.title : it.u.code)}</button></li>`;
-const plateHtml = (it) => `<div class="pl-plate">${it.img ? `<img src="${esc(it.img)}" alt="${esc(it.kind === 'dwg' ? it.title : 'Plano del departamento ' + it.u.code)}">` : `<p>Plano del ${esc(it.u.code)}<br><small>disponible pronto</small></p>`}</div>`;
+// Lot subdivisions: every lot shares one map; the chosen lot is highlighted and the polygons are clickable
+const lots = p.lots || [], lm = p.lotMap || {};
+const items = [...dwgs, ...units.map(u => ({ kind: 'unit', u, img: u.plan })), ...lots.map(l => ({ kind: 'lot', l }))];
+const idxRow = (it, i) => `<li><button type="button" class="ix" data-i="${i}"${it.kind === 'unit' ? ` data-beds="${it.u.beds}"` : ''}${i ? '' : ' aria-current="true"'}>${it.kind === 'lot' ? `<span class="sr">Lote </span>${esc(it.l.code)}` : esc(it.kind === 'dwg' ? it.title : it.u.code)}</button></li>`;
+const mapHtml = (code) => `<div class="pl-plate pl-map"><svg viewBox="${lm.viewBox}" role="img" aria-label="Plano de lotes de ${esc(p.name)}"><image href="${esc(lm.img)}" width="${lm.viewBox.split(' ')[2]}" height="${lm.viewBox.split(' ')[3]}"/>${lots.map((l, j) => lm.polys[l.code] ? `<polygon points="${lm.polys[l.code]}" data-j="${j}" class="${l.code === code ? 'on' : ''}${l.status ? ' st-' + esc(l.status) : ''}"><title>Lote ${esc(l.code)} · ${l.area} m²</title></polygon>` : '').join('')}</svg></div>`;
+const plateHtml = (it) => it.kind === 'lot' ? mapHtml(it.l.code) : `<div class="pl-plate">${it.img ? `<img src="${esc(it.img)}" alt="${esc(it.kind === 'dwg' ? it.title : 'Plano del departamento ' + it.u.code)}">` : `<p>Plano del ${esc(it.u.code)}<br><small>disponible pronto</small></p>`}</div>`;
 const shareBtn = `<button type="button" class="btn-pill btn-pill-line pf-share">Compartir</button>`;
 const specsHtml = (it) => {
   if (it.kind === 'dwg') return `<p class="pf-type">${esc(p.name)}</p><h3 class="pf-name">${esc(it.title)}</h3><div class="pf-btns">${p.plans ? `<a class="btn-pill btn-pill-dark" href="${esc(p.plans)}" download>Descargar planos</a>` : ''}${shareBtn}</div>`;
+  if (it.kind === 'lot') { const l = it.l; const ST = { disponible: 'Disponible', separado: 'Separado', vendido: 'Vendido' };
+    return `<p class="pf-type">${esc(p.name)}</p><h3 class="pf-name">Lote ${esc(l.code)}</h3>
+    <dl class="pf-specs"><dt>Área</dt><dd>${l.area} m²</dd>${l.front ? `<dt>Frente</dt><dd>${l.front} m</dd>` : ''}${l.status ? `<dt>Estado</dt><dd>${ST[l.status] || esc(l.status)}</dd>` : ''}${l.status === 'vendido' ? '' : `<dt>Precio</dt><dd>${money(l.price)}</dd>`}</dl>
+    <div class="pf-btns"><a class="btn-pill btn-pill-dark" data-wa="Hola, me interesa el lote ${esc(l.code)} de ${esc(p.name)} (${l.area} m²).">Contáctanos ↗</a>${shareBtn}</div>`; }
   const u = it.u;
   return `<p class="pf-type">${esc(u.type || 'Flat')} · ${esc(u.floorLabel || 'Piso ' + (u.floor ?? '—'))}</p><h3 class="pf-name">Departamento ${esc(u.code)}</h3>
     <dl class="pf-specs"><dt>Dormitorios</dt><dd>${u.beds}</dd><dt>Baños</dt><dd>${u.baths}</dd><dt>Área</dt><dd>${u.area} m²</dd>${done && !u.price ? '' : `<dt>Precio</dt><dd>${money(u.price)}</dd>`}</dl>
@@ -106,7 +113,7 @@ el.innerHTML = `
     ${(p.pageHero || p.hero) ? `<picture><source media="(max-width:720px)" srcset="${esc(p.pageHero || p.heroMobile || p.hero)}"><img src="${esc(p.pageHero || p.hero)}" alt="${esc(p.name)}" fetchpriority="high"></picture>` : ''}
     <div class="hero-photo-text">
       <p class="hero-kicker">${esc(done ? 'Obra entregada' : STAGES[p.stage])}</p>
-      <h1>${esc(p.name)}</h1>
+      <h1>${p.logo ? `<img class="hero-logo" src="${esc(p.logo)}" alt="${esc(p.name)}">` : esc(p.name)}</h1>
       <p class="hero-sub">${esc(sub)}</p>
       ${!done && (p.delivery || p.priceFrom || p.areas) ? `<p class="hero-keys">${[p.priceFrom && 'Desde ' + esc(p.priceFrom), bedroomsText(p.bedrooms) && esc(bedroomsText(p.bedrooms)), p.areas && esc(p.areas), p.delivery && 'Entrega ' + esc(p.delivery)].filter(Boolean).map(x => `<span>${x}</span>`).join('')}</p>` : ''}
       <div class="hero-actions"><a class="btn-pill" href="#contacto">${done ? 'Contáctanos' : 'Cotizar'}</a>${p.brochure ? `<a class="btn-pill btn-pill-ghost" href="${esc(p.brochure)}" download>Brochure</a>` : ''}<a class="btn-pill btn-pill-ghost" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a></div>
@@ -118,9 +125,9 @@ el.innerHTML = `
     <ul class="ficha-list">${ficha.map(([k, t, v]) => `<li>${icons[k] || icons.uso}<span>${t}</span><strong>${v}</strong></li>`).join('')}</ul>
     ${(p.brochure || p.plans) ? `<div class="hero-actions left">${p.brochure ? `<a class="btn-pill btn-pill-dark" href="${esc(p.brochure)}" download>Descargar brochure</a>` : ''}${p.plans ? `<a class="btn-pill btn-pill-line" href="${esc(p.plans)}" download>Descargar planos</a>` : ''}</div>` : ''}
   </div></section>
-  ${items.length ? `<section class="planos-g" id="planos">
+  ${items.length ? `<section class="planos-g${lots.length ? ' pg-lots' : ''}" id="planos">
     <div class="pg-top">
-      <div><p class="eyebrow">Planos</p><h2 class="title">${units.length && !done ? 'Elige tu departamento' : 'Distribución'}</h2></div>
+      <div><p class="eyebrow">Planos</p><h2 class="title">${lots.length ? 'Elige tu lote' : units.length && !done ? 'Elige tu departamento' : 'Distribución'}</h2></div>
       <div class="pg-tabs-wrap">
         ${bedsSet.length > 1 ? `<div class="pf-filter" id="unit-filter"><button type="button" data-b="" aria-pressed="true">Todos</button>${bedsSet.map(b => `<button type="button" data-b="${b}">${b} dorm.</button>`).join('')}</div>` : ''}
         <ul class="pg-tabs">${items.map(idxRow).join('')}</ul>
@@ -132,6 +139,7 @@ el.innerHTML = `
     </div>
   </section>` : ''}
   ${reelFrames.length ? `<section class="reel" id="renders" aria-label="Renders y áreas comunes"><div class="reel-panels" id="reel"></div></section>` : ''}
+  ${p.video ? `<section class="film" aria-label="Video de ${esc(p.name)}"><video controls playsinline preload="none" poster="${esc(p.videoPoster || '')}" src="${esc(p.video)}"></video></section>` : ''}
   ${p.mapQuery ? `<section class="near" id="ubicacion">
     <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${mapsQ}&output=embed"></iframe>
     <div class="near-panel">
@@ -162,6 +170,7 @@ const wire = (root) => root.querySelectorAll('[data-wa]').forEach(a => { a.href 
 const pd = document.getElementById('pf-detail');
 const pick = (btn) => { el.querySelectorAll('.ix').forEach(x => x.toggleAttribute('aria-current', x === btn)); const it = items[+btn.dataset.i]; uv.innerHTML = plateHtml(it); pd.innerHTML = specsHtml(it); [uv, pd].forEach(n => { n.classList.remove('swap'); void n.offsetWidth; n.classList.add('swap'); }); wire(pd); };
 el.querySelectorAll('.ix').forEach(b => b.addEventListener('click', () => pick(b)));
+uv?.addEventListener('click', e => { const g = e.target.closest('polygon[data-j]'); if (g) el.querySelector(`.ix[data-i="${dwgs.length + units.length + +g.dataset.j}"]`)?.click(); });
 document.getElementById('pf-detail')?.addEventListener('click', async e => { const b = e.target.closest('.pf-share'); if (!b) return; const url = location.href.split('#')[0] + '#planos';
   try { if (navigator.share) await navigator.share({ title: p.name, url }); else { await navigator.clipboard.writeText(url); b.textContent = 'Enlace copiado'; setTimeout(() => b.textContent = 'Compartir', 1800); } } catch (_) {} });
 if (uf) uf.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; uf.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
