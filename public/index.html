@@ -20,11 +20,13 @@
 <header class="site-header" data-site-header></header>
 <main>
 
-<section class="hero-photo" aria-label="Urba Inmobiliaria">
+<section class="hero-photo" aria-label="Proyecto destacado">
   <img src="/img/proyectos/sierra-hotel/fachada.jpg" alt="" fetchpriority="high">
-  <div class="hero-photo-text">
-    <h1>Urba Inmobiliaria</h1>
-    <a class="btn-pill" href="#proyectos">Ver proyectos <span aria-hidden="true">↗</span></a>
+  <div class="hero-photo-text" id="hero-text">
+    <p class="hero-kicker">Obra entregada</p>
+    <h1>Sierra Hotel</h1>
+    <p class="hero-sub">Hotel · Cusco, 2023</p>
+    <a class="btn-pill" href="/proyecto.html?p=sierra-hotel">Ver proyecto <span aria-hidden="true">↗</span></a>
   </div>
   <a class="scroll-cue" href="#proyectos">Descubre más<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
 </section>
@@ -55,7 +57,7 @@
 
 <section class="contact-band band band-dark" id="contacto">
   <div class="wrap contact-grid">
-    <div><p class="eyebrow">Contacto</p><h2 class="title">Hablemos de tu próximo espacio</h2><p>Déjanos tus datos y un asesor te contactará por WhatsApp.</p></div>
+    <div class="contact-intro"><p class="eyebrow">Contacto</p><h2 class="title">Hablemos de tu próximo espacio</h2><p>Déjanos tus datos y un asesor te contactará por WhatsApp.</p><ul class="contact-direct" id="contact-direct"></ul></div>
     <div id="lead"></div>
   </div>
 </section>
@@ -66,11 +68,21 @@
 <script>
 mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
 mountLeadForm(document.getElementById('lead'));
+document.getElementById('contact-direct').innerHTML = `<li><span>WhatsApp</span><a href="${waLink('')}" target="_blank" rel="noopener">${escH(URBA.phone)}</a></li><li><span>Correo</span><a href="mailto:${escH(URBA.salesEmail)}">${escH(URBA.salesEmail)}</a></li><li><span>Oficina</span>${escH(URBA.address)}</li>`;
 (function(){
   const shots = [];
   delivered().forEach(p => [...(p.spaces || []).map(x => x.img), p.hero, p.cover].filter(Boolean).forEach(img => { if (!shots.some(x => x.img === img)) shots.push({ img, p }); }));
   const g = document.getElementById('grid3'); if (!g) return;
   g.innerHTML = shots.slice(0, 3).map(x => `<a class="g3" href="${projectUrl(x.p)}"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"></div><p><strong>${esc(x.p.name)}</strong><span>${esc(x.p.district)}${x.p.kicker ? ' · ' + esc(x.p.kicker.split('·').pop().trim()) : ''}</span></p></a>`).join('');
+})();
+(function(){
+  const p = PROJECTS.find(x => x.featured) || PROJECTS.find(x => x.hero); if (!p) return;
+  const sec = document.querySelector('.hero-photo'), t = document.getElementById('hero-text');
+  sec.querySelector('img').src = p.hero; sec.querySelector('img').alt = p.name;
+  const kind = (p.kicker || '').split('·')[0].trim(), year = (p.kicker || '').split('·')[1];
+  t.innerHTML = `<p class="hero-kicker">${esc(STAGES[p.stage] === 'Entregado' ? 'Obra entregada' : STAGES[p.stage])}</p><h1>${esc(p.name)}</h1>`
+    + `<p class="hero-sub">${esc([kind || bedroomsText(p.bedrooms), p.district].filter(Boolean).join(' · '))}${year ? ', ' + esc(year.trim()) : ''}</p>`
+    + `<a class="btn-pill" href="${projectUrl(p)}">Ver proyecto <span aria-hidden="true">↗</span></a>`;
 })();
 if (window.urbaInk) urbaInk(['celeste', 'naranja', 'amarillo'][Math.floor(Math.random() * 3)]);
 </script>

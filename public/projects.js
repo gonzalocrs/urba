@@ -68,6 +68,7 @@ const PROJECTS = [
   },
   {
     slug: 'sierra-hotel',
+    featured: true,                 // shown in the home hero (photo, name, what it is)
     color: 'celeste',
     name: 'Sierra Hotel',
     district: 'Cusco',

@@ -381,3 +381,14 @@ nav a{font-size:.9rem}
 .obras .sec-head{margin-bottom:clamp(2rem,4vw,3rem)}
 .statement-band .slogan{font-size:clamp(2.5rem,6vw,5.5rem);line-height:1.02;letter-spacing:-.025em;font-weight:500}.hero-photo h1{margin-bottom:2.25rem}
 .statement-band .slogan{max-width:none}
+/* Hero: featured project name + what it is */
+.hero-kicker{font-family:var(--font-ui);font-size:.75rem!important;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75)!important;margin:0 auto 1.25rem!important}
+.hero-photo h1{margin-bottom:.75rem}
+.hero-sub{font-size:clamp(1.05rem,1.5vw,1.3rem)!important;color:rgba(255,255,255,.85)!important;margin:0 auto 2.25rem!important}
+/* Contact: balanced two columns, direct contact details fill the left */
+.contact-grid{grid-template-columns:1fr 1fr;gap:clamp(3rem,8vw,8rem)}
+.contact-intro .title{font-size:clamp(2.25rem,4vw,3.5rem);line-height:1.05}
+.contact-direct{list-style:none;padding:0;margin:2.5rem 0 0;border-top:1px solid rgba(255,255,255,.15)}
+.contact-direct li{display:grid;grid-template-columns:7rem 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.15);font-size:var(--fs-base)}
+.contact-direct span{color:rgba(255,255,255,.55);font-size:var(--fs-sm)}
+.contact-direct a{text-decoration:none;cursor:pointer}.contact-direct a:hover{color:var(--accent)}
