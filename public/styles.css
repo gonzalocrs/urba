@@ -222,10 +222,10 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .making-panel{background:var(--accent);display:grid;place-items:center;padding:12%}
 
 /* isotipo in white over black-and-white photography (brand application) */
-.has-img picture img{filter:grayscale(1) contrast(1.05)}
+
 .has-img .iso{background:var(--blanco);z-index:1;width:min(52vw,40rem)}
 .photo-iso{position:relative;overflow:hidden}
-.photo-iso img{filter:grayscale(1) contrast(1.05)}
+
 .photo-iso::before{content:"";position:absolute;top:0;right:0;width:78%;aspect-ratio:506.61/165.16;background:var(--blanco);z-index:1;-webkit-mask:url(/img/brand/isotipo.svg) right top/contain no-repeat;mask:url(/img/brand/isotipo.svg) right top/contain no-repeat}
 .photo-iso::after{display:none}
 
