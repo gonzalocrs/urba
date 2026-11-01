@@ -139,11 +139,11 @@ el.innerHTML = `
       <ul class="unit-list">${units.map(unitRow).join('')}</ul>
     </div>
   </div></section>` : ''}
-  ${reelFrames.length ? `<section class="reel" id="renders" aria-label="Renders y áreas comunes"><div class="reel-panels" id="reel"></div><div class="reel-cap" id="reel-cap"></div><nav class="reel-tabs" id="reel-tabs"></nav></section>` : ''}
   ${(p.planImgs || []).length ? `<section class="block plans-band"><div class="wrap-wide">
     <div class="sec-head"><div><p class="eyebrow">Planos</p><h2 class="title">Distribución</h2></div></div>
     <div class="plans">${p.planImgs.map(x => `<figure><div><img src="${esc(x.img)}" alt="${esc(x.title)}" loading="lazy"></div><figcaption>${esc(x.title)}</figcaption></figure>`).join('')}</div>
   </div></section>` : ''}
+  ${reelFrames.length ? `<section class="reel" id="renders" aria-label="Renders y áreas comunes"><div class="reel-panels" id="reel"></div><div class="reel-cap" id="reel-cap"></div><nav class="reel-tabs" id="reel-tabs"></nav></section>` : ''}
 
   <section class="talk" id="contacto">
     <div class="wrap talk-grid">
