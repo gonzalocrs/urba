@@ -9,9 +9,19 @@ const STAGES = {
   'entregado': 'Entregado'
 };
 
+// Brand manual: each project type has its own colour.
+// vivienda = amarillo, oficinas (oficinas y comercio) = celeste, retail = naranja
+const TYPES = {
+  'vivienda': { label: 'Vivienda', theme: 'amarillo' },
+  'oficinas': { label: 'Oficinas y comercio', theme: 'celeste' },
+  'retail':   { label: 'Retail', theme: 'naranja' }
+};
+const themeOf = p => 'theme-' + ((TYPES[p.type] || TYPES.vivienda).theme);
+
 const PROJECTS = [
   {
     slug: 'proyecto-1',
+    type: 'vivienda',               // vivienda | oficinas | retail
     name: 'Proyecto 1',
     district: 'Santiago de Surco',
     stage: 'preventa',
@@ -33,6 +43,7 @@ const PROJECTS = [
   },
   {
     slug: 'proyecto-2',
+    type: 'vivienda',
     name: 'Proyecto 2',
     district: 'Miraflores',
     stage: 'en-construccion',
@@ -49,6 +60,7 @@ const PROJECTS = [
   },
   {
     slug: 'proyecto-3',
+    type: 'vivienda',
     name: 'Proyecto 3',
     district: 'Barranco',
     stage: 'entrega-inmediata',
@@ -65,6 +77,7 @@ const PROJECTS = [
   },
   {
     slug: 'sierra-hotel',
+    type: 'oficinas',
     name: 'Sierra Hotel',
     district: 'Cusco',
     stage: 'entregado',
@@ -88,6 +101,7 @@ const PROJECTS = [
   },
   {
     slug: 'edificio-murano',
+    type: 'vivienda',
     name: 'Edificio Murano',
     district: 'Cusco',
     stage: 'entregado',
@@ -113,7 +127,7 @@ function projectUrl(p){ return '/proyecto.html?p=' + encodeURIComponent(p.slug);
 function projectCard(p){
   const img = p.cover ? `<img src="${esc(p.cover)}" alt="${esc(p.name)}" loading="lazy">` : '';
   const line = [p.areas, bedroomsText(p.bedrooms)].filter(Boolean).join(' · ') || p.kicker || '';
-  return `<a class="card" href="${projectUrl(p)}">
+  return `<a class="card ${themeOf(p)}" href="${projectUrl(p)}">
     <div class="ph">${img}<span class="tag">${esc(STAGES[p.stage] || '')}</span></div>
     <div class="card-body">
       <div><h3>${esc(p.name)}</h3><p class="card-district">${esc(p.district)}</p></div>
@@ -126,17 +140,19 @@ function mountFilters(form, grid, source, empty){
   const items = source();
   const districts = [...new Set(items.map(p => p.district))].sort();
   const beds = [...new Set(items.flatMap(p => p.bedrooms || []))].sort();
+  const types = Object.keys(TYPES).filter(t => items.some(p => p.type === t));
   const stages = Object.keys(STAGES).filter(s => items.some(p => p.stage === s));
   const opt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
   form.innerHTML = `
+    ${types.length > 1 ? `<label><span>Tipo</span><select name="t">${opt('', 'Todos')}${types.map(t => opt(t, TYPES[t].label)).join('')}</select></label>` : ''}
     <label><span>Distrito</span><select name="d">${opt('', 'Todos')}${districts.map(d => opt(d, d)).join('')}</select></label>
     <label><span>Dormitorios</span><select name="b">${opt('', 'Todos')}${beds.map(b => opt(b, b + (b == 1 ? ' dormitorio' : ' dormitorios'))).join('')}</select></label>
     <label><span>Etapa</span><select name="s">${opt('', 'Todas')}${stages.map(s => opt(s, STAGES[s])).join('')}</select></label>`;
   const q = new URLSearchParams(location.search);
-  ['d','b','s'].forEach(k => { if (q.get(k)) form.elements[k].value = q.get(k); });
+  ['t','d','b','s'].forEach(k => { if (q.get(k) && form.elements[k]) form.elements[k].value = q.get(k); });
   const render = () => {
-    const d = form.elements.d.value, b = form.elements.b.value, s = form.elements.s.value;
-    const list = items.filter(p => (!d || p.district === d) && (!b || (p.bedrooms || []).includes(+b)) && (!s || p.stage === s));
+    const t = form.elements.t ? form.elements.t.value : '', d = form.elements.d.value, b = form.elements.b.value, s = form.elements.s.value;
+    const list = items.filter(p => (!t || p.type === t) && (!d || p.district === d) && (!b || (p.bedrooms || []).includes(+b)) && (!s || p.stage === s));
     grid.innerHTML = list.map(projectCard).join('');
     if (empty) empty.hidden = list.length > 0;
   };

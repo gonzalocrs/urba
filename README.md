@@ -4,7 +4,8 @@ Static site served by Cloudflare Workers (static assets), the same setup as `gon
 Every push to `main` deploys automatically.
 
 ## Where things live
-- `public/projects.js`: the list of projects (name, district, stage, bedrooms, areas, photos, spaces, brochure/plans). Add a project here and it shows up in the home slider, the filters, the projects page and its own page (`/proyecto.html?p=<slug>`).
+- `public/projects.js`: the list of projects (name, type, district, stage, bedrooms, areas, photos, spaces, brochure/plans). Add a project here and it shows up in the home slider, the filters, the projects page and its own page (`/proyecto.html?p=<slug>`).
+- Project type sets the colour, per the brand manual: `vivienda` = amarillo, `oficinas` (oficinas y comercio) = celeste, `retail` = naranja. It colours the project page, its slide (and the header while that slide shows) and the card tag.
 - `public/site.js`: phone, WhatsApp, emails, address, RUC and social links, plus the shared header, footer and lead form (sends to WhatsApp).
 - `public/styles.css`: brand colors and fonts are the variables at the top.
 - `public/img/proyectos/<slug>/`: project photos.

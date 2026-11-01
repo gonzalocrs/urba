@@ -267,3 +267,8 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 /* photo blocks: clean photo, isotipo on a brand-colour strip overlapping its top edge */
 .photo-iso{overflow:visible}
 .photo-iso::before{width:70%;top:-1px;background:var(--accent);display:none}
+
+/* Project-type colour (manual): the card tag and hover carry the type's accent */
+.card .ph .tag{background:var(--accent);color:var(--grafito)}
+.site-header{transition:background-color .4s ease}
+.slide[hidden]{display:none!important}
