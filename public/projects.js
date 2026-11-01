@@ -162,17 +162,34 @@ function projectCard(p){
     </div></a>`;
 }
 
-// One big card per project when there are only one or two for sale (home)
-function featureCard(p){
-  return `<article class="feature">
+// One big card per project (home feature panel). nav = list of projects to switch between, i = this one's index
+function featureCard(p, i, nav){
+  const intro = (p.intro || '').split(/(?<=\.)\s/)[0];
+  const stage = p.stage === 'entregado' ? 'Obra entregada' : (STAGES[p.stage] || '');
+  return `<article class="feature${i ? '' : ' on'}" data-k="${i || 0}">
     <a class="feature-img" href="${projectUrl(p)}"><img src="${esc(p.featureImg || p.cover || p.hero)}" alt="${esc(p.name)}" loading="lazy"></a>
     <div class="feature-body">
-      <p class="eyebrow">${esc(STAGES[p.stage] || '')} · ${esc(p.district)}</p>
+      <p class="eyebrow">${esc(stage)} · ${esc(p.district)}</p>
       <h3 class="title">${esc(p.name)}</h3>
-      ${p.intro ? `<p>${esc(p.intro)}</p>` : ''}
-      <dl class="feature-keys">${(p.ficha || []).filter(f => f[0] !== 'ubicacion').map(f => `<div><dt>${esc(f[1])}</dt><dd>${esc(f[2])}</dd></div>`).join('')}</dl>
+      ${intro ? `<p>${esc(intro)}</p>` : ''}
+      <dl class="feature-keys">${(p.ficha || []).filter(f => f[0] !== 'ubicacion').slice(0, 3).map(f => `<div><dt>${esc(f[1])}</dt><dd>${esc(f[2])}</dd></div>`).join('')}</dl>
       <div class="hero-actions left"><a class="btn-pill btn-pill-dark" href="${projectUrl(p)}">${p.lots ? 'Ver lotes' : 'Ver proyecto'}</a><a class="btn-pill btn-pill-line" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a></div>
+      ${nav && nav.length > 1 ? `<nav class="feature-nav" aria-label="Proyectos">${nav.map((q, j) => `<button type="button" data-k="${j}"${j === i ? ' aria-current="true"' : ''}>${esc(q.name)}</button>`).join('')}</nav>` : ''}
     </div></article>`;
+}
+
+// Rotating feature panel: crossfades between projects, click a name to jump
+function mountFeatures(c, list){
+  c.className = 'features rot'; c.closest('section').classList.add('is-feature');
+  c.innerHTML = list.map((p, i) => featureCard(p, i, list)).join('');
+  c.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
+  const slides = [...c.querySelectorAll('.feature')]; if (slides.length < 2) return;
+  let k = 0, t; const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const go = (n) => { k = (n + slides.length) % slides.length; slides.forEach((s, j) => s.classList.toggle('on', j === k)); };
+  const play = () => { clearTimeout(t); if (!still) t = setTimeout(() => { go(k + 1); play(); }, 6000); };
+  c.addEventListener('click', e => { const b = e.target.closest('.feature-nav button'); if (b) { go(+b.dataset.k); play(); } });
+  c.addEventListener('mouseenter', () => clearTimeout(t)); c.addEventListener('mouseleave', play);
+  play();
 }
 
 // Filter bar (district / bedrooms / stage) used on home, listing and project pages

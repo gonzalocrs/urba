@@ -889,3 +889,11 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .is-feature .feature-body .title{font-size:var(--fs-h1);line-height:1.05;margin:.6rem 0 1.25rem}
 @media (max-width:860px){.is-feature .feature{grid-template-columns:1fr}.is-feature .feature-img{height:60vw}}
 .filters[hidden]{display:none}
+/* Rotating feature panel (home): slides stack in one grid cell and crossfade */
+.features.rot{display:grid}
+.features.rot>.feature{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility 0s .8s}
+.features.rot>.feature.on{opacity:1;visibility:visible;transition:opacity .8s ease}
+.feature-nav{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem;margin-top:2.5rem}
+.feature-nav button{all:unset;cursor:pointer;font-family:var(--font-ui);font-size:var(--fs-sm);color:var(--muted);padding-bottom:.3rem;border-bottom:1px solid transparent}
+.feature-nav button:hover{color:var(--grafito)}
+.feature-nav button[aria-current]{color:var(--grafito);border-bottom-color:var(--grafito)}
