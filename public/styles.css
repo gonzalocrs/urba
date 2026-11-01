@@ -754,3 +754,24 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .near-lists{grid-template-columns:1fr 1fr;gap:1.25rem 2rem}
 .near-panel .title{font-size:clamp(1.6rem,2.3vw,2.25rem)}
 @media (max-width:860px){.near{grid-template-columns:1fr}}
+
+/* Type scale pass (Gonzalo: smaller, more professional) */
+:root{--fs-h3:1.125rem;--fs-h2:clamp(1.4rem,1.9vw,1.75rem);--fs-h1:clamp(2rem,3.4vw,2.9rem)}
+.hero-photo h1{font-size:clamp(2.1rem,3.8vw,3.4rem)}
+.hero-sub{font-size:clamp(.95rem,1.2vw,1.1rem)}
+.statement-band .slogan{font-size:clamp(1.8rem,3.6vw,3.25rem)}
+.talk-title{font-size:clamp(1.9rem,3.4vw,3.1rem)}
+.talk-q{font-size:clamp(1.1rem,1.55vw,1.4rem)}
+.chips button{font-size:.9375rem;padding:.6rem 1.05rem}
+.ficha-list strong{font-size:clamp(.95rem,1.15vw,1.2rem)}
+.pf-side .title,.near-panel .title{font-size:var(--fs-h2)}
+.pf-list .ix strong{font-size:clamp(1rem,1.3vw,1.2rem)}
+.pf-list .ix:not([data-beds]) strong{font-size:1rem}
+.pf-list .ix{padding-top:.8rem;padding-bottom:.8rem}
+.pf-specs li{font-size:clamp(.9rem,1vw,1.05rem)}
+.ns-slogan{font-size:clamp(2.1rem,4.6vw,4.25rem)}
+.ns-big{font-size:clamp(1.6rem,3.2vw,2.9rem)}
+.ns-stats strong{font-size:clamp(2.4rem,5vw,4.5rem)}
+.reel-ph span,.reel-p.is-empty span{font-size:1.1rem}
+.card h3{font-size:var(--fs-h3)}
+.btn-pill{font-size:.9375rem;padding:.75rem 1.4rem}
