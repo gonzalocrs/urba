@@ -103,7 +103,7 @@ function mountReel() {
 }
 el.innerHTML = `
   <section class="hero-photo">
-    ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}" fetchpriority="high"></picture>` : ''}
+    ${(p.pageHero || p.hero) ? `<picture><source media="(max-width:720px)" srcset="${esc(p.pageHero || p.heroMobile || p.hero)}"><img src="${esc(p.pageHero || p.hero)}" alt="${esc(p.name)}" fetchpriority="high"></picture>` : ''}
     <div class="hero-photo-text">
       <p class="hero-kicker">${esc(done ? 'Obra entregada' : STAGES[p.stage])}</p>
       <h1>${esc(p.name)}</h1>
