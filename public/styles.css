@@ -379,3 +379,5 @@ nav a{font-size:.9rem}
 :root{--wrap:102rem;--gutter:clamp(1.25rem,4vw,4rem)}
 .wrap-wide{max-width:calc(var(--wrap) + 2*var(--gutter));padding-left:var(--gutter);padding-right:var(--gutter)}
 .obras .sec-head{margin-bottom:clamp(2rem,4vw,3rem)}
+.statement-band .slogan{font-size:clamp(2.5rem,6vw,5.5rem);line-height:1.02;letter-spacing:-.025em;font-weight:500}.hero-photo h1{margin-bottom:2.25rem}
+.statement-band .slogan{max-width:none}
