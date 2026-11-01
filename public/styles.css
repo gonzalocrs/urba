@@ -743,3 +743,14 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .pf-list .ix:hover::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--grafito)}
 .pf-list .ix[aria-current]::before{background:var(--accent);box-shadow:none}
 .pf-list .ix:not([data-beds]) strong{font-size:clamp(1.05rem,1.4vw,1.25rem)}
+/* Ubicación: more map, panel in the project's brand colour (matches the Ur) */
+.near{grid-template-columns:1.65fr 1fr}
+.near-panel{background:var(--accent);color:var(--grafito)}
+.near-panel .eyebrow,.near-panel .near-lists h3{color:rgba(40,40,41,.62)}
+.near-addr{color:rgba(40,40,41,.8)}
+.near-panel .btn-pill{background:var(--grafito);color:var(--blanco);border-color:var(--grafito)}
+.near-panel .btn-pill.btn-pill-accent{background:transparent;color:var(--grafito);border:1px solid var(--grafito)}
+.near-panel .btn-pill:hover{opacity:.85}
+.near-lists{grid-template-columns:1fr 1fr;gap:1.25rem 2rem}
+.near-panel .title{font-size:clamp(1.6rem,2.3vw,2.25rem)}
+@media (max-width:860px){.near{grid-template-columns:1fr}}
