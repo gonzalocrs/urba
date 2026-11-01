@@ -775,3 +775,30 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .reel-ph span,.reel-p.is-empty span{font-size:1.1rem}
 .card h3{font-size:var(--fs-h3)}
 .btn-pill{font-size:.9375rem;padding:.75rem 1.4rem}
+
+/* Planos menu v3: a real unit table + numbered drawing sheets (no markers, no pills) */
+.pf-filter{display:flex;gap:1.25rem;margin:0 0 1.5rem;font-family:var(--font-ui);font-size:var(--fs-sm)}
+.pf-filter button{all:unset;cursor:pointer;color:var(--muted);padding-bottom:.2rem;border-bottom:1px solid transparent}
+.pf-filter button:hover{color:var(--grafito)}
+.pf-filter button[aria-pressed=true]{color:var(--grafito);border-bottom-color:var(--grafito)}
+.pf-cap{font-family:var(--font-ui);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 .5rem}
+.pf-thead,.pf-units .ix{display:grid;grid-template-columns:1.1fr .7fr 1fr 1.4fr;gap:1rem;align-items:baseline}
+.pf-thead{font-family:var(--font-ui);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:0 0 .6rem;border-bottom:1px solid var(--grafito)}
+.pf-thead span:last-child,.pf-units .ix em{text-align:right}
+.pf-list{border-top:0}
+.pf-dwg{border-top:1px solid var(--grafito)}
+.pf-list .ix,.pf-list .ix:hover{padding:.85rem 0;background:transparent;color:var(--muted);font-variant-numeric:tabular-nums}
+.pf-list .ix::before,.pf-list .ix[aria-current]::before,.pf-list .ix:hover::before{display:none}
+.pf-units .ix strong,.pf-units .ix span,.pf-units .ix em{font:inherit;font-size:var(--fs-base);color:inherit;font-style:normal}
+.pf-units .ix strong{font-family:var(--font-ui);font-weight:500}
+.pf-list .ix:hover{color:var(--grafito)}
+.pf-list .ix[aria-current]{color:var(--grafito)}
+.pf-list .ix[aria-current] strong{color:var(--accent)}
+.pf-units .ix[aria-current]{box-shadow:inset 0 -1px 0 var(--grafito)}
+.pf-dwg .ix{grid-template-columns:2.25rem 1fr}
+.pf-dwg .ix strong{font-family:var(--font-ui);font-weight:500;font-size:var(--fs-base);color:inherit;grid-column:auto}
+.pf-dwg .ix .ix-no{font-family:var(--font-ui);font-size:var(--fs-xs);letter-spacing:.08em;color:var(--muted)}
+.pf-dwg .ix[aria-current] strong{color:var(--grafito)}
+.pf-dwg .ix[aria-current] .ix-no{color:var(--accent)}
+.pf-dwg .ix[aria-current]{box-shadow:inset 0 -1px 0 var(--grafito)}
+.pf-dwg .ix:not([data-beds]) strong{grid-column:2;font-size:var(--fs-base)}.pf-dwg .ix{align-items:baseline}

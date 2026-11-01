@@ -59,8 +59,8 @@ const money = v => v ? 'US$ ' + Number(v).toLocaleString('en-US') : 'Consultar';
 const dwgs = (p.planImgs || []).map(x => ({ kind: 'dwg', title: x.title, img: x.img }));
 const items = [...dwgs, ...units.map(u => ({ kind: 'unit', u, img: u.plan }))];
 const idxRow = (it, i) => it.kind === 'dwg'
-  ? `<li><button type="button" class="ix" data-i="${i}"${i ? '' : ' aria-current="true"'}><strong>${esc(it.title)}</strong></button></li>`
-  : `<li><button type="button" class="ix" data-i="${i}" data-beds="${it.u.beds}"${i ? '' : ' aria-current="true"'}><strong>${esc(it.u.code)}</strong><span>${it.u.beds} dorm. · ${it.u.area} m²</span><em>${money(it.u.price)}</em></button></li>`;
+  ? `<li><button type="button" class="ix" data-i="${i}"${i ? '' : ' aria-current="true"'}><span class="ix-no">${String(i + 1).padStart(2, '0')}</span><strong>${esc(it.title)}</strong></button></li>`
+  : `<li><button type="button" class="ix" data-i="${i}" data-beds="${it.u.beds}"${i ? '' : ' aria-current="true"'}><strong>${esc(it.u.code)}</strong><span>${it.u.beds}</span><span>${it.u.area} m²</span><em>${money(it.u.price)}</em></button></li>`;
 const plateHtml = (it) => `<div class="pl-plate">${it.img ? `<img src="${esc(it.img)}" alt="${esc(it.kind === 'dwg' ? it.title : 'Plano del departamento ' + it.u.code)}">` : `<p>Plano del ${esc(it.u.code)}<br><small>disponible pronto</small></p>`}</div>`;
 const specsHtml = (it) => {
   if (it.kind === 'dwg') return p.plans ? `<a class="btn-pill btn-pill-line" href="${esc(p.plans)}" download>Descargar planos</a>` : '';
@@ -123,8 +123,9 @@ el.innerHTML = `
     <aside class="pf-side">
       <p class="eyebrow">Planos</p>
       <h2 class="title">${units.length ? 'Elige tu departamento' : 'Distribución'}</h2>
-      ${bedsSet.length > 1 ? `<div class="chips chips-light chips-sm" id="unit-filter"><button type="button" data-b="" aria-pressed="true">Todos</button>${bedsSet.map(b => `<button type="button" data-b="${b}">${b} dorm.</button>`).join('')}</div>` : ''}
-      <ul class="pf-list">${items.map(idxRow).join('')}</ul>
+      ${bedsSet.length > 1 ? `<div class="pf-filter" id="unit-filter"><button type="button" data-b="" aria-pressed="true">Todos</button>${bedsSet.map(b => `<button type="button" data-b="${b}">${b} dorm.</button>`).join('')}</div>` : ''}
+      ${dwgs.length ? `<p class="pf-cap">Láminas</p><ul class="pf-list pf-dwg">${dwgs.map((it, i) => idxRow(it, i)).join('')}</ul>` : ''}
+      ${units.length ? `<div class="pf-thead"><span>Depto.</span><span>Dorm.</span><span>Área</span><span>Precio</span></div><ul class="pf-list pf-units">${items.map((it, i) => it.kind === 'unit' ? idxRow(it, i) : '').join('')}</ul>` : ''}
       <div class="pf-detail" id="pf-detail">${specsHtml(items[0])}</div>
     </aside>
   </section>` : ''}
