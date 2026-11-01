@@ -56,10 +56,10 @@
 <section class="block wrap block-flush">
   <div class="sec-head"><div><p class="eyebrow">Cómo trabajamos</p><h2 class="title">Del terreno a la entrega de llaves</h2></div></div>
   <ol class="steps">
-    <li><span>01</span><h3>Terreno</h3><p>Elegimos ubicaciones con buena conexión, servicios y vida de barrio.</p></li>
-    <li><span>02</span><h3>Diseño</h3><p>Arquitectura propia: plantas eficientes, luz natural y materiales que envejecen bien.</p></li>
-    <li><span>03</span><h3>Construcción</h3><p>Construimos con equipos de confianza y te mantenemos al tanto de cada avance.</p></li>
-    <li><span>04</span><h3>Entrega</h3><p>Entregamos a tiempo y seguimos contigo en la postventa.</p></li>
+    <li><canvas data-step="terreno" aria-hidden="true"></canvas><span>01</span><h3>Terreno</h3><p>Elegimos ubicaciones con buena conexión, servicios y vida de barrio.</p></li>
+    <li><canvas data-step="diseno" aria-hidden="true"></canvas><span>02</span><h3>Diseño</h3><p>Arquitectura propia: plantas eficientes, luz natural y materiales que envejecen bien.</p></li>
+    <li><canvas data-step="construccion" aria-hidden="true"></canvas><span>03</span><h3>Construcción</h3><p>Construimos con equipos de confianza y te mantenemos al tanto de cada avance.</p></li>
+    <li><canvas data-step="entrega" aria-hidden="true"></canvas><span>04</span><h3>Entrega</h3><p>Entregamos a tiempo y seguimos contigo en la postventa.</p></li>
   </ol>
 </section>
 
@@ -73,6 +73,7 @@
 <footer class="site-footer" data-site-footer></footer>
 <script src="/projects.js"></script>
 <script src="/site.js"></script>
+<script src="/process.js" defer></script>
 <script>
 mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
 mountLeadForm(document.getElementById('lead'));

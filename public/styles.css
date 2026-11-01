@@ -347,3 +347,7 @@ nav a{font-size:.875rem}
 .band-dark .eyebrow{color:rgba(255,255,255,.6)}
 @media (max-width:860px){.grid3{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.sec-head{flex-direction:column;align-items:flex-start}}
 @media (max-width:560px){.grid3,.steps{grid-template-columns:1fr}}
+.steps canvas{display:block;width:100%;aspect-ratio:1;background:var(--soft);margin:0 0 1.25rem}
+.steps li{border-top:0;padding-top:0}
+.steps span{display:block;border-top:1px solid var(--grafito);padding-top:.9rem}
+.steps h3{margin-top:.75rem}
