@@ -320,3 +320,30 @@ nav a{font-size:.875rem}
 .g-ui button:hover{background:var(--accent)}
 .g-count{min-width:2.5rem;text-align:center}
 @media (prefers-reduced-motion:reduce){.gallery .g-slide{animation:none}}
+
+/* Home, editorial pass: eyebrows, statement, section heads, 3-grid, steps */
+.statement{padding-top:var(--space-section);padding-bottom:calc(var(--space-section)*.4);max-width:calc(var(--wrap) + 2*var(--gutter))}
+.statement-text{font-family:var(--font-ui);font-weight:400;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.2;letter-spacing:-.015em;max-width:52rem;margin:0 0 2rem}
+.link-arrow{font-family:var(--font-ui);font-weight:500;font-size:var(--fs-sm);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:.15rem;white-space:nowrap}
+.link-arrow::after{content:" →"}
+.link-arrow:hover{color:var(--muted)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;margin-bottom:2rem}
+.sec-head .title{margin-bottom:0}
+.block-flush{padding-top:0}
+.cards .ph{aspect-ratio:4/5}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+.g3{text-decoration:none;display:block}
+.g3-img{aspect-ratio:4/5;overflow:hidden;background:var(--soft)}
+.g3-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.g3:hover .g3-img img{transform:scale(1.03)}
+.g3 p{display:flex;justify-content:space-between;gap:1rem;margin-top:.8rem;font-size:var(--fs-sm)}
+.g3 p strong{font-family:var(--font-ui);font-weight:500}
+.g3 p span{color:var(--muted)}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;padding:0}
+.steps li{border-top:1px solid var(--grafito);padding-top:1.25rem}
+.steps span{font-family:var(--font-ui);font-size:var(--fs-xs);color:var(--muted);letter-spacing:.08em}
+.steps h3{font-size:var(--fs-h3);font-weight:500;margin:1.75rem 0 .5rem}
+.steps p{color:var(--muted);font-size:var(--fs-sm);line-height:1.55}
+.band-dark .eyebrow{color:rgba(255,255,255,.6)}
+@media (max-width:860px){.grid3{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.sec-head{flex-direction:column;align-items:flex-start}}
+@media (max-width:560px){.grid3,.steps{grid-template-columns:1fr}}
