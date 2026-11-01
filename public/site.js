@@ -88,3 +88,16 @@ function mountLeadForm(el, project){
     window.open(waLink(text), '_blank', 'noopener');
   });
 }
+
+// Site icon: the brand's web icons rotate (Manual de Marca, "Íconos web: un sistema cíclico").
+// Each visit shows the Ur module in a different colour pair, never the same one twice in a row.
+// (b and a modules also exist in /img/brand/icons/.)
+(function rotateIcon(){
+  const ICONS = ["/img/brand/icons/ur-grafito-sobre-celeste.svg", "/img/brand/icons/ur-grafito-sobre-naranja.svg", "/img/brand/icons/ur-grafito-sobre-amarillo.svg", "/img/brand/icons/ur-celeste-sobre-grafito.svg", "/img/brand/icons/ur-naranja-sobre-grafito.svg", "/img/brand/icons/ur-amarillo-sobre-grafito.svg", "/img/brand/icons/ur-celeste-sobre-naranja.svg", "/img/brand/icons/ur-naranja-sobre-celeste.svg"];
+  let last = -1; try { last = +localStorage.getItem('urba-icon'); } catch (e) {}
+  let i; do { i = Math.floor(Math.random() * ICONS.length); } while (ICONS.length > 1 && i === last);
+  try { localStorage.setItem('urba-icon', i); } catch (e) {}
+  document.querySelectorAll('link[rel~="icon"]').forEach(l => l.remove());
+  const link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/svg+xml'; link.href = ICONS[i];
+  document.head.appendChild(link);
+})();
