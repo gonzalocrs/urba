@@ -8,6 +8,7 @@
 <meta property="og:title" content="Contacto · Urba Inmobiliaria">
 <meta property="og:description" content="Contacta a Urba Inmobiliaria por WhatsApp, teléfono o correo.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#282829">
 <link rel="icon" href="/img/brand/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -16,36 +17,24 @@
 <body class="theme-celeste">
 <header class="site-header" data-site-header></header>
 <main>
-<section class="page-head band"><div class="iso" aria-hidden="true"></div><div class="wrap"><h1>Contacto</h1><p class="lead">Escríbenos y te respondemos a la brevedad.</p></div></section>
-<section class="wrap block-tight split">
-  <div class="contact-list">
-    <p><span class="muted">WhatsApp</span><br><a class="btn" data-wa>Escríbenos por WhatsApp</a></p>
-    <p><span class="muted">Teléfono</span><br><a data-phone></a></p>
-    <p><span class="muted">Correo</span><br><a data-email></a></p>
-    <p><span class="muted">Oficina</span><br><span data-address></span></p>
-  </div>
-  <form class="form" id="contact-form">
-    <label>Nombre<input name="nombre" required autocomplete="name"></label>
-    <label>Teléfono<input name="telefono" type="tel" autocomplete="tel"></label>
-    <label>Proyecto de interés<select name="proyecto" id="proyecto-select"><option value="">General</option></select></label>
-    <label>Mensaje<textarea name="mensaje" rows="4" required></textarea></label>
-    <button class="btn" type="submit">Enviar por WhatsApp</button>
-  </form>
+
+<section class="page-head band"><div class="iso" aria-hidden="true"></div><div class="wrap"><h1 class="title">Contacto</h1><p class="lead">Escríbenos y te respondemos a la brevedad.</p></div></section>
+<section class="wrap block-tight contact-grid">
+  <div class="contact-list" id="contact-list"></div>
+  <div id="lead"></div>
 </section>
 </main>
 <footer class="site-footer" data-site-footer></footer>
-<script src="/site.js"></script>
 <script src="/projects.js"></script>
+<script src="/site.js"></script>
 <script>
-const sel = document.getElementById("proyecto-select");
-PROJECTS.filter(p => p.status !== "entregado").forEach(p => sel.add(new Option(p.name, p.name)));
-const q = new URLSearchParams(location.search).get("proyecto"); if (q) sel.value = q;
-document.getElementById("contact-form").addEventListener("submit", e => {
-  e.preventDefault();
-  const f = new FormData(e.target);
-  const text = `Hola, soy ${f.get("nombre")}.` + (f.get("proyecto") ? ` Me interesa ${f.get("proyecto")}.` : "") + `\n${f.get("mensaje")}` + (f.get("telefono") ? `\nMi teléfono: ${f.get("telefono")}` : "");
-  window.open(waLink(text), "_blank", "noopener");
-});
+document.getElementById('contact-list').innerHTML = `
+  <p><span class="muted">WhatsApp</span><br><a data-wa>${URBA.phone}</a></p>
+  <p><span class="muted">Ventas</span><br><a href="mailto:${URBA.salesEmail}">${URBA.salesEmail}</a></p>
+  <p><span class="muted">¿Tienes un terreno?</span><br><a href="mailto:${URBA.email}">${URBA.email}</a></p>
+  <p><span class="muted">Oficina</span><br>${URBA.address}</p>`;
+document.querySelectorAll('#contact-list [data-wa]').forEach(a => { a.href = waLink(); a.target = '_blank'; a.rel = 'noopener'; });
+mountLeadForm(document.getElementById('lead'));
 </script>
 </body>
 </html>

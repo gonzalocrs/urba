@@ -3,47 +3,81 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Urba Inmobiliaria</title>
-<meta name="description" content="Urba Inmobiliaria: proyectos inmobiliarios en Lima. Departamentos en venta, en construcción y entregados.">
-<meta property="og:title" content="Urba Inmobiliaria">
-<meta property="og:description" content="Urba Inmobiliaria: proyectos inmobiliarios en Lima. Departamentos en venta, en construcción y entregados.">
+<title>Urba Inmobiliaria · Creamos espacios, construimos comunidad</title>
+<meta name="description" content="Urba Inmobiliaria: proyectos inmobiliarios en Lima. Departamentos en preventa, en construcción y entrega inmediata.">
+<meta property="og:title" content="Urba Inmobiliaria · Creamos espacios, construimos comunidad">
+<meta property="og:description" content="Urba Inmobiliaria: proyectos inmobiliarios en Lima. Departamentos en preventa, en construcción y entrega inmediata.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#282829">
 <link rel="icon" href="/img/brand/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="theme-celeste">
-<header class="site-header" data-site-header></header>
+<header class="site-header" data-site-header data-over></header>
 <main>
-<section class="hero band">
-  <div class="iso" aria-hidden="true"></div>
-  <div class="wrap">
-    <h1>Creamos espacios.<br>Construimos comunidad.</h1>
-    <p class="lead">Desarrollamos y comercializamos proyectos inmobiliarios en Lima.</p>
-    <div class="actions"><a class="btn" href="/proyectos.html">Ver proyectos</a><a class="btn btn-ghost" data-wa>Escríbenos</a></div>
+
+<section class="slider" aria-roledescription="carrusel" aria-label="Proyectos destacados">
+  <div class="slides" id="slides"></div>
+  <div class="slider-ui wrap"><button class="sl-prev" aria-label="Anterior">←</button><div class="dots" id="dots"></div><button class="sl-next" aria-label="Siguiente">→</button></div>
+</section>
+
+<section class="block wrap" id="proyectos">
+  <h2 class="title">Conoce nuestros proyectos en venta</h2>
+  <form class="filters" id="filters" aria-label="Filtrar proyectos"></form>
+  <div class="cards" id="cards"></div>
+  <p id="empty" class="muted" hidden>No encontramos proyectos con esos filtros.</p>
+  <p class="center"><a class="btn btn-ghost" href="/proyectos.html">Ver todos los proyectos</a></p>
+</section>
+
+<section class="split-block">
+  <div class="split-media ph"></div>
+  <div class="split-text"><h2 class="title">¿Quién es Urba?</h2><p>Texto breve y con personalidad sobre Urba: quiénes somos y por qué hacemos lo que hacemos (por completar).</p><a class="btn" href="/nosotros.html">Saber más</a></div>
+</section>
+<section class="split-block reverse">
+  <div class="split-media ph"></div>
+  <div class="split-text"><h2 class="title">Obras entregadas</h2><p>Cada proyecto entregado es una comunidad que ya vive en él (por completar).</p><a class="btn" href="/entregados.html">Ver obras</a></div>
+</section>
+
+<section class="contact-band band band-dark" id="contacto">
+  <div class="wrap contact-grid">
+    <div><h2 class="title">Escríbenos para más información</h2><p>Déjanos tus datos y un asesor te contactará por WhatsApp.</p></div>
+    <div id="lead"></div>
   </div>
 </section>
-
-<section class="block wrap">
-  <div class="block-head"><h2>Proyectos destacados</h2><a href="/proyectos.html">Todos los proyectos →</a></div>
-  <div class="grid" id="featured"></div>
-</section>
-
-<section class="block wrap split">
-  <div><h2>Nosotros</h2><p>Texto breve sobre Urba Inmobiliaria: quiénes somos, desde cuándo y cómo trabajamos (por completar).</p><a href="/nosotros.html">Conócenos →</a></div>
-  <ul class="stats"><li><strong>—</strong><span>proyectos entregados</span></li><li><strong>—</strong><span>familias</span></li><li><strong>—</strong><span>años en el mercado</span></li></ul>
-</section>
-
-<section class="cta band band-dark"><div class="wrap">
-  <h2>¿Buscas tu próximo hogar?</h2>
-  <p>Cuéntanos qué buscas y te asesoramos sin compromiso.</p>
-  <a class="btn btn-accent" href="/contacto.html">Contáctanos</a>
-</div></section>
 </main>
 <footer class="site-footer" data-site-footer></footer>
-<script src="/site.js"></script>
 <script src="/projects.js"></script>
-<script>document.getElementById("featured").innerHTML = PROJECTS.filter(p => p.status !== "entregado").slice(0,3).concat(PROJECTS.filter(p => p.status === "entregado")).slice(0,3).map(projectCard).join("");</script>
+<script src="/site.js"></script>
+<script>
+mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
+mountLeadForm(document.getElementById('lead'));
+(function(){
+  const items = forSale().filter(p => p.headline);
+  const slides = document.getElementById('slides'), dots = document.getElementById('dots');
+  slides.innerHTML = items.map((p, i) => `
+    <article class="slide band${p.hero ? ' has-img' : ''}" aria-roledescription="diapositiva" aria-label="${i+1} de ${items.length}" ${i ? 'hidden' : ''}>
+      ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture>` : '<div class="iso" aria-hidden="true"></div>'}
+      <div class="wrap slide-text">
+        <span class="tag">${esc(STAGES[p.stage])}</span>
+        <h1>${esc(p.headline)}</h1>
+        <p class="slide-meta"><strong>${esc(p.name)}</strong> · ${esc(p.district)}<br>${esc([p.areas, bedroomsText(p.bedrooms)].filter(Boolean).join(' · '))}</p>
+        <a class="btn" href="${projectUrl(p)}">Conoce más</a>
+      </div>
+    </article>`).join('');
+  dots.innerHTML = items.map((_, i) => `<button aria-label="Ir a ${i+1}"${i ? '' : ' aria-current="true"'}></button>`).join('');
+  const s = [...slides.children], d = [...dots.children]; let cur = 0, timer;
+  const go = n => { cur = (n + s.length) % s.length; s.forEach((el, i) => el.hidden = i !== cur); d.forEach((el, i) => el.toggleAttribute('aria-current', i === cur)); };
+  const auto = () => { clearInterval(timer); if (s.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(() => go(cur + 1), 6000); };
+  d.forEach((el, i) => el.addEventListener('click', () => { go(i); auto(); }));
+  document.querySelector('.sl-prev').onclick = () => { go(cur - 1); auto(); };
+  document.querySelector('.sl-next').onclick = () => { go(cur + 1); auto(); };
+  let x0 = null; slides.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
+  slides.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { go(cur + (dx < 0 ? 1 : -1)); auto(); } x0 = null; });
+  if (s.length < 2) document.querySelector('.slider-ui').hidden = true;
+  auto();
+})();
+</script>
 </body>
 </html>

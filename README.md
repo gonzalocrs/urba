@@ -4,8 +4,8 @@ Static site served by Cloudflare Workers (static assets), the same setup as `gon
 Every push to `main` deploys automatically.
 
 ## Where things live
-- `public/projects.js`: the list of projects (name, district, status, facts, photos). Add a project here and it shows up on the home page, the projects page and its own detail page (`/proyecto.html?p=<slug>`).
-- `public/site.js`: phone, WhatsApp, email, address and social links, plus the shared header and footer.
+- `public/projects.js`: the list of projects (name, district, stage, bedrooms, areas, photos, spaces, brochure/plans). Add a project here and it shows up in the home slider, the filters, the projects page and its own page (`/proyecto.html?p=<slug>`).
+- `public/site.js`: phone, WhatsApp, emails, address, RUC and social links, plus the shared header, footer and lead form (sends to WhatsApp).
 - `public/styles.css`: brand colors and fonts are the variables at the top.
 - `public/img/proyectos/<slug>/`: project photos.
 
