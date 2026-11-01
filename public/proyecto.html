@@ -64,8 +64,8 @@ const shareBtn = `<button type="button" class="btn-pill btn-pill-line pf-share">
 const specsHtml = (it) => {
   if (it.kind === 'dwg') return `<p class="pf-type">${esc(p.name)}</p><h3 class="pf-name">${esc(it.title)}</h3><div class="pf-btns">${p.plans ? `<a class="btn-pill btn-pill-dark" href="${esc(p.plans)}" download>Descargar planos</a>` : ''}${shareBtn}</div>`;
   const u = it.u;
-  return `<p class="pf-type">${esc(u.type || 'Flat')} · Piso ${esc(String(u.floor ?? '—'))}</p><h3 class="pf-name">Departamento ${esc(u.code)}</h3>
-    <dl class="pf-specs"><dt>Dormitorios</dt><dd>${u.beds}</dd><dt>Baños</dt><dd>${u.baths}</dd><dt>Área</dt><dd>${u.area} m²</dd><dt>Precio</dt><dd>${money(u.price)}</dd></dl>
+  return `<p class="pf-type">${esc(u.type || 'Flat')} · ${esc(u.floorLabel || 'Piso ' + (u.floor ?? '—'))}</p><h3 class="pf-name">Departamento ${esc(u.code)}</h3>
+    <dl class="pf-specs"><dt>Dormitorios</dt><dd>${u.beds}</dd><dt>Baños</dt><dd>${u.baths}</dd><dt>Área</dt><dd>${u.area} m²</dd>${done && !u.price ? '' : `<dt>Precio</dt><dd>${money(u.price)}</dd>`}</dl>
     <div class="pf-btns"><a class="btn-pill btn-pill-dark" data-wa="Hola, me interesa el departamento ${esc(u.code)} de ${esc(p.name)} (${u.area} m², ${u.beds} dorm.).">Contáctanos ↗</a>${shareBtn}</div>`;
 };
 const near = p.nearby || {};
@@ -120,7 +120,7 @@ el.innerHTML = `
   </div></section>
   ${items.length ? `<section class="planos-g" id="planos">
     <div class="pg-top">
-      <div><p class="eyebrow">Planos</p><h2 class="title">${units.length ? 'Elige tu departamento' : 'Distribución'}</h2></div>
+      <div><p class="eyebrow">Planos</p><h2 class="title">${units.length && !done ? 'Elige tu departamento' : 'Distribución'}</h2></div>
       <div class="pg-tabs-wrap">
         ${bedsSet.length > 1 ? `<div class="pf-filter" id="unit-filter"><button type="button" data-b="" aria-pressed="true">Todos</button>${bedsSet.map(b => `<button type="button" data-b="${b}">${b} dorm.</button>`).join('')}</div>` : ''}
         <ul class="pg-tabs">${items.map(idxRow).join('')}</ul>

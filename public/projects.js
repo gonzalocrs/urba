@@ -115,17 +115,38 @@ const PROJECTS = [
     slug: 'edificio-murano',
     color: 'amarillo',
     name: 'Edificio Murano',
-    district: 'Cusco',
+    district: 'San Sebastián, Cusco',
     stage: 'entregado',
     headline: '',
     kicker: 'Vivienda · 2021',
-    bedrooms: [],
-    areas: '', floors: '',
-    address: 'Cusco, Perú',
-    intro: 'Edificio de vivienda en Cusco (por completar).',
-    hero: '', heroMobile: '', cover: '',
-    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['uso', 'Uso', 'Vivienda'], ['entrega', 'Entrega', '2021']],
-    spaces: [], brochure: '', plans: '', mapQuery: ''
+    bedrooms: [1, 3],
+    areas: '65 a 148 m²', floors: '8 pisos + semisótano',
+    address: 'Parque Amauta 206, Urb. Magisterial 1ra Etapa, San Sebastián, Cusco',
+    intro: '',
+    hero: '/img/proyectos/edificio-murano/fachada.jpg', heroMobile: '/img/proyectos/edificio-murano/fachada.jpg', cover: '/img/proyectos/edificio-murano/fachada.jpg',
+    pageHero: '/img/proyectos/edificio-murano/foto-sala-cocina.jpg',   // real photo of the delivered flat, differs from the home hero
+    ficha: [['ubicacion', 'Ubicación', 'San Sebastián, Cusco'], ['uso', 'Uso', 'Vivienda'], ['dorm', 'Departamentos', '1 y 3 dorm.'], ['entrega', 'Entrega', '2021']],
+    planImgs: [
+      { title: 'Semisótano', img: '/img/proyectos/edificio-murano/planos/semisotano.png' },
+      { title: 'Primer nivel', img: '/img/proyectos/edificio-murano/planos/nivel-1.png' },
+      { title: 'Segundo nivel', img: '/img/proyectos/edificio-murano/planos/nivel-2.png' },
+      { title: 'Típico 3 al 8', img: '/img/proyectos/edificio-murano/planos/tipico-3-8.png' }
+    ],
+    units: [                                // typologies from the 2021 sheets; delivered, so no price shown
+      { code: '301 al 801', type: 'Flat', floorLabel: 'Pisos 3 al 8', beds: 3, baths: 3, area: 148, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x01.png' },
+      { code: '102 al 802', type: 'Flat', floorLabel: 'Pisos 1 al 8', beds: 1, baths: 1, area: 65, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x02.png' }
+    ],
+    spaces: [
+      { title: 'Fachada', text: '', img: '/img/proyectos/edificio-murano/fachada.jpg' },
+      { title: 'Sala y cocina', text: '', img: '/img/proyectos/edificio-murano/foto-sala-cocina.jpg' },
+      { title: 'Cocina', text: '', img: '/img/proyectos/edificio-murano/foto-cocina.jpg' }
+    ],
+    gallery: [
+      { title: 'Áreas sociales', imgs: ['/img/proyectos/edificio-murano/fachada.jpg', '/img/proyectos/edificio-murano/sala.jpg', '/img/proyectos/edificio-murano/comedor-cocina.jpg', '/img/proyectos/edificio-murano/sala-estar.jpg', '/img/proyectos/edificio-murano/estudio.jpg'] },
+      { title: 'Obra entregada', imgs: ['/img/proyectos/edificio-murano/foto-sala-cocina.jpg', '/img/proyectos/edificio-murano/foto-cocina.jpg'] },
+      { title: 'Dormitorios y baños', imgs: ['/img/proyectos/edificio-murano/dormitorio-principal.jpg', '/img/proyectos/edificio-murano/dormitorio-secundario.jpg', '/img/proyectos/edificio-murano/bano-principal.jpg', '/img/proyectos/edificio-murano/bano-visita.jpg'] }
+    ],
+    brochure: '', plans: '', mapQuery: 'Parque Amauta 206, San Sebastián, Cusco'
   }
 ];
 

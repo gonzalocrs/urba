@@ -74,7 +74,9 @@ mountFilters(document.getElementById('filters'), document.getElementById('cards'
 mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'));
 (function(){
   const shots = [];
-  delivered().forEach(p => [...(p.spaces || []).map(x => x.img), p.hero, p.cover].filter(Boolean).forEach(img => { if (!shots.some(x => x.img === img)) shots.push({ img, p }); }));
+  // round-robin across delivered projects so each one shows up before any repeats
+  const lists = delivered().map(p => [...new Set([p.cover, ...(p.spaces || []).filter(x => x.title !== 'Fachada').map(x => x.img), p.hero].filter(Boolean))].map(img => ({ img, p })));
+  for (let i = 0; lists.some(l => l[i]); i++) lists.forEach(l => { if (l[i]) shots.push(l[i]); });
   const g = document.getElementById('grid3'); if (!g) return;
   g.innerHTML = shots.slice(0, 3).map(x => `<a class="g3" href="${projectUrl(x.p)}"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"></div><p><strong>${esc(x.p.name)}</strong><span>${esc(x.p.district)}${x.p.kicker ? ' · ' + esc(x.p.kicker.split('·').pop().trim()) : ''}</span></p></a>`).join('');
 })();
