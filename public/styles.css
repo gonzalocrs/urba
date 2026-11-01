@@ -726,3 +726,9 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .talk-box{min-height:15rem}
 .talk-grid{align-items:start}
 @media (max-width:860px){.talk-title{min-height:3.1em}}
+/* Otros proyectos on project pages: compact */
+#others{grid-template-columns:repeat(4,minmax(0,1fr));gap:2rem 1.25rem}
+#others .ph{aspect-ratio:4/3}
+#others .card h3{font-size:clamp(1.05rem,1.4vw,1.3rem)}
+#others .tag{font-size:var(--fs-xs)}
+@media (max-width:980px){#others{grid-template-columns:repeat(2,minmax(0,1fr))}}
