@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proyectos · Urba Inmobiliaria</title>
+<meta name="description" content="Proyectos de Urba Inmobiliaria en Lima: en venta, en construcción y entregados.">
+<meta property="og:title" content="Proyectos · Urba Inmobiliaria">
+<meta property="og:description" content="Proyectos de Urba Inmobiliaria en Lima: en venta, en construcción y entregados.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="site-header" data-site-header></header>
+<main>
+<section class="page-head wrap"><h1>Proyectos</h1>
+  <div class="filters" role="group" aria-label="Filtrar por estado">
+    <button data-f="" aria-pressed="true">Todos</button>
+    <button data-f="en-venta" aria-pressed="false">En venta</button>
+    <button data-f="en-construccion" aria-pressed="false">En construcción</button>
+    <button data-f="entregado" aria-pressed="false">Entregados</button>
+  </div>
+</section>
+<section class="wrap block-tight"><div class="grid" id="list"></div><p id="empty" class="muted" hidden>No hay proyectos en esta categoría por ahora.</p></section>
+</main>
+<footer class="site-footer" data-site-footer></footer>
+<script src="/site.js"></script>
+<script src="/projects.js"></script>
+<script>
+const list = document.getElementById("list"), empty = document.getElementById("empty");
+function show(f){
+  const items = PROJECTS.filter(p => !f || p.status === f);
+  list.innerHTML = items.map(projectCard).join(""); empty.hidden = items.length > 0;
+  document.querySelectorAll(".filters button").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === f));
+}
+document.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => { history.replaceState(null, "", b.dataset.f ? "?estado=" + b.dataset.f : location.pathname); show(b.dataset.f); }));
+show(new URLSearchParams(location.search).get("estado") || "");
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proyecto · Urba Inmobiliaria</title>
+<meta name="description" content="Proyecto de Urba Inmobiliaria en Lima.">
+<meta property="og:title" content="Proyecto · Urba Inmobiliaria">
+<meta property="og:description" content="Proyecto de Urba Inmobiliaria en Lima.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="site-header" data-site-header></header>
+<main>
+<article class="wrap" id="project"></article>
+<div class="lightbox" id="lb" hidden><button class="lb-close" aria-label="Cerrar">×</button><img alt=""></div>
+</main>
+<footer class="site-footer" data-site-footer></footer>
+<script src="/site.js"></script>
+<script src="/projects.js"></script>
+<script>
+const slug = new URLSearchParams(location.search).get("p");
+const p = PROJECTS.find(x => x.slug === slug);
+const el = document.getElementById("project");
+if (!p) {
+  el.innerHTML = `<section class="page-head"><h1>Proyecto no encontrado</h1><p><a href="/proyectos.html">Ver todos los proyectos →</a></p></section>`;
+} else {
+  document.title = p.name + " · Urba Inmobiliaria";
+  document.querySelector("meta[name=description]").content = p.summary;
+  const facts = Object.entries(p.facts || {}).map(([k,v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("");
+  const feats = (p.features || []).map(f => `<li>${esc(f)}</li>`).join("");
+  const photos = (p.photos || []).map((src,i) => `<button class="thumb" data-src="${esc(src)}"><img src="${esc(src)}" alt="${esc(p.name)}, foto ${i+1}" loading="lazy"></button>`).join("");
+  el.innerHTML = `
+    <p class="crumbs"><a href="/proyectos.html">Proyectos</a> / ${esc(p.name)}</p>
+    <header class="project-head">
+      <div><span class="tag tag-${esc(p.status)}">${esc(STATUS_LABEL[p.status])}</span><h1>${esc(p.name)}</h1><p class="lead">${esc(p.district)} · ${esc(p.type)}</p></div>
+      <a class="btn" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">Pedir información</a>
+    </header>
+    <div class="project-cover ph">${p.cover ? `<img src="${esc(p.cover)}" alt="${esc(p.name)}">` : ""}</div>
+    <div class="project-body">
+      <div><h2>El proyecto</h2><p>${esc(p.description)}</p>${feats ? `<h3>Características</h3><ul class="features">${feats}</ul>` : ""}</div>
+      <aside><dl class="facts">${facts}</dl>${p.address ? `<p class="muted">${esc(p.address)}</p>` : ""}</aside>
+    </div>
+    ${photos ? `<h2>Galería</h2><div class="gallery">${photos}</div>` : ""}
+    ${p.mapQuery ? `<h2>Ubicación</h2><iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${encodeURIComponent(p.mapQuery)}&output=embed"></iframe>` : ""}`;
+  el.querySelectorAll("[data-wa]").forEach(a => { a.href = waLink(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+  const lb = document.getElementById("lb"), lbImg = lb.querySelector("img");
+  el.querySelectorAll(".thumb").forEach(b => b.addEventListener("click", () => { lbImg.src = b.dataset.src; lbImg.alt = b.querySelector("img").alt; lb.hidden = false; }));
+  lb.addEventListener("click", e => { if (e.target !== lbImg) lb.hidden = true; });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") lb.hidden = true; });
+}
+</script>
+</body>
+</html>
