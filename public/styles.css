@@ -623,3 +623,8 @@ nav a{font-size:.9rem}
 .reel-p:has(.reel-ph.on) .reel-bars i{background:rgba(40,40,41,.15)}
 .reel-p:has(.reel-ph.on) .reel-bars i.on::after,.reel-p:has(.reel-ph.on) .reel-bars i.run::after{background:var(--grafito)}
 .reel-p:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+/* ficha: always one row across the width */
+.ficha-list{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:0 clamp(1rem,2vw,2rem)}
+.ficha-list li{align-content:start}
+.ficha-list strong{font-size:clamp(1rem,1.35vw,1.4rem)}
+@media (max-width:860px){.ficha-list{grid-auto-flow:row;grid-template-columns:1fr 1fr}}
