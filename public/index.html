@@ -70,7 +70,7 @@
 <script src="/projects.js"></script>
 <script src="/site.js"></script>
 <script>
-if (forSale().length < 3) { document.getElementById('filters').hidden = true; const c = document.getElementById('cards'); c.className = 'features'; c.innerHTML = forSale().map(featureCard).join(''); c.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; }); }
+if (forSale().length < 3) { document.getElementById('filters').hidden = true; const c = document.getElementById('cards'); c.className = 'features'; c.closest('section').classList.add('is-feature'); c.innerHTML = forSale().map(featureCard).join(''); c.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; }); }
 else mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
 mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'));
 (function(){
