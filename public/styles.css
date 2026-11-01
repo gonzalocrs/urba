@@ -240,3 +240,30 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .has-img::after{background:linear-gradient(to top,rgba(20,20,21,.65),rgba(20,20,21,.05) 55%)}
 .page-head{padding-top:3.5rem}
 .page-head.band{background:var(--soft)}
+
+/* Photo heroes, as in the manual's cover: a clean colour photo + a solid brand panel
+   carrying the isotipo (bleeding off the top) and the text. Never the isotipo over the photo. */
+.slide.has-img,.project-hero.has-img{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);padding:0;align-items:stretch;background:var(--accent);color:var(--grafito)}
+.has-img::after{display:none}
+.has-img picture{position:relative;inset:auto;display:block;min-height:100%}
+.has-img picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.has-img .hero-panel{position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:calc(var(--header) + 2rem) clamp(1.5rem,3.5vw,3.5rem) 5.5rem}
+.has-img .hero-panel .iso{background:var(--grafito);width:100%;right:0;top:0}
+.has-img .slide-text{z-index:1}
+.has-img .slide-text h1{font-size:clamp(2rem,3.4vw,3rem);max-width:12ch}
+.has-img .btn{background:var(--grafito);color:var(--blanco);border-color:var(--grafito)}
+.has-img .btn:hover{background:transparent;color:var(--grafito)}
+.has-img .btn-ghost{background:transparent;color:var(--grafito);border-color:var(--grafito)}
+.has-img .btn-ghost:hover{background:var(--grafito);color:var(--blanco)}
+.has-img .tag{background:var(--grafito);color:var(--blanco)}
+.slider:has(.slide.has-img:not([hidden])) .slider-ui{color:var(--grafito);left:auto;right:0;width:calc(100% / 2.55);padding-left:clamp(1.5rem,3.5vw,3.5rem);max-width:none}
+@media (max-width:860px){
+  .slide.has-img,.project-hero.has-img{grid-template-columns:1fr;min-height:0}
+  .has-img picture{aspect-ratio:4/3}
+  .has-img .hero-panel{padding:6.5rem var(--gutter) 4.5rem}
+  .has-img .hero-panel .iso{width:85%}
+  .slider:has(.slide.has-img:not([hidden])) .slider-ui{width:100%;padding-left:var(--gutter);bottom:1.5rem}
+}
+/* photo blocks: clean photo, isotipo on a brand-colour strip overlapping its top edge */
+.photo-iso{overflow:visible}
+.photo-iso::before{width:70%;top:-1px;background:var(--accent);display:none}

@@ -44,13 +44,13 @@ const icons = {
 };
 el.innerHTML = `
   <section class="project-hero band${p.hero ? ' has-img' : ''}">
-    ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture>` : ''}<div class="iso" aria-hidden="true"></div>
+    ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture><div class="hero-panel"><div class="iso" aria-hidden="true"></div>` : '<div class="iso" aria-hidden="true"></div>'}
     <div class="wrap slide-text">
       <span class="tag">${esc(STAGES[p.stage])}</span>
       <h1>${esc(p.name)}</h1>
       <p class="slide-meta">${esc(p.district)}</p>
       <div class="actions"><a class="btn" href="#info">${p.stage === 'entregado' ? 'Contáctanos' : 'Quiero más información'}</a><a class="btn btn-ghost" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a>${p.mapQuery ? '<a class="btn btn-ghost" href="#ubicacion">Ubicación</a>' : ''}</div>
-    </div>
+    </div>${p.hero ? '</div>' : ''}
   </section>
   <section class="wrap intro"><h2 class="title">${esc(p.name)}</h2><p class="lead">${esc(p.intro)}</p></section>
   ${(p.spaces || []).map((s, i) => `
@@ -66,7 +66,7 @@ el.innerHTML = `
   <section class="contact-band band band-dark" id="info"><div class="wrap contact-grid">
     <div><h2 class="title">${p.stage === 'entregado' ? 'Conversemos' : 'Quiero más información'}</h2><p>${p.stage === 'entregado' ? 'Conoce nuestros proyectos en venta. Déjanos tus datos y te contactamos.' : 'Déjanos tus datos y te enviamos precios, planos y disponibilidad de ' + esc(p.name) + '.'}</p></div><div id="lead"></div></div></section>
   <section class="wrap block"><h2 class="title">Otros proyectos en venta</h2><div class="cards" id="others"></div></section>`;
-if (p.hero) document.querySelector('.site-header').classList.add('on-dark');
+
 mountLeadForm(document.getElementById('lead'), p.stage === 'entregado' ? '' : p.name);
 document.getElementById('others').innerHTML = forSale().filter(x => x.slug !== p.slug).slice(0, 2).map(projectCard).join('');
 el.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });

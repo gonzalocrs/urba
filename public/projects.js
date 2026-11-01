@@ -75,7 +75,7 @@ const PROJECTS = [
     floors: '',
     address: 'Cusco, Perú',
     intro: 'Transformamos una estructura existente en un hotel, rediseñando por completo su distribución interior y su fachada. La materialidad conecta el edificio con el carácter arquitectónico de Cusco: una base de texturas rústicas, un cuerpo que reinterpreta la misma paleta cálida con una composición contemporánea y un remate de materiales naturales y vidrio de piso a techo que enmarca las montañas.',
-    hero: '/img/proyectos/sierra-hotel/hero.jpg', heroMobile: '/img/proyectos/sierra-hotel/fachada.jpg',
+    hero: '/img/proyectos/sierra-hotel/fachada.jpg', heroMobile: '/img/proyectos/sierra-hotel/fachada.jpg',
     cover: '/img/proyectos/sierra-hotel/cover.jpg',
     ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['areas', 'Uso', 'Hotel'], ['pisos', 'Entrega', '2023']],
     spaces: [

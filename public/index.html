@@ -60,18 +60,18 @@ mountLeadForm(document.getElementById('lead'));
   const slides = document.getElementById('slides'), dots = document.getElementById('dots');
   slides.innerHTML = items.map((p, i) => `
     <article class="slide band${p.hero ? ' has-img' : ''}" aria-roledescription="diapositiva" aria-label="${i+1} de ${items.length}" ${i ? 'hidden' : ''}>
-      ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture>` : ''}<div class="iso" aria-hidden="true"></div>
+      ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture><div class="hero-panel"><div class="iso" aria-hidden="true"></div>` : '<div class="iso" aria-hidden="true"></div>'}
       <div class="wrap slide-text">
         <span class="tag">${esc(STAGES[p.stage])}</span>
         <h1>${esc(p.headline)}</h1>
         <p class="slide-meta"><strong>${esc(p.name)}</strong> · ${esc(p.district)}<br>${esc([p.areas, bedroomsText(p.bedrooms)].filter(Boolean).join(' · '))}</p>
         <a class="btn" href="${projectUrl(p)}">Conoce más</a>
-      </div>
+      </div>${p.hero ? '</div>' : ''}
     </article>`).join('');
   dots.innerHTML = items.map((_, i) => `<button aria-label="Ir a ${i+1}"${i ? '' : ' aria-current="true"'}></button>`).join('');
   const s = [...slides.children], d = [...dots.children]; let cur = 0, timer;
   const hdr = document.querySelector('.site-header');
-  const go = n => { cur = (n + s.length) % s.length; s.forEach((el, i) => el.hidden = i !== cur); d.forEach((el, i) => el.toggleAttribute('aria-current', i === cur)); hdr.classList.toggle('on-dark', s[cur].classList.contains('has-img')); };
+  const go = n => { cur = (n + s.length) % s.length; s.forEach((el, i) => el.hidden = i !== cur); d.forEach((el, i) => el.toggleAttribute('aria-current', i === cur));  };
   const auto = () => { clearInterval(timer); if (s.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(() => go(cur + 1), 6000); };
   d.forEach((el, i) => el.addEventListener('click', () => { go(i); auto(); }));
   document.querySelector('.sl-prev').onclick = () => { go(cur - 1); auto(); };
