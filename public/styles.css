@@ -556,3 +556,36 @@ nav a{font-size:.9rem}
 .reel-tabs button[aria-current]{font-weight:600}
 @media (max-width:860px){.reel-panels{grid-template-columns:1fr}.reel-p:not(:first-child){display:none}.reel-p{height:72vh}}
 @media (prefers-reduced-motion:reduce){.reel-panels .reel-p,.reel-bars i.run::after{animation:none}.reel-p img{transition:none}}
+
+/* Nosotros: full-bleed colour field, horizontal logo sequence, stacked full-width sections */
+.ns-hero{background:var(--accent);color:var(--grafito);padding:clamp(4rem,9vw,8rem) 0 clamp(4rem,8vw,7rem)}
+.ns-hero .eyebrow{color:rgba(40,40,41,.6)}
+.ns-slogan{font-family:var(--font-ui);font-weight:500;font-size:clamp(2.6rem,6.5vw,6rem);line-height:1;letter-spacing:-.025em;max-width:16ch}
+.ns-still{margin:clamp(4rem,9vw,8rem) 0}
+.still.still-h{width:100%;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.5rem,4vw,4.5rem);padding:0}
+.ns-logo-text{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(2rem,6vw,6rem);border-top:1px solid var(--grafito);padding-top:clamp(1.5rem,3vw,2.5rem)}
+.ns-logo-text .title{max-width:14ch}
+.ns-logo-text p{font-size:var(--fs-lg,1.2rem);line-height:1.5;margin-bottom:1.25rem;max-width:40rem}
+.ns-story{padding:clamp(5rem,10vw,9rem) 0;background:var(--soft)}
+.ns-big{font-family:var(--font-ui);font-weight:500;font-size:clamp(2rem,4.6vw,4.25rem);line-height:1.08;letter-spacing:-.02em;max-width:22ch;margin-top:1rem}
+.ns-big span{color:var(--muted)}
+.ns-photo{position:relative;background:var(--grafito);color:var(--blanco)}
+.ns-photo img{display:block;width:100%;height:min(92vh,58rem);object-fit:cover}
+.ns-photo-cap{display:grid;grid-template-columns:1.4fr 1fr;gap:2rem;align-items:end;padding-top:clamp(2.5rem,5vw,4rem);padding-bottom:clamp(3.5rem,7vw,6rem)}
+.ns-photo-cap .eyebrow{color:rgba(255,255,255,.55)}
+.ns-photo-cap .title{max-width:20ch}
+.ns-photo-cap>p{color:rgba(255,255,255,.7)}
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem}
+.team figure{margin:0}
+.team-img{aspect-ratio:3/4;background:var(--soft) url(/img/brand/isotipo.svg) right 1.25rem top 1.5rem/40% no-repeat}
+.team figcaption{margin-top:.8rem;display:flex;flex-direction:column;font-size:var(--fs-sm)}
+.team strong{font-family:var(--font-ui);font-weight:500;font-size:1rem}
+.team span{color:var(--muted)}
+.ns-numbers{background:var(--accent);color:var(--grafito);padding:clamp(4rem,8vw,7rem) 0}
+.ns-numbers .eyebrow{color:rgba(40,40,41,.6)}
+.ns-stats{list-style:none;padding:0;margin:2rem 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--grafito)}
+.ns-stats li{padding:1.5rem 1.5rem 0 0}
+.ns-stats li+li{border-left:1px solid rgba(40,40,41,.25);padding-left:1.5rem}
+.ns-stats strong{display:block;font-family:var(--font-ui);font-weight:500;font-size:clamp(3rem,7vw,6.5rem);line-height:1}
+.ns-stats span{font-size:var(--fs-sm)}
+@media (max-width:860px){.still.still-h{grid-template-columns:1fr 1fr;row-gap:2.5rem}.ns-logo-text,.ns-photo-cap{grid-template-columns:1fr}.team{grid-template-columns:1fr 1fr}.ns-stats{grid-template-columns:1fr 1fr}.ns-stats li:nth-child(3){border-left:0;padding-left:0}}
