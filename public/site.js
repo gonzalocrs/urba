@@ -3,8 +3,8 @@ function escH(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;',
 const URBA = {
   phone: '+51 974 979 393',
   whatsapp: '51974979393',            // digits only, with country code
-  salesEmail: 'ventas@urba.pe',       // TODO
-  email: 'contacto@urba.pe',          // TODO
+  salesEmail: 'contacto@urba.pe',
+  email: 'contacto@urba.pe',
   address: 'Santiago de Surco, Lima, Perú',
   company: 'Consorcio Mecano S.A.C.',
   ruc: '',                            // TODO RUC
