@@ -10,8 +10,9 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#282829">
 <link rel="icon" href="/img/brand/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+
+<link rel="preload" href="/fonts/bonn-bf-medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="theme-amarillo">
@@ -30,7 +31,7 @@ const el = document.getElementById('project');
 if (!p) { el.innerHTML = '<section class="page-head band"><div class="wrap"><h1 class="title">Proyecto no encontrado</h1><p><a class="btn" href="/proyectos.html">Ver proyectos</a></p></div></section>'; return; }
 document.title = p.name + ' · ' + p.district + ' · Urba Inmobiliaria';
 document.querySelector('meta[name=description]').content = p.intro;
-const ficha = [
+const ficha = p.ficha || [
   ['ubicacion', 'Ubicación', p.address],
   ['areas', 'Áreas y dormitorios', [p.areas, bedroomsText(p.bedrooms)].filter(Boolean).join('<br>')],
   ['pisos', 'Pisos', p.floors]
@@ -47,7 +48,7 @@ el.innerHTML = `
       <span class="tag">${esc(STAGES[p.stage])}</span>
       <h1>${esc(p.name)}</h1>
       <p class="slide-meta">${esc(p.district)}</p>
-      <div class="actions"><a class="btn" href="#info">Quiero más información</a><a class="btn btn-ghost" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a>${p.mapQuery ? '<a class="btn btn-ghost" href="#ubicacion">Ubicación</a>' : ''}</div>
+      <div class="actions"><a class="btn" href="#info">${p.stage === 'entregado' ? 'Contáctanos' : 'Quiero más información'}</a><a class="btn btn-ghost" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a>${p.mapQuery ? '<a class="btn btn-ghost" href="#ubicacion">Ubicación</a>' : ''}</div>
     </div>
   </section>
   <section class="wrap intro"><h2 class="title">${esc(p.name)}</h2><p class="lead">${esc(p.intro)}</p></section>
@@ -62,9 +63,10 @@ el.innerHTML = `
   </section>
   ${p.mapQuery ? `<section class="wrap" id="ubicacion"><h2 class="title">Ubicación</h2><iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${encodeURIComponent(p.mapQuery)}&output=embed"></iframe></section>` : ''}
   <section class="contact-band band band-dark" id="info"><div class="wrap contact-grid">
-    <div><h2 class="title">Quiero más información</h2><p>Déjanos tus datos y te enviamos precios, planos y disponibilidad de ${esc(p.name)}.</p></div><div id="lead"></div></div></section>
+    <div><h2 class="title">${p.stage === 'entregado' ? 'Conversemos' : 'Quiero más información'}</h2><p>${p.stage === 'entregado' ? 'Conoce nuestros proyectos en venta. Déjanos tus datos y te contactamos.' : 'Déjanos tus datos y te enviamos precios, planos y disponibilidad de ' + esc(p.name) + '.'}</p></div><div id="lead"></div></div></section>
   <section class="wrap block"><h2 class="title">Otros proyectos en venta</h2><div class="cards" id="others"></div></section>`;
-mountLeadForm(document.getElementById('lead'), p.name);
+if (p.hero) document.querySelector('.site-header').classList.add('on-dark');
+mountLeadForm(document.getElementById('lead'), p.stage === 'entregado' ? '' : p.name);
 document.getElementById('others').innerHTML = forSale().filter(x => x.slug !== p.slug).slice(0, 2).map(projectCard).join('');
 el.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
 })();

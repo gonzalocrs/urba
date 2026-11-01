@@ -64,17 +64,41 @@ const PROJECTS = [
     mapQuery: 'Barranco, Lima'
   },
   {
-    slug: 'proyecto-entregado',
-    name: 'Proyecto entregado',
-    district: 'San Isidro',
+    slug: 'sierra-hotel',
+    name: 'Sierra Hotel',
+    district: 'Cusco',
     stage: 'entregado',
-    headline: '',
-    bedrooms: [2, 3],
+    headline: 'Sierra Hotel, Cusco',
+    kicker: 'Hotel · 2023',
+    bedrooms: [],
     areas: '',
     floors: '',
-    address: 'San Isidro',
-    intro: 'Obra entregada (por completar).',
+    address: 'Cusco, Perú',
+    intro: 'Transformamos una estructura existente en un hotel, rediseñando por completo su distribución interior y su fachada. La materialidad conecta el edificio con el carácter arquitectónico de Cusco: una base de texturas rústicas, un cuerpo que reinterpreta la misma paleta cálida con una composición contemporánea y un remate de materiales naturales y vidrio de piso a techo que enmarca las montañas.',
+    hero: '/img/proyectos/sierra-hotel/hero.jpg', heroMobile: '/img/proyectos/sierra-hotel/fachada.jpg',
+    cover: '/img/proyectos/sierra-hotel/cover.jpg',
+    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['areas', 'Uso', 'Hotel'], ['pisos', 'Entrega', '2023']],
+    spaces: [
+      { title: 'Fachada', text: 'Base, cuerpo y remate: tres partes que leen la ciudad. La base toma las texturas rústicas de Cusco y el cuerpo reinterpreta su paleta cálida con una composición sobria.', img: '/img/proyectos/sierra-hotel/fachada.jpg' },
+      { title: 'Materialidad', text: 'Listones cálidos, carpinterías oscuras y volúmenes limpios. Una arquitectura contemporánea que pertenece a su lugar.', img: '/img/proyectos/sierra-hotel/foto-4-crop.jpg' },
+      { title: 'Interiores', text: 'Cada espacio fue rediseñado pensando en la experiencia del huésped, con acabados nobles y luz natural.', img: '/img/proyectos/sierra-hotel/foto-1.jpg' }
+    ],
+    brochure: '', plans: '',
+    mapQuery: 'Cusco, Perú'
+  },
+  {
+    slug: 'edificio-murano',
+    name: 'Edificio Murano',
+    district: 'Cusco',
+    stage: 'entregado',
+    headline: '',
+    kicker: 'Vivienda · 2021',
+    bedrooms: [],
+    areas: '', floors: '',
+    address: 'Cusco, Perú',
+    intro: 'Edificio de vivienda en Cusco (por completar).',
     hero: '', heroMobile: '', cover: '',
+    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['areas', 'Uso', 'Vivienda'], ['pisos', 'Entrega', '2021']],
     spaces: [], brochure: '', plans: '', mapQuery: ''
   }
 ];
@@ -88,7 +112,7 @@ function projectUrl(p){ return '/proyecto.html?p=' + encodeURIComponent(p.slug);
 
 function projectCard(p){
   const img = p.cover ? `<img src="${esc(p.cover)}" alt="${esc(p.name)}" loading="lazy">` : '';
-  const line = [p.areas, bedroomsText(p.bedrooms)].filter(Boolean).join(' · ');
+  const line = [p.areas, bedroomsText(p.bedrooms)].filter(Boolean).join(' · ') || p.kicker || '';
   return `<a class="card" href="${projectUrl(p)}">
     <div class="ph">${img}<span class="tag">${esc(STAGES[p.stage] || '')}</span></div>
     <div class="card-body">
