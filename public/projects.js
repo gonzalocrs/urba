@@ -36,16 +36,22 @@ const PROJECTS = [
       { code: '10', area: 206.05 }, { code: '11', area: 204.67 }, { code: '12', area: 289.84 }, { code: '13', area: 202.06 },
       { code: '14', area: 291.62 }
     ],
-    lotMap: {                         // polygons traced over lotes.png, in its 2000-wide coordinates
-      img: '/img/proyectos/horizontes-del-valle/lotes.png', viewBox: '0 0 2000 717',
+    lotMap: {                         // built by tools/clean_lots.py from the lotización PDF (PDF point coordinates)
+      img: '/img/proyectos/horizontes-del-valle/lotes.svg', viewBox: '60 233 1073 388',
       polys: {
-        '1': '735,103 884,99 884,425 750,396', '2': '884,99 1021,97 1021,473 884,425',
-        '3': '1021,97 1158,94 1158,288 1021,291', '5': '1158,94 1296,91 1296,285 1158,288',
-        '7': '1296,91 1433,88 1433,282 1296,285', '9': '1433,88 1571,85 1571,278 1433,282',
-        '11': '1571,85 1708,82 1708,275 1571,278', '13': '1708,82 1845,80 1845,272 1708,275',
-        '14': '1845,80 1980,80 1980,361 1845,363',
-        '6': '1113,376 1341,376 1341,567 1198,544 1113,512', '8': '1341,376 1479,373 1479,560 1435,572 1341,567',
-        '10': '1479,373 1640,370 1640,518 1479,560', '12': '1640,370 1980,361 1980,451 1815,465 1812,472 1640,518'
+        '1': '453.5,275.5 533.3,273.4 533.3,448.1 461.5,432.6',
+        '2': '533.3,273.4 606.8,272.3 606.8,473.8 533.3,448.1',
+        '3': '606.8,272.3 680.2,270.7 680.2,374.7 606.8,376.3',
+        '5': '680.2,270.7 754.1,269.1 754.1,373.1 680.2,374.7',
+        '7': '754.1,269.1 827.6,267.5 827.6,371.5 754.1,373.1',
+        '9': '827.6,267.5 901.5,265.9 901.5,369.3 827.6,371.5',
+        '11': '901.5,265.9 975.0,264.3 975.0,367.7 901.5,369.3',
+        '13': '975.0,264.3 1048.4,263.2 1048.4,366.1 975.0,367.7',
+        '14': '1048.4,263.2 1120.7,263.2 1120.7,413.8 1048.4,414.9',
+        '6': '656.1,421.9 778.3,421.9 778.3,524.2 701.6,511.9 656.1,494.7',
+        '8': '778.3,421.9 852.2,420.2 852.2,520.5 828.6,526.9 778.3,524.2',
+        '10': '852.2,420.2 938.5,418.6 938.5,498.0 852.2,520.5',
+        '12': '938.5,418.6 1120.7,413.8 1120.7,462.0 1032.3,469.6 1030.7,473.3 938.5,498.0'
       }
     },
     nearby: { 'Cerca de': ['Plaza de Armas de Urubamba, a 7 cuadras', 'Tiendas y servicios', 'Bancos y cajas municipales', 'Av. principal de Urubamba'] },
@@ -106,14 +112,14 @@ const PROJECTS = [
     pageHero: '/img/proyectos/edificio-murano/foto-sala-cocina.jpg',   // real photo of the delivered flat, differs from the home hero
     ficha: [['ubicacion', 'Ubicación', 'San Sebastián, Cusco'], ['uso', 'Uso', 'Vivienda'], ['dorm', 'Departamentos', '1 y 3 dorm.'], ['entrega', 'Entrega', '2021']],
     planImgs: [
-      { title: 'Semisótano', img: '/img/proyectos/edificio-murano/planos/semisotano.png' },
-      { title: 'Primer nivel', img: '/img/proyectos/edificio-murano/planos/nivel-1.png' },
-      { title: 'Segundo nivel', img: '/img/proyectos/edificio-murano/planos/nivel-2.png' },
-      { title: 'Típico 3 al 8', img: '/img/proyectos/edificio-murano/planos/tipico-3-8.png' }
+      { title: 'Semisótano', img: '/img/proyectos/edificio-murano/planos/semisotano.svg' },
+      { title: 'Primer nivel', img: '/img/proyectos/edificio-murano/planos/nivel-1.svg' },
+      { title: 'Segundo nivel', img: '/img/proyectos/edificio-murano/planos/nivel-2.svg' },
+      { title: 'Típico 3 al 8', img: '/img/proyectos/edificio-murano/planos/tipico-3-8.svg' }
     ],
     units: [                                // typologies from the 2021 sheets; delivered, so no price shown
-      { code: '301 al 801', type: 'Flat', floorLabel: 'Pisos 3 al 8', beds: 3, baths: 3, area: 148, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x01.png' },
-      { code: '102 al 802', type: 'Flat', floorLabel: 'Pisos 1 al 8', beds: 1, baths: 1, area: 65, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x02.png' }
+      { code: '301 al 801', type: 'Flat', floorLabel: 'Pisos 3 al 8', beds: 3, baths: 3, area: 148, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x01.svg' },
+      { code: '102 al 802', type: 'Flat', floorLabel: 'Pisos 1 al 8', beds: 1, baths: 1, area: 65, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x02.svg' }
     ],
     spaces: [
       { title: 'Fachada', text: '', img: '/img/proyectos/edificio-murano/fachada.jpg' },
