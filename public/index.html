@@ -17,12 +17,17 @@
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="theme-celeste">
-<header class="site-header" data-site-header data-over></header>
+<header class="site-header" data-site-header></header>
 <main>
 
-<section class="slider" aria-roledescription="carrusel" aria-label="Proyectos destacados">
-  <div class="slides" id="slides"></div>
-  <div class="slider-ui wrap"><button class="sl-prev" aria-label="Anterior">←</button><div class="dots" id="dots"></div><button class="sl-next" aria-label="Siguiente">→</button></div>
+<section class="hero-photo" aria-label="Urba Inmobiliaria">
+  <img src="/img/proyectos/sierra-hotel/fachada.jpg" alt="" fetchpriority="high">
+  <div class="hero-photo-text">
+    <h1>Creamos espacios,<br>construimos comunidad</h1>
+    <p>Proyectos inmobiliarios pensados para vivir mejor: buena arquitectura, buena ubicación y una comunidad que crece contigo.</p>
+    <a class="btn-pill" href="#proyectos">Ver proyectos <span aria-hidden="true">↗</span></a>
+  </div>
+  <a class="scroll-cue" href="#proyectos">Descubre más<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
 </section>
 
 <section class="block wrap" id="proyectos">
@@ -55,35 +60,7 @@
 <script>
 mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
 mountLeadForm(document.getElementById('lead'));
-(function(){
-  const items = forSale().filter(p => p.headline).concat(delivered().filter(p => p.headline && p.hero)).sort((a, b) => !!b.hero - !!a.hero);
-  const slides = document.getElementById('slides'), dots = document.getElementById('dots');
-  slides.innerHTML = items.map((p, i) => `
-    <article class="slide band${p.hero ? ' has-img' : ''}" aria-roledescription="diapositiva" aria-label="${i+1} de ${items.length}" ${i ? 'hidden' : ''}>
-      ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture><div class="hero-panel"><div class="iso" aria-hidden="true"></div>` : '<div class="iso" aria-hidden="true"></div>'}
-      <div class="wrap slide-text">
-        <span class="tag">${esc(STAGES[p.stage])}</span>
-        <h1>${esc(p.headline)}</h1>
-        <p class="slide-meta"><strong>${esc(p.name)}</strong> · ${esc(p.district)}<br>${esc([p.areas, bedroomsText(p.bedrooms)].filter(Boolean).join(' · '))}</p>
-        <a class="btn" href="${projectUrl(p)}">Conoce más</a>
-      </div>${p.hero ? '</div>' : ''}
-    </article>`).join('');
-  dots.innerHTML = items.map((_, i) => `<button aria-label="Ir a ${i+1}"${i ? '' : ' aria-current="true"'}></button>`).join('');
-  const s = [...slides.children], d = [...dots.children]; let cur = 0, timer;
-  const hdr = document.querySelector('.site-header');
-  const ACCENTS = items.map(projectColor);
-  s.forEach((el, i) => el.classList.add('theme-' + ACCENTS[i]));
-  const go = n => { cur = (n + s.length) % s.length; s.forEach((el, i) => el.hidden = i !== cur); d.forEach((el, i) => el.toggleAttribute('aria-current', i === cur));
-    const a = ACCENTS[cur]; if (window.urbaInk) urbaInk(a); };
-  const auto = () => { clearInterval(timer); if (s.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(() => go(cur + 1), 6000); };
-  d.forEach((el, i) => el.addEventListener('click', () => { go(i); auto(); }));
-  document.querySelector('.sl-prev').onclick = () => { go(cur - 1); auto(); };
-  document.querySelector('.sl-next').onclick = () => { go(cur + 1); auto(); };
-  let x0 = null; slides.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
-  slides.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { go(cur + (dx < 0 ? 1 : -1)); auto(); } x0 = null; });
-  if (s.length < 2) document.querySelector('.slider-ui').hidden = true;
-  go(0); auto();
-})();
+if (window.urbaInk) urbaInk(['celeste', 'naranja', 'amarillo'][Math.floor(Math.random() * 3)]);
 </script>
 </body>
 </html>

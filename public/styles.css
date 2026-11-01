@@ -280,3 +280,17 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .site-header .nav-wa:hover{background:var(--blanco);color:var(--grafito)}
 .page-project .site-header,.page-project .site-header.over,.page-project .site-header.scrolled,.page-project .site-header.open{background:var(--accent);color:var(--grafito)}
 .page-project .site-header .nav-wa:hover{background:var(--grafito);color:var(--accent)}
+
+/* Home hero: full-bleed photo, dark veil, centred headline, one pill button */
+.hero-photo{position:relative;min-height:calc(100svh - var(--header));display:grid;place-items:center;overflow:hidden;background:var(--grafito);color:var(--blanco);text-align:center}
+.hero-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,21,.55) 0%,rgba(20,20,21,.45) 45%,rgba(20,20,21,.7) 100%)}
+.hero-photo-text{position:relative;z-index:1;max-width:64rem;padding:6rem 1.5rem}
+.hero-photo h1{font-family:var(--font-ui);font-weight:500;font-size:clamp(2.4rem,4.8vw,4.25rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 1.5rem}
+.hero-photo p{font-size:clamp(1rem,1.3vw,1.125rem);line-height:1.6;color:rgba(255,255,255,.82);max-width:34rem;margin:0 auto 2.25rem}
+.btn-pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--blanco);color:var(--grafito);font-family:var(--font-ui);font-weight:500;padding:.85rem 1.6rem;border-radius:2rem;text-decoration:none;transition:background-color .25s,color .25s}
+.btn-pill:hover{background:var(--accent);color:var(--grafito)}
+.scroll-cue{position:absolute;z-index:1;left:50%;bottom:1.5rem;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.35rem;color:rgba(255,255,255,.75);text-decoration:none;font-family:var(--font-ui);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+.scroll-cue svg{width:1.25rem;height:1.25rem;animation:cue 2s ease-in-out infinite}
+@keyframes cue{50%{transform:translateY(4px)}}
+@media (prefers-reduced-motion:reduce){.scroll-cue svg{animation:none}}
