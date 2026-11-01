@@ -74,48 +74,33 @@ const mapsQ = encodeURIComponent(p.mapQuery || p.address || '');
 const kind = (p.kicker || '').split('·')[0].trim(), year = ((p.kicker || '').split('·')[1] || '').trim();
 const sub = [kind, p.district].filter(Boolean).join(' · ') + (year ? ', ' + year : '');
 const done = p.stage === 'entregado';
-// Renders + common areas reel: groups of images, three panels, story bars, name tabs
+// Renders reel (Hugmun-style): three columns, each its own image set; click a column to step it, each auto-plays on its own
+const SLOTS = 5, pad = (imgs) => [...imgs, ...Array(Math.max(0, SLOTS - imgs.length)).fill('')];
 const reelGroups = (p.gallery || [
-  ...(p.spaces || []).filter(x => x.img).map(x => ({ title: x.title, imgs: [x.img] })),
-  ...(p.amenities || []).map(a => ({ title: a.title, imgs: a.imgs || [a.img || ''] }))
-]).filter(g => g.imgs && g.imgs.length);
-const reelFrames = reelGroups; // kept for the template check
+  { title: 'Exteriores', imgs: (p.spaces || []).filter(x => x.img).map(x => x.img) },
+  { title: 'Áreas comunes', imgs: (p.amenities || []).map(a => a.img || ''), labels: (p.amenities || []).map(a => a.title) },
+  { title: 'Interiores', imgs: [] }
+]).slice(0, 3).map(g => ({ ...g, imgs: pad(g.imgs || []) }));
+const reelFrames = reelGroups;
 function mountReel() {
   const box = document.getElementById('reel'); if (!box) return;
-  const cap = document.getElementById('reel-cap'), tabs = document.getElementById('reel-tabs'), G = reelGroups.length;
-  const show = Math.min(3, G), still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let centre = 0, ticks = 0, timer = null, ks = [];
-  box.style.setProperty('--n', show);
-  tabs.innerHTML = reelGroups.map((g, gi) => `<button type="button" data-g="${gi}">${esc(g.title)}</button>`).join('');
-  const first = () => show === 3 ? centre - 1 : centre;
-  const panel = (gi, j) => { const g = reelGroups[gi], real = g.imgs.filter(Boolean);
-    return `<figure class="reel-p${real.length ? '' : ' is-empty'}" data-j="${j}">`
-      + (real.length ? real.map((img, k) => `<img class="${k ? '' : 'on'}" src="${esc(img)}" alt="${esc(g.title)}, ${esc(p.name)}" decoding="async">`).join('') : `<span>${esc(g.title)}<small>Render por completar</small></span>`)
-      + `<div class="reel-bars">${Array.from({ length: Math.max(1, real.length) }, (_, k) => `<i class="${k ? '' : 'run'}"></i>`).join('')}</div></figure>`; };
-  const render = () => {
-    const gs = Array.from({ length: show }, (_, j) => ((first() + j) % G + G) % G);
-    box.innerHTML = gs.map(panel).join(''); ks = gs.map(() => 0);
-    const g = reelGroups[centre];
-    cap.innerHTML = `<strong>${esc(g.title)}</strong><span>${esc(p.name)} · ${esc(p.district)}</span>`;
-    tabs.querySelectorAll('button').forEach(b => b.toggleAttribute('aria-current', +b.dataset.g === centre));
-  };
-  // each panel steps through its own images; after a few steps the centre moves to the next group
-  const tick = () => {
-    ticks++;
-    if (ticks >= Math.max(1, reelGroups[centre].imgs.filter(Boolean).length) && G > 1) return go(centre + 1);
-    box.querySelectorAll('.reel-p').forEach((fg, j) => {
-      const imgs = fg.querySelectorAll('img'), bars = fg.querySelectorAll('.reel-bars i'); if (imgs.length < 2) { bars[0].classList.remove('run'); void bars[0].offsetWidth; bars[0].classList.add('run'); return; }
-      ks[j] = (ks[j] + 1) % imgs.length;
-      imgs.forEach((im, k) => im.classList.toggle('on', k === ks[j]));
-      bars.forEach((b, k) => { b.className = k < ks[j] ? 'on' : ''; if (k === ks[j]) { void b.offsetWidth; b.className = 'run'; } });
-    });
-  };
-  const restart = () => { clearInterval(timer); if (!still) timer = setInterval(tick, 4500); };
-  const go = (to) => { centre = (to + G) % G; ticks = 0; render(); restart(); };
-  tabs.addEventListener('click', e => { const b = e.target.closest('button'); if (b) go(+b.dataset.g); });
-  box.addEventListener('click', e => { const fg = e.target.closest('.reel-p'); if (!fg || show < 3) return go(centre + 1); const j = +fg.dataset.j; if (j !== 1) go(centre + j - 1); });
-  box.addEventListener('mouseenter', () => clearInterval(timer)); box.addEventListener('mouseleave', restart);
-  render(); restart();
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches, STEP = 5000;
+  box.innerHTML = reelGroups.map((g, j) => `<figure class="reel-p" data-j="${j}" tabindex="0" role="button" aria-label="${esc(g.title)}: siguiente imagen">`
+    + g.imgs.map((img, k) => img ? `<img class="${k ? '' : 'on'}" src="${esc(img)}" alt="${esc(g.title)}, ${esc(p.name)}" decoding="async">`
+      : `<div class="reel-ph${k ? '' : ' on'}"><span>${esc((g.labels && g.labels[k]) || g.title)}<small>Imagen por completar</small></span></div>`).join('')
+    + `<div class="reel-bars">${g.imgs.map((_, k) => `<i class="${k ? '' : 'run'}"></i>`).join('')}</div></figure>`).join('');
+  box.querySelectorAll('.reel-p').forEach((fg, j) => {
+    const slides = fg.querySelectorAll('img, .reel-ph'), bars = fg.querySelectorAll('.reel-bars i'); let k = 0, t = null;
+    const set = (to) => { k = (to + slides.length) % slides.length;
+      slides.forEach((x, i) => x.classList.toggle('on', i === k));
+      bars.forEach((b, i) => { b.className = i < k ? 'on' : ''; if (i === k) { void b.offsetWidth; b.className = 'run'; } }); };
+    const play = () => { clearTimeout(t); if (!still) t = setTimeout(() => { set(k + 1); play(); }, STEP); };
+    fg.addEventListener('click', e => { const r = fg.getBoundingClientRect(); set(k + (e.clientX - r.left < r.width / 3 ? -1 : 1)); play(); });
+    fg.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); set(k + 1); play(); } if (e.key === 'ArrowLeft') { set(k - 1); play(); } });
+    // stagger the columns so they don't all change at once
+    bars[0].style.animationDuration = (STEP + j * 1600) / 1000 + 's';
+    if (!still) t = setTimeout(() => { bars[0].style.animationDuration = ''; set(1); play(); }, STEP + j * 1600);
+  });
 }
 el.innerHTML = `
   <section class="hero-photo">
@@ -144,7 +129,7 @@ el.innerHTML = `
       </div>
     </div>
   </div></section>` : ''}
-  ${reelFrames.length ? `<section class="reel" id="renders" aria-label="Renders y áreas comunes"><div class="reel-panels" id="reel"></div><div class="reel-cap" id="reel-cap"></div><nav class="reel-tabs" id="reel-tabs"></nav></section>` : ''}
+  ${reelFrames.length ? `<section class="reel" id="renders" aria-label="Renders y áreas comunes"><div class="reel-panels" id="reel"></div></section>` : ''}
 
   <section class="talk" id="contacto">
     <div class="wrap talk-grid">
