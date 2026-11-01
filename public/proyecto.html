@@ -146,6 +146,7 @@ el.innerHTML = `
     </div>
   </section>` : ''}
 
+  ${forSale().some(x => x.slug !== p.slug) ? `<section class="block"><div class="wrap-wide"><div class="sec-head"><div><p class="eyebrow">Proyectos en venta</p><h2 class="title">Otros proyectos</h2></div><a class="link-arrow" href="/proyectos.html">Ver todos</a></div><div class="cards" id="others"></div></div></section>` : ''}
   <section class="talk" id="contacto">
     <div class="wrap talk-grid">
       <div class="talk-head">
@@ -155,8 +156,7 @@ el.innerHTML = `
       </div>
       <div class="talk-box" id="talk"></div>
     </div>
-  </section>
-  ${forSale().some(x => x.slug !== p.slug) ? `<section class="block"><div class="wrap-wide"><div class="sec-head"><div><p class="eyebrow">Proyectos en venta</p><h2 class="title">Otros proyectos</h2></div><a class="link-arrow" href="/proyectos.html">Ver todos</a></div><div class="cards" id="others"></div></div></section>` : ''}`;
+  </section>`;
 
 mountReel();
 mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'), done ? '' : p.name);
