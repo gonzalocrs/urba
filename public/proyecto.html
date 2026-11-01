@@ -16,7 +16,7 @@
 <link rel="preload" href="/fonts/bonn-bf-medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles.css">
 </head>
-<body class="theme-amarillo">
+<body class="theme-amarillo page-project">
 <header class="site-header" data-site-header data-over></header>
 <main>
 
@@ -30,6 +30,8 @@
 const p = PROJECTS.find(x => x.slug === new URLSearchParams(location.search).get('p'));
 const el = document.getElementById('project');
 if (!p) { el.innerHTML = '<section class="page-head band"><div class="wrap"><h1 class="title">Proyecto no encontrado</h1><p><a class="btn" href="/proyectos.html">Ver proyectos</a></p></div></section>'; return; }
+document.body.className = 'theme-' + projectColor(p, PROJECTS.indexOf(p)) + ' page-project';
+if (window.urbaInk) urbaInk(projectColor(p, PROJECTS.indexOf(p)));
 document.title = p.name + ' · ' + p.district + ' · Urba Inmobiliaria';
 document.querySelector('meta[name=description]').content = p.intro;
 const ficha = p.ficha || [

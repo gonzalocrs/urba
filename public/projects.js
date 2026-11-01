@@ -12,6 +12,7 @@ const STAGES = {
 const PROJECTS = [
   {
     slug: 'proyecto-1',
+    color: 'naranja',                 // celeste | naranja | amarillo: slide, header and project page colour
     name: 'Proyecto 1',
     district: 'Santiago de Surco',
     stage: 'preventa',
@@ -33,6 +34,7 @@ const PROJECTS = [
   },
   {
     slug: 'proyecto-2',
+    color: 'amarillo',
     name: 'Proyecto 2',
     district: 'Miraflores',
     stage: 'en-construccion',
@@ -49,6 +51,7 @@ const PROJECTS = [
   },
   {
     slug: 'proyecto-3',
+    color: 'celeste',
     name: 'Proyecto 3',
     district: 'Barranco',
     stage: 'entrega-inmediata',
@@ -65,6 +68,7 @@ const PROJECTS = [
   },
   {
     slug: 'sierra-hotel',
+    color: 'celeste',
     name: 'Sierra Hotel',
     district: 'Cusco',
     stage: 'entregado',
@@ -88,6 +92,7 @@ const PROJECTS = [
   },
   {
     slug: 'edificio-murano',
+    color: 'amarillo',
     name: 'Edificio Murano',
     district: 'Cusco',
     stage: 'entregado',
@@ -102,6 +107,8 @@ const PROJECTS = [
     spaces: [], brochure: '', plans: '', mapQuery: ''
   }
 ];
+
+const projectColor = (p, i) => p.color || ['celeste', 'naranja', 'amarillo'][(i || 0) % 3];
 
 const forSale = () => PROJECTS.filter(p => p.stage !== 'entregado');
 const delivered = () => PROJECTS.filter(p => p.stage === 'entregado');

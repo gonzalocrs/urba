@@ -274,3 +274,9 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 /* The header already carries the mark: no isotipo watermark in the top bands */
 .slide .iso,.project-hero .iso,.page-head .iso{display:none}
 .site-header,.slide{transition:background-color .35s ease}.logo-ur{transition:background-color .35s ease}
+
+/* Test: grafito ribbon everywhere, only the Ur carries colour. Project pages keep the colour ribbon. */
+.site-header,.site-header.over,.site-header.scrolled,.site-header.open{background:var(--grafito);color:var(--blanco)}
+.site-header .nav-wa:hover{background:var(--blanco);color:var(--grafito)}
+.page-project .site-header,.page-project .site-header.over,.page-project .site-header.scrolled,.page-project .site-header.open{background:var(--accent);color:var(--grafito)}
+.page-project .site-header .nav-wa:hover{background:var(--grafito);color:var(--accent)}

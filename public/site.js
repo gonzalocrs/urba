@@ -100,9 +100,10 @@ function mountLeadForm(el, project){
   document.querySelectorAll('link[rel~="icon"]').forEach(l => l.remove());
   const link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/svg+xml'; link.href = ICONS[i];
   document.head.appendChild(link);
-  // Header mark: Ur letters only, in a colour that contrasts with the accent behind it
-  const INK = { celeste: ['naranja', 'grafito'], naranja: ['celeste', 'grafito'], amarillo: ['grafito'] };
-  window.urbaInk = (accent, n) => { const list = INK[accent] || ['grafito']; document.querySelectorAll('.logo-ur').forEach(el => el.style.background = 'var(--' + list[(n || 0) % list.length] + ')'); };
-  const accent = (document.body.className.match(/theme-(\w+)/) || [, 'celeste'])[1];
-  urbaInk(accent, i);
+  // Header: grafito ribbon, the Ur takes the accent colour. On a project page the
+  // ribbon takes the project's colour instead and the Ur goes to its contrasting ink.
+  const INK = { celeste: 'naranja', naranja: 'celeste', amarillo: 'grafito' };
+  const isProject = document.body.classList.contains('page-project');
+  window.urbaInk = accent => { const c = isProject ? (INK[accent] || 'grafito') : accent; document.querySelectorAll('.logo-ur').forEach(el => el.style.background = 'var(--' + c + ')'); };
+  urbaInk((document.body.className.match(/theme-(\w+)/) || [, 'celeste'])[1]);
 })();
