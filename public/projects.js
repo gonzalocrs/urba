@@ -27,7 +27,6 @@ const PROJECTS = [
     hero: '/img/proyectos/horizontes-del-valle/valle-nevado.jpg', heroMobile: '/img/proyectos/horizontes-del-valle/valle-nevado.jpg',
     pageHero: '/img/proyectos/horizontes-del-valle/valle-norte.jpg',
     cover: '/img/proyectos/horizontes-del-valle/valle-nevado-2.jpg',
-    featureImg: '/img/proyectos/horizontes-del-valle/terreno.jpg',   // home feature: the land itself, the hero already shows the valley
     logo: '/img/proyectos/horizontes-del-valle/logo-hdv-blanco.png',
     ficha: [['ubicacion', 'Ubicación', 'Urubamba, Cusco'], ['uso', 'Tipo', 'Lotes'], ['areas', 'Áreas', '202 a 367 m²'], ['pisos', 'Lotes', '13']],
     // Lots from the plan dated 06/12/2023. status: 'disponible' | 'separado' | 'vendido' (empty = not shown). price in US$, 0 = Consultar
