@@ -102,6 +102,11 @@ const PROJECTS = [
       { title: 'Materialidad', text: 'Listones cálidos, carpinterías oscuras y volúmenes limpios. Una arquitectura contemporánea que pertenece a su lugar.', img: '/img/proyectos/sierra-hotel/foto-4-crop.jpg' },
       { title: 'Interiores', text: 'Cada espacio fue rediseñado pensando en la experiencia del huésped, con acabados nobles y luz natural.', img: '/img/proyectos/sierra-hotel/foto-1.jpg' }
     ],
+    gallery: [                              // renders reel: groups shown as tabs, each image a story bar
+      { title: 'Fachada', imgs: ['/img/proyectos/sierra-hotel/fachada.jpg', '/img/proyectos/sierra-hotel/foto-4.jpg'] },
+      { title: 'Materialidad', imgs: ['/img/proyectos/sierra-hotel/foto-4-crop.jpg', '/img/proyectos/sierra-hotel/axonometria.jpg'] },
+      { title: 'Interiores', imgs: ['/img/proyectos/sierra-hotel/foto-1.jpg', '/img/proyectos/sierra-hotel/foto-3.jpg'] }
+    ],
     brochure: '', plans: '',
     mapQuery: 'Cusco, Perú'
   },

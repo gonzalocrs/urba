@@ -528,3 +528,31 @@ nav a{font-size:.9rem}
 .amen figure:hover img{transform:scale(1.03)}
 .amen figcaption{margin-top:.75rem;font-family:var(--font-ui);font-weight:500}
 @media (max-width:860px){.units-wrap,.near{grid-template-columns:1fr}.unit-view{position:static}.uv-info{grid-template-columns:1fr}.uv-info ul{justify-content:flex-start}.amen{grid-template-columns:1fr 1fr}}
+
+/* Renders + common areas reel (Hugmun-style: three tall panels, story bars, name tabs) */
+.reel{padding:clamp(1rem,2vw,1.75rem) clamp(1rem,2vw,1.75rem) clamp(3.5rem,6vw,5rem);background:var(--blanco)}
+.reel-panels{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:clamp(.5rem,1vw,1rem)}
+.reel-p{position:relative;margin:0;height:min(82vh,54rem);overflow:hidden;background:var(--soft);cursor:pointer}
+.reel-p img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity 1.1s ease,transform 6s ease}
+.reel-p img.on{opacity:1;transform:none}
+.reel-panels .reel-p{animation:reelIn .8s ease both}.reel-panels .reel-p:nth-child(2){animation-delay:.08s}.reel-panels .reel-p:nth-child(3){animation-delay:.16s}
+.reel-p.is-empty{background:var(--soft) url(/img/brand/isotipo.svg) right 2rem top 2.5rem/26% no-repeat;display:flex;align-items:flex-end}
+.reel-p.is-empty span{padding:1.5rem;font-family:var(--font-ui);font-weight:500;font-size:var(--fs-lg,1.35rem);display:flex;flex-direction:column;gap:.25rem}
+.reel-p.is-empty small{font-family:inherit;font-size:var(--fs-sm);color:var(--muted);font-weight:400}
+@keyframes reelIn{from{opacity:0}to{opacity:1}}
+.reel-bars{position:absolute;left:1.25rem;right:1.25rem;bottom:1.1rem;display:flex;gap:.5rem}
+.reel-bars i{flex:1;height:2px;background:rgba(255,255,255,.45);position:relative;overflow:hidden}
+.reel-p.is-empty .reel-bars i{background:rgba(40,40,41,.15)}
+.reel-bars i.on::after,.reel-bars i.run::after{content:"";position:absolute;inset:0;background:var(--blanco)}
+.reel-p.is-empty .reel-bars i.on::after,.reel-p.is-empty .reel-bars i.run::after{background:var(--grafito)}
+.reel-bars i.run::after{transform-origin:left;animation:reelBar 4.5s linear both}
+@keyframes reelBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.reel-cap{text-align:center;margin:clamp(2.5rem,5vw,4rem) 0 clamp(2rem,4vw,3rem);font-size:var(--fs-sm);line-height:1.4}
+.reel-cap strong{display:block;font-family:var(--font-ui);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.reel-cap span{color:var(--muted)}
+.reel-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem clamp(1.25rem,3vw,2.75rem)}
+.reel-tabs button{background:none;border:0;padding:.25rem 0;font:inherit;font-family:var(--font-ui);font-size:var(--fs-sm);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);cursor:pointer}
+.reel-tabs button:hover,.reel-tabs button[aria-current]{color:var(--grafito)}
+.reel-tabs button[aria-current]{font-weight:600}
+@media (max-width:860px){.reel-panels{grid-template-columns:1fr}.reel-p:not(:first-child){display:none}.reel-p{height:72vh}}
+@media (prefers-reduced-motion:reduce){.reel-panels .reel-p,.reel-bars i.run::after{animation:none}.reel-p img{transition:none}}
