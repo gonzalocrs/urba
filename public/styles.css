@@ -628,3 +628,33 @@ nav a{font-size:.9rem}
 .ficha-list li{align-content:start}
 .ficha-list strong{font-size:clamp(1rem,1.35vw,1.4rem)}
 @media (max-width:860px){.ficha-list{grid-auto-flow:row;grid-template-columns:1fr 1fr}}
+
+/* Planos v2: full-bleed split. Soft stage with the drawing, dark panel with a floor stack + index */
+.planos-x{display:grid;grid-template-columns:1.55fr 1fr;min-height:min(100vh,62rem)}
+.px-stage{background:var(--soft);padding:clamp(2rem,4vw,4rem);display:flex;flex-direction:column;justify-content:center}
+.px-stage .unit-view{position:static}
+.px-stage .uv-plan{background:var(--blanco);aspect-ratio:3/2}
+.px-stage .uv-info{border-bottom:0;padding-bottom:0}
+.px-panel{background:var(--grafito);color:var(--blanco);padding:clamp(3rem,6vw,5.5rem) clamp(2rem,4vw,4.5rem)}
+.px-panel .eyebrow{color:rgba(255,255,255,.55)}
+.px-panel .title{font-size:clamp(2rem,3.2vw,3rem);line-height:1.05;margin-bottom:clamp(2rem,4vw,3rem)}
+.px-body.has-stack{display:grid;grid-template-columns:4.5rem 1fr;gap:clamp(1.5rem,3vw,2.5rem);align-items:start}
+.stack{display:flex;flex-direction:column;gap:3px;position:sticky;top:calc(var(--header) + 1.5rem)}
+.stack i{position:relative;display:block;height:clamp(.9rem,1.6vw,1.25rem);border:1px solid rgba(255,255,255,.28);transition:background-color .3s,border-color .3s}
+.stack i.has{border-color:rgba(255,255,255,.6)}
+.stack i.on{background:var(--accent);border-color:var(--accent)}
+.stack i b{position:absolute;right:calc(100% + .5rem);top:50%;transform:translateY(-50%);font:500 .65rem/1 var(--font-ui);color:rgba(255,255,255,.4)}
+.stack i.on b{color:var(--blanco)}
+.stack-ground{display:block;height:1px;background:rgba(255,255,255,.6);margin:.35rem -.6rem 0}
+.px-panel .ix-list{border-top-color:rgba(255,255,255,.6)}
+.px-panel .ix-group,.px-panel .ix-filter button,.px-panel .ix-meta,.px-panel .ix-price{color:rgba(255,255,255,.55)}
+.px-panel .ix-filter button[aria-pressed=true],.px-panel .ix[aria-current] .ix-price{color:var(--blanco)}
+.px-panel .ix{color:var(--blanco);border-bottom-color:rgba(255,255,255,.14)}
+.px-panel .ix::before{background:rgba(255,255,255,.25)}
+.px-panel .ix:hover::before{background:var(--blanco)}
+.px-panel .ix[aria-current]::before{background:var(--accent)}
+.px-panel .ix:hover{padding-left:1.4rem}
+@media (max-width:960px){.planos-x{grid-template-columns:1fr}}
+.px-panel .ix-group{flex-wrap:wrap}
+.ix-filter button{white-space:nowrap}
+.stack i.has{cursor:pointer}.stack i.has:hover{border-color:var(--blanco)}
