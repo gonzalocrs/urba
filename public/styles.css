@@ -866,3 +866,13 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .pl-map polygon{mix-blend-mode:multiply}
 .pl-map polygon.on{fill:var(--accent,#f5e500);stroke-width:2.5}
 .feature-body .title{font-size:var(--fs-h2)}
+/* Obras entregadas (home): two calm images inside the grid, caption below */
+.obras .grid3{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.5rem,3vw,2.5rem)}
+.obras .g3{color:var(--grafito)}
+.obras .g3-img{height:auto;aspect-ratio:4/3;background:var(--soft)}
+.obras .g3 p{position:static;padding:0;margin-top:.9rem;background:none}
+.obras .g3 p span{color:var(--muted)}
+@media (max-width:860px){.obras .grid3{grid-template-columns:1fr}.obras .g3-img{height:auto}}
+.obras{padding-bottom:clamp(3rem,6vw,5rem)}
+.obras .g3{color:var(--blanco)}
+.obras .g3 p span{color:rgba(255,255,255,.6)}

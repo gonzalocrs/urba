@@ -133,7 +133,6 @@ const PROJECTS = [
     ],
     brochure: '', plans: '', mapQuery: 'Parque Amauta 206, San Sebastián, Cusco'
   },
-  { slug: 'centro-empresarial-amauta', name: 'Centro Empresarial Amauta', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/centro-empresarial-amauta/cover.jpg' },
   { slug: 'residencial-alta-vista', name: 'Residencial Alta Vista', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/residencial-alta-vista/cover.jpg' },
   { slug: 'residencial-las-margaritas', name: 'Residencial Las Margaritas', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/residencial-las-margaritas/cover.jpg' },
   { slug: 'condominio-el-pino', name: 'Condominio El Pino', district: 'Cusco', stage: 'entregado', page: false, cover: '/img/proyectos/condominio-el-pino/cover.jpg' },
