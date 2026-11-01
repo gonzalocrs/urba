@@ -39,11 +39,11 @@
 </section>
 
 <section class="split-block">
-  <div class="split-media making-panel"><div class="making" role="img" aria-label="El logo de Urba armándose y desarmándose"><span class="m-logo"></span><span class="m-iso"></span></div></div>
+  <div class="split-media making-panel"><div class="still" role="img" aria-label="El logo de Urba, de completo a solo sus puntos de construcción"><div class="still-row r1"><span></span></div><div class="still-row r2"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:75.91%;top:52.34%"></i><i style="left:32.73%;top:61.98%"></i></div><div class="still-row r3"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:75.91%;top:52.34%"></i><i style="left:32.73%;top:61.98%"></i></div><div class="still-row r4"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:32.73%;top:61.98%"></i></div></div></div>
   <div class="split-text"><h2 class="title">¿Quién es Urba?</h2><p>Una idea se convierte en proyecto, el proyecto en edificio, y al terminarlo volvemos a empezar. Por eso nuestro logo nunca está terminado: siempre se está construyendo, como nosotros.</p><a class="btn" href="/nosotros.html">Saber más</a></div>
 </section>
 <section class="split-block reverse">
-  <div class="split-media ph photo-iso"><img src="/img/proyectos/sierra-hotel/fachada.jpg" alt="Fachada del Sierra Hotel, Cusco" loading="lazy"></div>
+  <div class="split-media ph gallery" id="gallery" aria-roledescription="carrusel" aria-label="Obras entregadas"></div>
   <div class="split-text"><h2 class="title">Obras entregadas</h2><p>Del Sierra Hotel en Cusco al Edificio Murano: cada proyecto entregado es una comunidad que ya vive en él.</p><a class="btn" href="/entregados.html">Ver obras</a></div>
 </section>
 
@@ -60,6 +60,19 @@
 <script>
 mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
 mountLeadForm(document.getElementById('lead'));
+(function(){
+  const shots = [];
+  delivered().forEach(p => [p.hero, ...(p.spaces || []).map(x => x.img)].filter(Boolean).forEach(img => { if (!shots.some(x => x.img === img)) shots.push({ img, p }); }));
+  const g = document.getElementById('gallery'); if (!g || !shots.length) return;
+  g.innerHTML = shots.map((x, i) => `<a class="g-slide" href="${projectUrl(x.p)}"${i ? ' hidden' : ''}><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"><span class="g-cap">${esc(x.p.name)} · ${esc(x.p.district)}</span></a>`).join('')
+    + (shots.length > 1 ? `<div class="g-ui"><button class="g-prev" aria-label="Anterior">←</button><span class="g-count"></span><button class="g-next" aria-label="Siguiente">→</button></div>` : '');
+  const sl = [...g.querySelectorAll('.g-slide')], cnt = g.querySelector('.g-count'); let cur = 0;
+  const go = n => { cur = (n + sl.length) % sl.length; sl.forEach((el, i) => el.hidden = i !== cur); if (cnt) cnt.textContent = (cur + 1) + ' / ' + sl.length; };
+  if (shots.length > 1) { g.querySelector('.g-prev').onclick = () => go(cur - 1); g.querySelector('.g-next').onclick = () => go(cur + 1); }
+  let x0 = null; g.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
+  g.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1)); x0 = null; });
+  go(0);
+})();
 if (window.urbaInk) urbaInk(['celeste', 'naranja', 'amarillo'][Math.floor(Math.random() * 3)]);
 </script>
 </body>

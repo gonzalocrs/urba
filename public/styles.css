@@ -300,3 +300,23 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .logo-ur{height:1.5rem}
 .nav-wa{padding:.25rem .75rem!important;font-size:.8125rem!important}
 nav a{font-size:.875rem}
+
+/* "Always in the making" still (manual): logo → fading → only its construction points */
+.still{width:min(100%,22rem);display:grid;gap:clamp(1.75rem,4vw,3rem);padding:1rem 0}
+.still-row{position:relative;aspect-ratio:357.64/117.99}
+.still-row span{position:absolute;inset:0;background:var(--grafito);-webkit-mask:url(/img/brand/logo.svg) center/contain no-repeat;mask:url(/img/brand/logo.svg) center/contain no-repeat}
+.still-row.r2 span{opacity:.24}.still-row.r3 span{opacity:.1}.still-row.r4 span{display:none}
+.still-row i{position:absolute;width:5%;aspect-ratio:1;background:var(--grafito)}
+.making-panel{padding:8% 12%}
+
+/* Obras entregadas carousel */
+.gallery .g-slide{position:absolute;inset:0;display:block;animation:g-in .45s ease}
+.gallery .g-slide[hidden]{display:none}
+.gallery .g-slide img{width:100%;height:100%;object-fit:cover}
+@keyframes g-in{from{opacity:0}to{opacity:1}}
+.g-cap{position:absolute;left:1rem;bottom:1rem;background:var(--grafito);color:var(--blanco);font-family:var(--font-ui);font-size:var(--fs-xs);padding:.3rem .6rem}
+.g-ui{position:absolute;right:1rem;bottom:1rem;z-index:2;display:flex;align-items:center;gap:.25rem;background:var(--blanco);color:var(--grafito);font-family:var(--font-ui);font-size:var(--fs-xs)}
+.g-ui button{border:0;background:none;color:inherit;font:inherit;font-size:1rem;width:2.5rem;height:2.25rem;cursor:pointer}
+.g-ui button:hover{background:var(--accent)}
+.g-count{min-width:2.5rem;text-align:center}
+@media (prefers-reduced-motion:reduce){.gallery .g-slide{animation:none}}
