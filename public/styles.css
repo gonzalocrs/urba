@@ -802,3 +802,32 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .pf-dwg .ix[aria-current] .ix-no{color:var(--accent)}
 .pf-dwg .ix[aria-current]{box-shadow:inset 0 -1px 0 var(--grafito)}
 .pf-dwg .ix:not([data-beds]) strong{grid-column:2;font-size:var(--fs-base)}.pf-dwg .ix{align-items:baseline}
+
+/* Planos v5 (ref. Marcan): full-bleed soft frame, text tabs on top, smaller plan on a white card, details beside. No lines. */
+.planos-g{background:var(--soft);padding:clamp(2rem,4vw,3.5rem) var(--gutter);min-height:calc(100svh - var(--header));max-height:62rem;box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(1.25rem,2.5vw,2rem)}
+.pg-top{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.pg-top .title{margin:0}
+.pg-tabs-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:.75rem}
+.pg-tabs{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+.pg-tabs li[hidden]{display:none}
+.pg-tabs .ix{all:unset;cursor:pointer;font-family:var(--font-ui);font-weight:500;font-size:var(--fs-sm);color:var(--muted);padding:.5rem .95rem;border-radius:2rem;transition:background-color .2s,color .2s}
+.pg-tabs .ix:hover{color:var(--grafito)}
+.pg-tabs .ix[aria-current]{background:var(--blanco);color:var(--grafito)}
+.pf-filter{margin:0}
+.pg-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(18rem,1fr);gap:clamp(1.5rem,3.5vw,3.5rem);align-items:stretch}
+.pg-card{position:relative;background:var(--blanco);min-height:24rem}
+.pg-card .pl-plate{position:absolute;inset:0;height:auto;background:transparent;border:0}
+.pg-card .pl-plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:clamp(2.5rem,7%,5rem);box-sizing:border-box;mix-blend-mode:normal}
+.pg-card .pl-plate:not(:has(img)){border:0}
+.pg-card.swap,.pg-info.swap{animation:talk-in .35s ease}
+.pg-info{align-self:center;padding:1rem 0}
+.pf-type{font-size:var(--fs-sm);color:var(--muted);margin:0 0 .35rem}
+.pf-name{font-family:var(--font-ui);font-weight:500;font-size:var(--fs-h2);margin:0 0 1.75rem;line-height:1.15}
+.pf-specs{display:grid;grid-template-columns:max-content 1fr;gap:.7rem 2.5rem;margin:0 0 2rem}
+.pf-specs dt{font-family:var(--font-ui);font-weight:500;color:var(--grafito)}
+.pf-specs dd{margin:0;color:var(--grafito);font-variant-numeric:tabular-nums}
+.pf-btns{display:flex;flex-wrap:wrap;gap:.75rem}
+.pf-btns .btn-pill-line{background:transparent;border:1px solid var(--grafito);color:var(--grafito);cursor:pointer;font-family:var(--font-ui)}
+@media (max-width:900px){.planos-g{max-height:none}.pg-body{grid-template-columns:1fr}.pg-card{min-height:60vw}.pg-tabs-wrap{align-items:flex-start}}
+.planos-g .pg-card{top:auto}.planos-g{height:calc(100svh - var(--header));min-height:34rem}
+.ficha-band{background:var(--blanco)}
