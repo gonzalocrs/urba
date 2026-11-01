@@ -59,14 +59,14 @@ const money = v => v ? 'US$ ' + Number(v).toLocaleString('en-US') : 'Consultar';
 const dwgs = (p.planImgs || []).map(x => ({ kind: 'dwg', title: x.title, img: x.img }));
 const items = [...dwgs, ...units.map(u => ({ kind: 'unit', u, img: u.plan }))];
 const idxRow = (it, i) => it.kind === 'dwg'
-  ? `<li><button type="button" class="ix" data-i="${i}"${i ? '' : ' aria-current="true"'}><strong>${esc(it.title)}</strong><span>${esc(p.name)}</span></button></li>`
-  : `<li><button type="button" class="ix" data-i="${i}" data-beds="${it.u.beds}"${i ? '' : ' aria-current="true"'}><strong>${esc(it.u.code)}</strong><span>${it.u.beds} dorm. · ${it.u.area} m²</span></button></li>`;
-const plateView = (it) => {
-  const plate = `<div class="pl-plate">${it.img ? `<img src="${esc(it.img)}" alt="${esc(it.kind === 'dwg' ? it.title : 'Plano del departamento ' + it.u.code)}">` : `<p>Plano del ${esc(it.u.code)}<br><small>disponible pronto</small></p>`}</div>`;
-  if (it.kind === 'dwg') return plate + (p.plans ? `<div class="pl-specs"><a class="btn-pill btn-pill-line" href="${esc(p.plans)}" download>Descargar planos</a></div>` : '');
+  ? `<li><button type="button" class="ix" data-i="${i}"${i ? '' : ' aria-current="true"'}><strong>${esc(it.title)}</strong></button></li>`
+  : `<li><button type="button" class="ix" data-i="${i}" data-beds="${it.u.beds}"${i ? '' : ' aria-current="true"'}><strong>${esc(it.u.code)}</strong><span>${it.u.beds} dorm. · ${it.u.area} m²</span><em>${money(it.u.price)}</em></button></li>`;
+const plateHtml = (it) => `<div class="pl-plate">${it.img ? `<img src="${esc(it.img)}" alt="${esc(it.kind === 'dwg' ? it.title : 'Plano del departamento ' + it.u.code)}">` : `<p>Plano del ${esc(it.u.code)}<br><small>disponible pronto</small></p>`}</div>`;
+const specsHtml = (it) => {
+  if (it.kind === 'dwg') return p.plans ? `<a class="btn-pill btn-pill-line" href="${esc(p.plans)}" download>Descargar planos</a>` : '';
   const u = it.u;
-  return plate + `<ul class="pl-specs"><li><span>Tipo</span>${esc(u.type || 'Flat')} · Piso ${esc(String(u.floor ?? '—'))}</li><li><span>Dormitorios</span>${u.beds}</li><li><span>Baños</span>${u.baths}</li><li><span>Área</span>${u.area} m²</li><li><span>Precio desde</span>${money(u.price)}</li>
-    <li class="pl-cta"><a class="btn-pill btn-pill-dark" data-wa="Hola, me interesa el departamento ${esc(u.code)} de ${esc(p.name)} (${u.area} m², ${u.beds} dorm.).">Cotizar ${esc(u.code)} ↗</a></li></ul>`;
+  return `<ul class="pf-specs"><li><span>Tipo</span>${esc(u.type || 'Flat')} · Piso ${esc(String(u.floor ?? '—'))}</li><li><span>Baños</span>${u.baths}</li><li><span>Área</span>${u.area} m²</li><li><span>Precio desde</span>${money(u.price)}</li></ul>
+    <a class="btn-pill btn-pill-dark" data-wa="Hola, me interesa el departamento ${esc(u.code)} de ${esc(p.name)} (${u.area} m², ${u.beds} dorm.).">Cotizar ${esc(u.code)} ↗</a>`;
 };
 const near = p.nearby || {};
 const mapsQ = encodeURIComponent(p.mapQuery || p.address || '');
@@ -118,12 +118,16 @@ el.innerHTML = `
     <ul class="ficha-list">${ficha.map(([k, t, v]) => `<li>${icons[k] || icons.uso}<span>${t}</span><strong>${v}</strong></li>`).join('')}</ul>
     ${(p.brochure || p.plans) ? `<div class="hero-actions left">${p.brochure ? `<a class="btn-pill btn-pill-dark" href="${esc(p.brochure)}" download>Descargar brochure</a>` : ''}${p.plans ? `<a class="btn-pill btn-pill-line" href="${esc(p.plans)}" download>Descargar planos</a>` : ''}</div>` : ''}
   </div></section>
-  ${items.length ? `<section class="block planos-t" id="planos"><div class="wrap-wide">
-    <div class="sec-head"><div><p class="eyebrow">Planos</p><h2 class="title">${units.length ? 'Elige tu departamento' : 'Distribución'}</h2></div>
-      ${bedsSet.length > 1 ? `<div class="chips chips-light" id="unit-filter"><button type="button" data-b="" aria-pressed="true">Todos</button>${bedsSet.map(b => `<button type="button" data-b="${b}">${b} dorm.</button>`).join('')}</div>` : ''}</div>
-    <ul class="pl-tabs">${items.map(idxRow).join('')}</ul>
-    <div class="unit-view" id="unit-view">${plateView(items[0])}</div>
-  </div></section>` : ''}
+  ${items.length ? `<section class="planos-f" id="planos">
+    <div class="pf-stage unit-view" id="unit-view">${plateHtml(items[0])}</div>
+    <aside class="pf-side">
+      <p class="eyebrow">Planos</p>
+      <h2 class="title">${units.length ? 'Elige tu departamento' : 'Distribución'}</h2>
+      ${bedsSet.length > 1 ? `<div class="chips chips-light chips-sm" id="unit-filter"><button type="button" data-b="" aria-pressed="true">Todos</button>${bedsSet.map(b => `<button type="button" data-b="${b}">${b} dorm.</button>`).join('')}</div>` : ''}
+      <ul class="pf-list">${items.map(idxRow).join('')}</ul>
+      <div class="pf-detail" id="pf-detail">${specsHtml(items[0])}</div>
+    </aside>
+  </section>` : ''}
   ${reelFrames.length ? `<section class="reel" id="renders" aria-label="Renders y áreas comunes"><div class="reel-panels" id="reel"></div></section>` : ''}
   ${p.mapQuery ? `<section class="near" id="ubicacion">
     <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${mapsQ}&output=embed"></iframe>
@@ -152,7 +156,8 @@ mountReel();
 mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'), done ? '' : p.name);
 const uf = document.getElementById('unit-filter'), uv = document.getElementById('unit-view');
 const wire = (root) => root.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
-const pick = (btn) => { el.querySelectorAll('.ix').forEach(x => x.toggleAttribute('aria-current', x === btn)); uv.innerHTML = plateView(items[+btn.dataset.i]); uv.classList.remove('swap'); void uv.offsetWidth; uv.classList.add('swap'); wire(uv); };
+const pd = document.getElementById('pf-detail');
+const pick = (btn) => { el.querySelectorAll('.ix').forEach(x => x.toggleAttribute('aria-current', x === btn)); const it = items[+btn.dataset.i]; uv.innerHTML = plateHtml(it); pd.innerHTML = specsHtml(it); [uv, pd].forEach(n => { n.classList.remove('swap'); void n.offsetWidth; n.classList.add('swap'); }); wire(pd); };
 el.querySelectorAll('.ix').forEach(b => b.addEventListener('click', () => pick(b)));
 if (uf) uf.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; uf.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
   const vis = [...el.querySelectorAll('.ix[data-beds]')].filter(x => { const show = !b.dataset.b || x.dataset.beds === b.dataset.b; x.parentElement.hidden = !show; return show; });

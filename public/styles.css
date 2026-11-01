@@ -682,3 +682,47 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .pl-tabs .ix[aria-current]::before{width:100%}
 .pl-tabs .ix:not([data-beds]) strong{font-size:clamp(1.05rem,1.5vw,1.35rem)}
 .pl-tabs .ix::before,.pl-tabs .ix[aria-current]::before{transform:none;margin:0;top:-1px;height:3px}
+
+/* Planos v4: plan left, options right, whole block fits one screen */
+.planos-f{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(20rem,1fr);gap:clamp(1.5rem,3vw,3.5rem);height:calc(100svh - var(--header));min-height:36rem;max-height:62rem;padding:clamp(1.25rem,2.5vw,2.5rem) var(--gutter);box-sizing:border-box}
+.pf-stage{position:relative;min-height:0}
+.pf-stage .pl-plate{height:100%}
+.pf-stage.swap,.pf-detail.swap{animation:talk-in .35s ease}
+.pf-side{display:flex;flex-direction:column;min-height:0;padding-top:.25rem}
+.pf-side .title{font-size:clamp(1.6rem,2.6vw,2.5rem);line-height:1.05;margin-bottom:1rem}
+.chips-sm{margin-bottom:1.25rem}
+.chips-sm button{padding:.45rem .9rem;font-size:var(--fs-sm)}
+.pf-list{list-style:none;padding:0;margin:0;flex:1;min-height:0;overflow-y:auto;border-top:1px solid var(--grafito)}
+.pf-list li[hidden]{display:none}
+.pf-list .ix{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:4.5rem 1fr auto;align-items:baseline;gap:1rem;padding:.9rem 0 .9rem .9rem;border-bottom:1px solid var(--line);cursor:pointer;position:relative;transition:background-color .2s}
+.pf-list .ix::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background-color .2s}
+.pf-list .ix:hover{background:var(--soft)}
+.pf-list .ix[aria-current]::before{background:var(--accent)}
+.pf-list .ix strong{font-family:var(--font-ui);font-weight:500;font-size:clamp(1.15rem,1.6vw,1.5rem);color:var(--muted)}
+.pf-list .ix:not([data-beds]) strong{font-size:1.05rem;grid-column:1/-1}
+.pf-list .ix[aria-current] strong,.pf-list .ix:hover strong{color:var(--grafito)}
+.pf-list .ix span{font-size:var(--fs-sm);color:var(--muted)}
+.pf-list .ix em{font-style:normal;font-size:var(--fs-sm);color:var(--muted)}
+.pf-list .ix[aria-current] em{color:var(--grafito)}
+.pf-detail{padding-top:1.25rem;display:grid;gap:1.25rem;justify-items:start}
+.pf-specs{list-style:none;padding:0;margin:0;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.5rem}
+.pf-specs li{border-top:1px solid var(--grafito);padding-top:.6rem;display:grid;gap:.2rem;font-family:var(--font-ui);font-weight:500;font-size:clamp(.95rem,1.15vw,1.15rem)}
+.pf-specs span{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:400}
+@media (max-width:900px){.planos-f{grid-template-columns:1fr;height:auto;max-height:none}.pf-stage .pl-plate{height:55vh}.pf-list{overflow:visible}}
+.planos-f .pf-stage{position:relative;top:auto;height:100%}
+.planos-f .pf-stage .pl-plate{position:absolute;inset:0;height:auto}
+.pf-list .ix::before,.pf-list .ix[aria-current]::before{top:0;bottom:0;height:auto;width:3px;margin:0;transform:none}
+.pf-list .ix:hover::before{background:transparent}.pf-list .ix[aria-current]::before{background:var(--accent)}
+/* thinner location + contact bands */
+.near{min-height:min(62vh,36rem)}
+.near-panel{padding:clamp(2.25rem,4vw,3.75rem) clamp(2rem,4.5vw,4.5rem)}
+.near-panel .title{font-size:clamp(1.75rem,2.6vw,2.5rem)}
+.near-addr{margin-bottom:1.5rem}
+.near-btns{margin-bottom:2rem}
+.near-lists{gap:1.25rem 3rem}
+.near-lists ol{line-height:1.7}
+.talk{padding:clamp(3rem,6vw,4.75rem) 0}
+.talk-title{font-size:clamp(2.25rem,4.4vw,4.1rem);margin-bottom:1.5rem;min-height:2.1em}
+.talk-box{min-height:15rem}
+.talk-grid{align-items:start}
+@media (max-width:860px){.talk-title{min-height:3.1em}}
