@@ -426,3 +426,5 @@ nav a{font-size:.9rem}
 @media (max-width:860px){.talk-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.talk-caret{animation:none}.talk-step{animation:none}}
 .talk-title{min-height:3.1em}
+/* calmer contact headline */
+.talk-title{font-size:clamp(1.75rem,2.8vw,2.6rem);line-height:1.15;letter-spacing:-.015em;min-height:2.4em;margin-bottom:1.75rem}
