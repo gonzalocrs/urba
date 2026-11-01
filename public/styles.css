@@ -351,8 +351,6 @@ nav a{font-size:.875rem}
 .steps li{border-top:0;padding-top:0}
 .steps span{display:block;border-top:1px solid var(--grafito);padding-top:.9rem}
 .steps h3{margin-top:.75rem}
-/* paper panels for the ink drawings */
-.steps canvas{background:#f3f3f1}
 /* Ribbon: middle ground (72px original, 52px slim → 62px) */
 :root{--header:3.875rem}
 .logo-ur{height:1.875rem}
