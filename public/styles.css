@@ -392,3 +392,37 @@ nav a{font-size:.9rem}
 .contact-direct li{display:grid;grid-template-columns:7rem 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.15);font-size:var(--fs-base)}
 .contact-direct span{color:rgba(255,255,255,.55);font-size:var(--fs-sm)}
 .contact-direct a{text-decoration:none;cursor:pointer}.contact-direct a:hover{color:var(--accent)}
+.statement-band .slogan{font-size:clamp(2.1rem,4.6vw,4.25rem)}
+
+/* Home contact: animated headline + one-question-at-a-time form */
+.talk{background:var(--grafito);color:var(--blanco);padding:clamp(5rem,10vw,8.5rem) 0}
+.talk .eyebrow{color:rgba(255,255,255,.55)}
+.talk-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(3rem,8vw,8rem);align-items:center}
+.talk-title{font-family:var(--font-ui);font-weight:500;font-size:clamp(2.5rem,5.5vw,5rem);line-height:1.02;letter-spacing:-.025em;margin:0 0 2.5rem;min-height:2.1em}
+.talk-word{color:var(--accent)}
+.talk-caret{display:inline-block;width:.06em;height:.85em;background:var(--accent);margin-left:.08em;vertical-align:-.05em;animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.talk-direct{display:flex;flex-wrap:wrap;gap:.75rem}
+.talk-direct a{border:1px solid rgba(255,255,255,.3);border-radius:2rem;padding:.6rem 1.1rem;text-decoration:none;font-family:var(--font-ui);font-size:var(--fs-sm)}
+.talk-direct a:hover{border-color:var(--accent);color:var(--accent)}
+.talk-box{background:#2f2f30;border-radius:1.25rem;padding:clamp(1.75rem,3.5vw,3rem);min-height:22rem}
+.talk-step{animation:talk-in .35s ease}
+@keyframes talk-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.talk-q{font-family:var(--font-ui);font-weight:500;font-size:clamp(1.35rem,2.2vw,1.9rem);margin:0 0 1.5rem}
+.talk-q span{display:block;font-size:.75rem;letter-spacing:.15em;color:rgba(255,255,255,.5);margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chips button{font:500 var(--fs-base) var(--font-ui);color:var(--blanco);background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:2rem;padding:.75rem 1.25rem;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.chips button:hover,.chips button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--grafito)}
+.talk-in{display:block;width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.3);color:var(--blanco);font:var(--fs-lg,1.25rem) var(--font-text);padding:.85rem 0;margin-bottom:1rem;outline:none}
+.talk-in:focus{border-color:var(--accent)}
+.talk-in::placeholder{color:rgba(255,255,255,.4)}
+.talk-ok{display:flex;align-items:center;gap:.5rem;font-size:var(--fs-sm);color:rgba(255,255,255,.7);margin:.5rem 0 1rem}
+.talk-ok input{accent-color:var(--accent)}
+.talk-err{color:var(--accent);font-size:var(--fs-sm)}
+.talk-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem}
+.talk-back{background:none;border:0;color:rgba(255,255,255,.6);font:var(--fs-sm) var(--font-ui);cursor:pointer;padding:0}
+.talk-back:hover{color:var(--blanco)}
+.talk .btn-pill{border:0;cursor:pointer}
+@media (max-width:860px){.talk-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.talk-caret{animation:none}.talk-step{animation:none}}
+.talk-title{min-height:3.1em}

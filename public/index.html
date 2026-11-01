@@ -55,10 +55,14 @@
 
 
 
-<section class="contact-band band band-dark" id="contacto">
-  <div class="wrap contact-grid">
-    <div class="contact-intro"><p class="eyebrow">Contacto</p><h2 class="title">Hablemos de tu próximo espacio</h2><p>Déjanos tus datos y un asesor te contactará por WhatsApp.</p><ul class="contact-direct" id="contact-direct"></ul></div>
-    <div id="lead"></div>
+<section class="talk" id="contacto">
+  <div class="wrap talk-grid">
+    <div class="talk-head">
+      <p class="eyebrow">Contacto</p>
+      <h2 class="talk-title">Quiero<br><span class="talk-word" id="talk-word">comprar un depa</span><span class="talk-caret" aria-hidden="true"></span></h2>
+      <div class="talk-direct" id="talk-direct"></div>
+    </div>
+    <div class="talk-box" id="talk"></div>
   </div>
 </section>
 </main>
@@ -67,8 +71,7 @@
 <script src="/site.js"></script>
 <script>
 mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
-mountLeadForm(document.getElementById('lead'));
-document.getElementById('contact-direct').innerHTML = `<li><span>WhatsApp</span><a href="${waLink('')}" target="_blank" rel="noopener">${escH(URBA.phone)}</a></li><li><span>Correo</span><a href="mailto:${escH(URBA.salesEmail)}">${escH(URBA.salesEmail)}</a></li><li><span>Oficina</span>${escH(URBA.address)}</li>`;
+mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'));
 (function(){
   const shots = [];
   delivered().forEach(p => [...(p.spaces || []).map(x => x.img), p.hero, p.cover].filter(Boolean).forEach(img => { if (!shots.some(x => x.img === img)) shots.push({ img, p }); }));
