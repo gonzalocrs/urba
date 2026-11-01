@@ -658,3 +658,27 @@ nav a{font-size:.9rem}
 .px-panel .ix-group{flex-wrap:wrap}
 .ix-filter button{white-space:nowrap}
 .stack i.has{cursor:pointer}.stack i.has:hover{border-color:var(--blanco)}
+
+/* Planos v3: ficha-style tabs across the top, big plate, specs line like the ficha */
+.pl-tabs{list-style:none;padding:0;margin:0 0 clamp(1.5rem,3vw,2.5rem);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:0 clamp(1rem,2vw,2rem)}
+.pl-tabs li[hidden]{display:none}
+.pl-tabs .ix{all:unset;box-sizing:border-box;display:grid;gap:.3rem;width:100%;padding:1.1rem 0 .25rem;border-top:1px solid var(--line);cursor:pointer;position:relative}
+.pl-tabs .ix::before{content:"";position:absolute;left:0;right:100%;top:-1px;height:3px;background:var(--accent);transition:right .45s cubic-bezier(.2,.7,.2,1)}
+.pl-tabs .ix:hover{border-top-color:var(--grafito)}
+.pl-tabs .ix[aria-current]::before{right:0}
+.pl-tabs .ix strong{font-family:var(--font-ui);font-weight:500;font-size:clamp(1.4rem,2.4vw,2.2rem);line-height:1.1;color:var(--muted);transition:color .2s}
+.pl-tabs .ix:hover strong,.pl-tabs .ix[aria-current] strong{color:var(--grafito)}
+.pl-tabs .ix span{font-size:var(--fs-sm);color:var(--muted)}
+.planos-t .unit-view{position:static}
+.pl-plate{position:relative;background:var(--soft);height:min(72vh,46rem);display:grid;place-items:center;text-align:center;color:var(--muted);font-family:var(--font-ui)}
+.pl-plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:clamp(1.5rem,4vw,4rem);box-sizing:border-box;mix-blend-mode:multiply}
+.pl-specs{list-style:none;padding:0;margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:0 clamp(1rem,2vw,2rem);align-items:end}
+.pl-specs li{border-top:1px solid var(--grafito);padding:1rem 0 0;margin-top:clamp(1.5rem,3vw,2rem);display:grid;gap:.35rem;font-family:var(--font-ui);font-weight:500;font-size:clamp(1rem,1.3vw,1.3rem)}
+.pl-specs li span{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.pl-specs li.pl-cta{border-top:0;justify-items:end}
+div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
+@media (max-width:860px){.pl-tabs{grid-auto-flow:row;grid-template-columns:1fr 1fr}.pl-specs{grid-auto-flow:row;grid-template-columns:1fr 1fr}.pl-specs li.pl-cta{grid-column:1/-1;justify-items:start}.pl-plate{height:55vh}}
+.pl-tabs .ix::before{right:auto;width:0;transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.pl-tabs .ix[aria-current]::before{width:100%}
+.pl-tabs .ix:not([data-beds]) strong{font-size:clamp(1.05rem,1.5vw,1.35rem)}
+.pl-tabs .ix::before,.pl-tabs .ix[aria-current]::before{transform:none;margin:0;top:-1px;height:3px}
