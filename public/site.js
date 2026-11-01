@@ -1,8 +1,8 @@
 // Shared header, footer, contact details and lead form. Edit contact info here once.
 function escH(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 const URBA = {
-  phone: '+51 999 999 999',          // TODO real number
-  whatsapp: '51999999999',            // digits only, with country code
+  phone: '+51 974 979 393',
+  whatsapp: '51974979393',            // digits only, with country code
   salesEmail: 'ventas@urba.pe',       // TODO
   email: 'contacto@urba.pe',          // TODO
   address: 'Santiago de Surco, Lima, Perú',
