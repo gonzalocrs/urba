@@ -91,29 +91,30 @@ function mountLeadForm(el, project){
 
 // Home contact: one question at a time, ends in a prefilled WhatsApp message.
 // The headline word cycles through the options until the visitor picks one.
-function mountTalk(box, word, direct){
+function mountTalk(box, word, direct, preset){
   const OPTS = [['comprar un depa', 'Quiero comprar un departamento'], ['invertir', 'Quiero invertir en un proyecto'], ['vender mi terreno', 'Tengo un terreno y quiero conversar'], ['visitar un proyecto', 'Quiero visitar un proyecto'], ['saber más', 'Quisiera más información']];
   const names = (typeof PROJECTS !== 'undefined' ? PROJECTS.filter(p => p.stage !== 'entregado') : []).map(p => p.name);
-  const st = { opt: null, proj: '', name: '', tel: '' };
+  const st = { opt: null, proj: preset || '', name: '', tel: '' };
+  const total = preset ? 2 : 3, num = (k) => (preset && k === 2 ? 2 : k + 1) + '/' + total;
   let cycle = 0, timer = null;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const type = (txt) => { if (reduce) { word.textContent = txt; return; } let n = 0; word.textContent = ''; const it = setInterval(() => { word.textContent = txt.slice(0, ++n); if (n >= txt.length) clearInterval(it); }, 45); };
   const startCycle = () => { if (reduce) return; timer = setInterval(() => { cycle = (cycle + 1) % OPTS.length; type(OPTS[cycle][0]); }, 2600); };
   direct.innerHTML = `<a href="${waLink('')}" target="_blank" rel="noopener">WhatsApp ${escH(URBA.phone)}</a><a href="mailto:${escH(URBA.salesEmail)}">${escH(URBA.salesEmail)}</a>`;
   const steps = [
-    () => `<p class="talk-q"><span>1/3</span>¿Qué estás buscando?</p><div class="chips">${OPTS.map((o, i) => `<button type="button" data-i="${i}"${st.opt === i ? ' aria-pressed="true"' : ''}>${escH(o[0][0].toUpperCase() + o[0].slice(1))}</button>`).join('')}</div>`,
-    () => `<p class="talk-q"><span>2/3</span>${st.opt === 2 ? '¿Dónde está tu terreno?' : '¿Algún proyecto en mente?'}</p>` + (st.opt === 2
+    () => `<p class="talk-q"><span>${num(0)}</span>¿Qué estás buscando?</p><div class="chips">${OPTS.map((o, i) => `<button type="button" data-i="${i}"${st.opt === i ? ' aria-pressed="true"' : ''}>${escH(o[0][0].toUpperCase() + o[0].slice(1))}</button>`).join('')}</div>`,
+    () => `<p class="talk-q"><span>${num(1)}</span>${st.opt === 2 ? '¿Dónde está tu terreno?' : '¿Algún proyecto en mente?'}</p>` + (st.opt === 2
       ? `<input class="talk-in" name="proj" placeholder="Distrito o dirección" value="${escH(st.proj)}">`
       : `<div class="chips">${names.concat(['Todavía no sé']).map(n => `<button type="button" data-p="${escH(n)}"${st.proj === n ? ' aria-pressed="true"' : ''}>${escH(n)}</button>`).join('')}</div>`) + `<div class="talk-nav"><button type="button" class="talk-back">← Atrás</button>${st.opt === 2 ? '<button type="button" class="btn-pill talk-next">Siguiente →</button>' : ''}</div>`,
-    () => `<p class="talk-q"><span>3/3</span>¿Cómo te llamamos?</p><input class="talk-in" name="name" placeholder="Nombre y apellido" autocomplete="name" value="${escH(st.name)}"><input class="talk-in" name="tel" type="tel" placeholder="Celular" autocomplete="tel" value="${escH(st.tel)}"><label class="talk-ok"><input type="checkbox" name="ok"> Acepto la <a href="/privacidad.html" target="_blank">política de privacidad</a></label><p class="talk-err" hidden>Completa tu nombre, celular y acepta la política.</p><div class="talk-nav"><button type="button" class="talk-back">← Atrás</button><button type="button" class="btn-pill talk-send">Enviar por WhatsApp ↗</button></div>`
+    () => `<p class="talk-q"><span>${num(2)}</span>¿Cómo te llamamos?</p><input class="talk-in" name="name" placeholder="Nombre y apellido" autocomplete="name" value="${escH(st.name)}"><input class="talk-in" name="tel" type="tel" placeholder="Celular" autocomplete="tel" value="${escH(st.tel)}"><label class="talk-ok"><input type="checkbox" name="ok"> Acepto la <a href="/privacidad.html" target="_blank">política de privacidad</a></label><p class="talk-err" hidden>Completa tu nombre, celular y acepta la política.</p><div class="talk-nav"><button type="button" class="talk-back">← Atrás</button><button type="button" class="btn-pill talk-send">Enviar por WhatsApp ↗</button></div>`
   ];
   let step = 0;
   const render = () => { box.innerHTML = `<div class="talk-step">${steps[step]()}</div>`; const f = box.querySelector('input.talk-in'); if (f && step) f.focus({ preventScroll: true }); };
   box.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
-    if (b.dataset.i) { st.opt = +b.dataset.i; clearInterval(timer); type(OPTS[st.opt][0]); step = 1; }
+    if (b.dataset.i) { st.opt = +b.dataset.i; clearInterval(timer); type(OPTS[st.opt][0]); step = preset && st.opt !== 2 ? 2 : 1; }
     else if (b.dataset.p) { st.proj = b.dataset.p === 'Todavía no sé' ? '' : b.dataset.p; step = 2; }
-    else if (b.classList.contains('talk-back')) { step = Math.max(0, step - 1); }
+    else if (b.classList.contains('talk-back')) { step = preset && step === 2 && st.opt !== 2 ? 0 : Math.max(0, step - 1); }
     else if (b.classList.contains('talk-next')) { st.proj = box.querySelector('[name=proj]').value.trim(); step = 2; }
     else if (b.classList.contains('talk-send')) {
       st.name = box.querySelector('[name=name]').value.trim(); st.tel = box.querySelector('[name=tel]').value.trim();

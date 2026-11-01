@@ -426,3 +426,26 @@ nav a{font-size:.9rem}
 @media (max-width:860px){.talk-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.talk-caret{animation:none}.talk-step{animation:none}}
 .talk-title{min-height:3.1em}
+
+/* Project page, same language as home */
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+.hero-actions.left{justify-content:flex-start;margin-top:2.5rem}
+.btn-pill-ghost{background:transparent;color:var(--blanco);box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
+.btn-pill-ghost:hover{background:var(--blanco);color:var(--grafito)}
+.btn-pill-dark{background:var(--grafito);color:var(--blanco)}
+.btn-pill-line{background:transparent;box-shadow:inset 0 0 0 1px var(--grafito)}
+.hero-photo>picture{position:absolute;inset:0}
+.hero-photo>picture img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.project-intro{font-family:var(--font-ui);font-size:clamp(1.35rem,2.2vw,2rem);line-height:1.35;letter-spacing:-.01em;max-width:60rem;margin:0}
+.space-img{background:var(--soft);min-height:min(92vh,56rem);position:relative;overflow:hidden}
+.space-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split-full.reverse .space-img{order:2}
+.split-full.space .split-text{justify-self:center}
+.facts{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:0 2rem}
+.facts li{border-top:1px solid var(--grafito);padding:1.25rem 0 2rem}
+.facts span{display:block;font-family:var(--font-ui);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
+.facts strong{font-family:var(--font-ui);font-weight:500;font-size:clamp(1.5rem,2.4vw,2.25rem);line-height:1.15}
+.map-full{position:relative}
+.map-full iframe{display:block;width:100%;height:min(70vh,36rem);border:0;filter:grayscale(1)}
+.map-label{position:absolute;left:var(--gutter);bottom:1.5rem;background:var(--grafito);color:var(--blanco);font-family:var(--font-ui);font-size:var(--fs-sm);padding:.6rem 1rem;margin:0}
+@media (max-width:860px){.split-full.reverse .space-img{order:0}.space-img{min-height:60vh}}

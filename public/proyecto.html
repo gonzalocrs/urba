@@ -16,8 +16,8 @@
 <link rel="preload" href="/fonts/bonn-bf-medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles.css">
 </head>
-<body class="theme-amarillo page-project">
-<header class="site-header" data-site-header data-over></header>
+<body class="theme-amarillo">
+<header class="site-header" data-site-header></header>
 <main>
 
 <div id="project"></div>
@@ -30,7 +30,7 @@
 const p = PROJECTS.find(x => x.slug === new URLSearchParams(location.search).get('p'));
 const el = document.getElementById('project');
 if (!p) { el.innerHTML = '<section class="page-head band"><div class="wrap"><h1 class="title">Proyecto no encontrado</h1><p><a class="btn" href="/proyectos.html">Ver proyectos</a></p></div></section>'; return; }
-document.body.className = 'theme-' + projectColor(p, PROJECTS.indexOf(p)) + ' page-project';
+document.body.className = 'theme-' + projectColor(p, PROJECTS.indexOf(p));
 if (window.urbaInk) urbaInk(projectColor(p, PROJECTS.indexOf(p)));
 document.title = p.name + ' · ' + p.district + ' · Urba Inmobiliaria';
 document.querySelector('meta[name=description]').content = p.intro;
@@ -44,33 +44,49 @@ const icons = {
   areas: '<path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z" fill="none" stroke="currentColor" stroke-width="2"/>',
   pisos: '<path d="M5 21V3h14v18M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M3 21h18" fill="none" stroke="currentColor" stroke-width="2"/>'
 };
+const kind = (p.kicker || '').split('·')[0].trim(), year = ((p.kicker || '').split('·')[1] || '').trim();
+const sub = [kind || bedroomsText(p.bedrooms), p.district].filter(Boolean).join(' · ') + (year ? ', ' + year : '');
+const done = p.stage === 'entregado';
 el.innerHTML = `
-  <section class="project-hero band${p.hero ? ' has-img' : ''}">
-    ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}"></picture><div class="hero-panel"><div class="iso" aria-hidden="true"></div>` : '<div class="iso" aria-hidden="true"></div>'}
-    <div class="wrap slide-text">
-      <span class="tag">${esc(STAGES[p.stage])}</span>
+  <section class="hero-photo">
+    ${p.hero ? `<picture><source media="(max-width:720px)" srcset="${esc(p.heroMobile || p.hero)}"><img src="${esc(p.hero)}" alt="${esc(p.name)}" fetchpriority="high"></picture>` : ''}
+    <div class="hero-photo-text">
+      <p class="hero-kicker">${esc(done ? 'Obra entregada' : STAGES[p.stage])}</p>
       <h1>${esc(p.name)}</h1>
-      <p class="slide-meta">${esc(p.district)}</p>
-      <div class="actions"><a class="btn" href="#info">${p.stage === 'entregado' ? 'Contáctanos' : 'Quiero más información'}</a><a class="btn btn-ghost" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a>${p.mapQuery ? '<a class="btn btn-ghost" href="#ubicacion">Ubicación</a>' : ''}</div>
-    </div>${p.hero ? '</div>' : ''}
+      <p class="hero-sub">${esc(sub)}</p>
+      <div class="hero-actions"><a class="btn-pill" href="#contacto">${done ? 'Contáctanos' : 'Quiero más información'}</a><a class="btn-pill btn-pill-ghost" data-wa="Hola, quisiera información sobre ${esc(p.name)}.">WhatsApp</a></div>
+    </div>
+    <a class="scroll-cue" href="#proyecto">Descubre más<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </section>
-  <section class="wrap intro"><h2 class="title">${esc(p.name)}</h2><p class="lead">${esc(p.intro)}</p></section>
+  <section class="statement-band" id="proyecto"><div class="wrap-wide statement">
+    <p class="eyebrow">El proyecto</p>
+    <p class="project-intro">${esc(p.intro)}</p>
+  </div></section>
   ${(p.spaces || []).map((s, i) => `
-  <section class="split-block${i % 2 ? ' reverse' : ''}">
-    <div class="split-media ph">${s.img ? `<img src="${esc(s.img)}" alt="${esc(s.title)}, ${esc(p.name)}" loading="lazy">` : ''}</div>
-    <div class="split-text"><h3 class="title">${esc(s.title)}</h3><p>${esc(s.text)}</p></div>
+  <section class="split-full space${i % 2 ? ' reverse' : ''}">
+    <div class="space-img">${s.img ? `<img src="${esc(s.img)}" alt="${esc(s.title)}, ${esc(p.name)}" loading="lazy">` : ''}</div>
+    <div class="split-text"><p class="eyebrow">0${i + 1}</p><h2 class="title">${esc(s.title)}</h2><p>${esc(s.text)}</p></div>
   </section>`).join('')}
-  <section class="wrap ficha"><h2 class="title">Ficha técnica</h2>
-    <div class="ficha-grid">${ficha.map(([k, t, v]) => `<div><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">${icons[k]}</svg><h4>${t}</h4><p>${v}</p></div>`).join('')}</div>
-    ${(p.brochure || p.plans) ? `<div class="actions">${p.brochure ? `<a class="btn" href="${esc(p.brochure)}" download>Descargar brochure</a>` : ''}${p.plans ? `<a class="btn btn-ghost" href="${esc(p.plans)}" download>Descargar planos</a>` : ''}</div>` : ''}
+  <section class="block"><div class="wrap-wide">
+    <div class="sec-head"><div><p class="eyebrow">Ficha técnica</p><h2 class="title">${esc(p.name)} en datos</h2></div></div>
+    <ul class="facts">${ficha.map(([k, t, v]) => `<li><span>${t}</span><strong>${v}</strong></li>`).join('')}</ul>
+    ${(p.brochure || p.plans) ? `<div class="hero-actions left">${p.brochure ? `<a class="btn-pill btn-pill-dark" href="${esc(p.brochure)}" download>Descargar brochure</a>` : ''}${p.plans ? `<a class="btn-pill btn-pill-line" href="${esc(p.plans)}" download>Descargar planos</a>` : ''}</div>` : ''}
+  </div></section>
+  ${p.mapQuery ? `<section id="ubicacion" class="map-full"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${encodeURIComponent(p.mapQuery)}&output=embed"></iframe><p class="map-label">${esc(p.address || p.mapQuery)}</p></section>` : ''}
+  <section class="talk" id="contacto">
+    <div class="wrap talk-grid">
+      <div class="talk-head">
+        <p class="eyebrow">Contacto</p>
+        <h2 class="talk-title">Quiero<br><span class="talk-word" id="talk-word">saber más</span><span class="talk-caret" aria-hidden="true"></span></h2>
+        <div class="talk-direct" id="talk-direct"></div>
+      </div>
+      <div class="talk-box" id="talk"></div>
+    </div>
   </section>
-  ${p.mapQuery ? `<section class="wrap" id="ubicacion"><h2 class="title">Ubicación</h2><iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${encodeURIComponent(p.mapQuery)}&output=embed"></iframe></section>` : ''}
-  <section class="contact-band band band-dark" id="info"><div class="wrap contact-grid">
-    <div><h2 class="title">${p.stage === 'entregado' ? 'Conversemos' : 'Quiero más información'}</h2><p>${p.stage === 'entregado' ? 'Conoce nuestros proyectos en venta. Déjanos tus datos y te contactamos.' : 'Déjanos tus datos y te enviamos precios, planos y disponibilidad de ' + esc(p.name) + '.'}</p></div><div id="lead"></div></div></section>
-  <section class="wrap block"><h2 class="title">Otros proyectos en venta</h2><div class="cards" id="others"></div></section>`;
+  ${forSale().some(x => x.slug !== p.slug) ? `<section class="block"><div class="wrap-wide"><div class="sec-head"><div><p class="eyebrow">Proyectos en venta</p><h2 class="title">Otros proyectos</h2></div><a class="link-arrow" href="/proyectos.html">Ver todos</a></div><div class="cards" id="others"></div></div></section>` : ''}`;
 
-mountLeadForm(document.getElementById('lead'), p.stage === 'entregado' ? '' : p.name);
-document.getElementById('others').innerHTML = forSale().filter(x => x.slug !== p.slug).slice(0, 2).map(projectCard).join('');
+mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'), done ? '' : p.name);
+const others = document.getElementById('others'); if (others) others.innerHTML = forSale().filter(x => x.slug !== p.slug).slice(0, 3).map(projectCard).join('');
 el.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
 })();
 </script>
