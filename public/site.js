@@ -29,7 +29,7 @@ function waLink(text){
     if (header.hasAttribute('data-over')) header.classList.add('over');
     header.innerHTML = `
       <div class="wrap top">
-        <a class="brand" href="/" aria-label="Urba Inmobiliaria, inicio"><span class="logo" aria-hidden="true"></span></a>
+        <a class="brand" href="/" aria-label="Urba Inmobiliaria, inicio"><img class="logo-ur" src="/img/brand/icons/ur-grafito-sobre-celeste.svg" alt="" width="44" height="44"></a>
         <nav id="nav">
           ${NAV.map(([h, t]) => `<a href="${h}"${here === h || (h === '/proyectos.html' && here === '/proyecto.html') ? ' aria-current="page"' : ''}>${t}</a>`).join('')}
           <a class="nav-wa" data-wa>WhatsApp ${URBA.phone}</a>
@@ -100,4 +100,5 @@ function mountLeadForm(el, project){
   document.querySelectorAll('link[rel~="icon"]').forEach(l => l.remove());
   const link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/svg+xml'; link.href = ICONS[i];
   document.head.appendChild(link);
+  document.querySelectorAll('.logo-ur').forEach(img => img.src = ICONS[i]);
 })();

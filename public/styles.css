@@ -268,3 +268,8 @@ main:has(> .contact-band:last-child) + .site-footer,main:has(#project) + .site-f
 .photo-iso{overflow:visible}
 .photo-iso::before{width:70%;top:-1px;background:var(--accent);display:none}
 .slide[hidden]{display:none!important}
+
+/* Header mark = the Ur module, same rotating pair as the favicon */
+.logo-ur{display:block;width:3.25rem;height:3.25rem}
+/* The header already carries the mark: no isotipo watermark in the top bands */
+.slide .iso,.project-hero .iso,.page-head .iso{display:none}
