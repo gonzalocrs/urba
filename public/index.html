@@ -30,38 +30,30 @@
   <a class="scroll-cue" href="#proyectos">Descubre más<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
 </section>
 
-<section class="statement wrap">
+<section class="statement-band"><div class="wrap-wide statement">
   <p class="eyebrow">Urba Inmobiliaria</p>
   <p class="statement-text">Diseñamos y construimos edificios para vivir, trabajar y encontrarse. Buena arquitectura, bien ubicada y hecha para durar.</p>
   <a class="link-arrow" href="/nosotros.html">Conócenos</a>
-</section>
+</div></section>
 
-<section class="block wrap" id="proyectos">
+<section class="block" id="proyectos"><div class="wrap-wide">
   <div class="sec-head"><div><p class="eyebrow">Proyectos en venta</p><h2 class="title">Encuentra tu próximo espacio</h2></div><a class="link-arrow" href="/proyectos.html">Ver todos</a></div>
   <form class="filters" id="filters" aria-label="Filtrar proyectos"></form>
   <div class="cards" id="cards"></div>
   <p id="empty" class="muted" hidden>No encontramos proyectos con esos filtros.</p>
-</section>
+</div></section>
 
-<section class="block wrap block-flush">
-  <div class="sec-head"><div><p class="eyebrow">Obras entregadas</p><h2 class="title">Espacios que ya son comunidad</h2></div><a class="link-arrow" href="/entregados.html">Ver obras</a></div>
+<section class="obras">
+  <div class="wrap-wide sec-head"><div><p class="eyebrow">Obras entregadas</p><h2 class="title">Espacios que ya son comunidad</h2></div><a class="link-arrow" href="/entregados.html">Ver obras</a></div>
   <div class="grid3" id="grid3"></div>
 </section>
 
-<section class="split-block">
-  <div class="split-media making-panel"><div class="still" role="img" aria-label="El logo de Urba, de completo a solo sus puntos de construcción"><div class="still-row r1"><span></span></div><div class="still-row r2"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:75.91%;top:52.34%"></i><i style="left:32.73%;top:61.98%"></i></div><div class="still-row r3"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:75.91%;top:52.34%"></i><i style="left:32.73%;top:61.98%"></i></div><div class="still-row r4"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:32.73%;top:61.98%"></i></div></div></div>
+<section class="split-full">
+  <div class="making-panel"><div class="still" role="img" aria-label="El logo de Urba, de completo a solo sus puntos de construcción"><div class="still-row r1"><span></span></div><div class="still-row r2"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:75.91%;top:52.34%"></i><i style="left:32.73%;top:61.98%"></i></div><div class="still-row r3"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:75.91%;top:52.34%"></i><i style="left:32.73%;top:61.98%"></i></div><div class="still-row r4"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:32.73%;top:61.98%"></i></div></div></div>
   <div class="split-text"><p class="eyebrow">Quiénes somos</p><h2 class="title">Un logo que nunca está terminado</h2><p>Una idea se convierte en proyecto, el proyecto en edificio, y al terminarlo volvemos a empezar. Por eso nuestro logo siempre se está construyendo, como nosotros.</p><a class="link-arrow" href="/nosotros.html">Saber más</a></div>
 </section>
 
-<section class="block wrap block-flush">
-  <div class="sec-head"><div><p class="eyebrow">Cómo trabajamos</p><h2 class="title">Del terreno a la entrega de llaves</h2></div></div>
-  <ol class="steps">
-    <li><canvas data-step="terreno" aria-hidden="true"></canvas><span>01</span><h3>Terreno</h3><p>Elegimos ubicaciones con buena conexión, servicios y vida de barrio.</p></li>
-    <li><canvas data-step="diseno" aria-hidden="true"></canvas><span>02</span><h3>Diseño</h3><p>Arquitectura propia: plantas eficientes, luz natural y materiales que envejecen bien.</p></li>
-    <li><canvas data-step="construccion" aria-hidden="true"></canvas><span>03</span><h3>Construcción</h3><p>Construimos con equipos de confianza y te mantenemos al tanto de cada avance.</p></li>
-    <li><canvas data-step="entrega" aria-hidden="true"></canvas><span>04</span><h3>Entrega</h3><p>Entregamos a tiempo y seguimos contigo en la postventa.</p></li>
-  </ol>
-</section>
+
 
 <section class="contact-band band band-dark" id="contacto">
   <div class="wrap contact-grid">
@@ -73,7 +65,6 @@
 <footer class="site-footer" data-site-footer></footer>
 <script src="/projects.js"></script>
 <script src="/site.js"></script>
-<script src="/process.js" defer></script>
 <script>
 mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
 mountLeadForm(document.getElementById('lead'));
