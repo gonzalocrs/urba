@@ -135,6 +135,16 @@ el.innerHTML = `
     </aside>
   </section>` : ''}
   ${reelFrames.length ? `<section class="reel" id="renders" aria-label="Renders y áreas comunes"><div class="reel-panels" id="reel"></div></section>` : ''}
+  ${p.mapQuery ? `<section class="near" id="ubicacion">
+    <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${mapsQ}&output=embed"></iframe>
+    <div class="near-panel">
+      <p class="eyebrow">Ubicación</p>
+      <h2 class="title">Cerca de la vida que te gusta.</h2>
+      <p class="near-addr">${esc(p.address || p.mapQuery)}</p>
+      <div class="near-btns"><a class="btn-pill" href="https://www.google.com/maps/search/?api=1&query=${mapsQ}" target="_blank" rel="noopener">Ver en Google Maps</a><a class="btn-pill btn-pill-accent" href="https://waze.com/ul?q=${mapsQ}&navigate=yes" target="_blank" rel="noopener">Ver en Waze</a></div>
+      ${Object.keys(near).length ? `<div class="near-lists">${Object.entries(near).map(([k, list]) => `<div><h3>${esc(k)}</h3><ol>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>`).join('')}</div>` : ''}
+    </div>
+  </section>` : ''}
 
   <section class="talk" id="contacto">
     <div class="wrap talk-grid">
@@ -146,17 +156,7 @@ el.innerHTML = `
       <div class="talk-box" id="talk"></div>
     </div>
   </section>
-  ${forSale().some(x => x.slug !== p.slug) ? `<section class="block"><div class="wrap-wide"><div class="sec-head"><div><p class="eyebrow">Proyectos en venta</p><h2 class="title">Otros proyectos</h2></div><a class="link-arrow" href="/proyectos.html">Ver todos</a></div><div class="cards" id="others"></div></div></section>` : ''}
-  ${p.mapQuery ? `<section class="near" id="ubicacion">
-    <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ${esc(p.name)}" src="https://www.google.com/maps?q=${mapsQ}&output=embed"></iframe>
-    <div class="near-panel">
-      <p class="eyebrow">Ubicación</p>
-      <h2 class="title">Cerca de la vida que te gusta.</h2>
-      <p class="near-addr">${esc(p.address || p.mapQuery)}</p>
-      <div class="near-btns"><a class="btn-pill" href="https://www.google.com/maps/search/?api=1&query=${mapsQ}" target="_blank" rel="noopener">Ver en Google Maps</a><a class="btn-pill btn-pill-accent" href="https://waze.com/ul?q=${mapsQ}&navigate=yes" target="_blank" rel="noopener">Ver en Waze</a></div>
-      ${Object.keys(near).length ? `<div class="near-lists">${Object.entries(near).map(([k, list]) => `<div><h3>${esc(k)}</h3><ol>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>`).join('')}</div>` : ''}
-    </div>
-  </section>` : ''}`;
+  ${forSale().some(x => x.slug !== p.slug) ? `<section class="block"><div class="wrap-wide"><div class="sec-head"><div><p class="eyebrow">Proyectos en venta</p><h2 class="title">Otros proyectos</h2></div><a class="link-arrow" href="/proyectos.html">Ver todos</a></div><div class="cards" id="others"></div></div></section>` : ''}`;
 
 mountReel();
 mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'), done ? '' : p.name);
