@@ -20,7 +20,16 @@ const PROJECTS = [
     bedrooms: [2, 3],
     areas: 'De 80 a 140 m²',
     floors: '10 pisos',
+    delivery: 'Diciembre 2027',            // por confirmar
+    priceFrom: 'US$ 150,000',              // por confirmar
     address: 'Dirección por confirmar, Santiago de Surco',
+    // Units / floor plans table (por completar). plan = image of the unit's floor plan
+    units: [
+      { code: '201', type: 'Flat', floor: 2, beds: 2, baths: 2, area: 80, price: 150000, plan: '' },
+      { code: '202', type: 'Flat', floor: 2, beds: 3, baths: 2, area: 105, price: 195000, plan: '' },
+      { code: '501', type: 'Flat', floor: 5, beds: 2, baths: 2, area: 82, price: 158000, plan: '' },
+      { code: '1001', type: 'Penthouse', floor: 10, beds: 3, baths: 3, area: 140, price: 280000, plan: '' }
+    ],
     intro: 'Descripción del proyecto: concepto, entorno y lo que lo hace especial (por completar).',
     hero: '', heroMobile: '',               // e.g. /img/proyectos/proyecto-1/hero.jpg
     cover: '',                              // card image
@@ -82,7 +91,8 @@ const PROJECTS = [
     intro: 'Transformamos una estructura existente en un hotel, rediseñando por completo su distribución interior y su fachada. La materialidad conecta el edificio con el carácter arquitectónico de Cusco: una base de texturas rústicas, un cuerpo que reinterpreta la misma paleta cálida con una composición contemporánea y un remate de materiales naturales y vidrio de piso a techo que enmarca las montañas.',
     hero: '/img/proyectos/sierra-hotel/fachada.jpg', heroMobile: '/img/proyectos/sierra-hotel/fachada.jpg',
     cover: '/img/proyectos/sierra-hotel/cover.jpg',
-    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['areas', 'Uso', 'Hotel'], ['pisos', 'Entrega', '2023']],
+    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['uso', 'Uso', 'Hotel'], ['entrega', 'Entrega', '2023']],
+    planImgs: [{ title: 'Plantas: primer piso, típica y azotea', img: '/img/proyectos/sierra-hotel/floor-plans.svg' }, { title: 'Elevación principal', img: '/img/proyectos/sierra-hotel/elevation.svg' }],
     spaces: [
       { title: 'Fachada', text: 'Base, cuerpo y remate: tres partes que leen la ciudad. La base toma las texturas rústicas de Cusco y el cuerpo reinterpreta su paleta cálida con una composición sobria.', img: '/img/proyectos/sierra-hotel/fachada.jpg' },
       { title: 'Materialidad', text: 'Listones cálidos, carpinterías oscuras y volúmenes limpios. Una arquitectura contemporánea que pertenece a su lugar.', img: '/img/proyectos/sierra-hotel/foto-4-crop.jpg' },
@@ -104,7 +114,7 @@ const PROJECTS = [
     address: 'Cusco, Perú',
     intro: 'Edificio de vivienda en Cusco (por completar).',
     hero: '', heroMobile: '', cover: '',
-    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['areas', 'Uso', 'Vivienda'], ['pisos', 'Entrega', '2021']],
+    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['uso', 'Uso', 'Vivienda'], ['entrega', 'Entrega', '2021']],
     spaces: [], brochure: '', plans: '', mapQuery: ''
   }
 ];
