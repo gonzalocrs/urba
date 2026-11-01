@@ -732,3 +732,14 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 #others .card h3{font-size:clamp(1.05rem,1.4vw,1.3rem)}
 #others .tag{font-size:var(--fs-xs)}
 @media (max-width:980px){#others{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Planos: drawings sit on the page (no plate), menu uses the brand's construction square */
+.planos-f .pl-plate{background:transparent}
+.planos-f .pl-plate img{mix-blend-mode:normal;padding:0}
+.planos-f .pl-plate:not(:has(img)){border:1px dashed var(--line)}
+.pf-list{border-top:1px solid var(--grafito)}
+.pf-list .ix{padding:1rem 0 1rem 1.6rem;grid-template-columns:4rem 1fr auto}
+.pf-list .ix:hover{background:transparent}
+.pf-list .ix::before,.pf-list .ix[aria-current]::before{top:50%;bottom:auto;width:.6rem;height:.6rem;margin-top:-.3rem;left:0;background:transparent;box-shadow:inset 0 0 0 1.5px var(--line);transition:background-color .25s,box-shadow .25s}
+.pf-list .ix:hover::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--grafito)}
+.pf-list .ix[aria-current]::before{background:var(--accent);box-shadow:none}
+.pf-list .ix:not([data-beds]) strong{font-size:clamp(1.05rem,1.4vw,1.25rem)}
