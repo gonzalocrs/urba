@@ -963,3 +963,5 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 @media (max-width:900px){.pg-lots .pg-card{min-height:0}}
 /* home quiénes somos: logo in fragments (brand manual), so the full logo isn't repeated (Gonzalo 2026-11-02) */
 .frag{width:clamp(6rem,10vw,9.5rem);aspect-ratio:236/645;background:var(--grafito);-webkit-mask:url(/img/brand/fragmentos.svg?v=3) center/contain no-repeat;mask:url(/img/brand/fragmentos.svg?v=3) center/contain no-repeat}
+.pf-ask{margin-top:1.75rem;color:var(--muted);font-size:var(--fs-sm)}
+.pf-ask .link-arrow{color:var(--grafito);margin-left:.25rem}
