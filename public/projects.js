@@ -80,7 +80,6 @@ const PROJECTS = [
     intro: 'Transformamos una estructura existente en un hotel, rediseñando por completo su distribución interior y su fachada. La materialidad conecta el edificio con el carácter arquitectónico de Cusco: una base de texturas rústicas, un cuerpo que reinterpreta la misma paleta cálida con una composición contemporánea y un remate de materiales naturales y vidrio de piso a techo que enmarca las montañas.',
     hero: '/img/proyectos/sierra-hotel/fachada.jpg', heroMobile: '/img/proyectos/sierra-hotel/fachada.jpg',
     cover: '/img/proyectos/sierra-hotel/cover.jpg',
-    featureImg: '/img/proyectos/sierra-hotel/foto-4.jpg',   // real photo, so the home panel doesn't repeat the hero render
     pageHero: '/img/proyectos/sierra-hotel/foto-4.jpg',   // project page hero: different from the home hero so the click feels like arriving somewhere new
     ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['uso', 'Uso', 'Hotel'], ['entrega', 'Entrega', '2024']],
     planImgs: [{ title: 'Plantas: primer piso, típica y azotea', img: '/img/proyectos/sierra-hotel/floor-plans.svg' }, { title: 'Elevación principal', img: '/img/proyectos/sierra-hotel/elevation.svg' }],
@@ -110,7 +109,6 @@ const PROJECTS = [
     address: 'Parque Amauta 206, Urb. Magisterial 1ra Etapa, San Sebastián, Cusco',
     intro: '',
     hero: '/img/proyectos/edificio-murano/fachada.jpg', heroMobile: '/img/proyectos/edificio-murano/fachada.jpg', cover: '/img/proyectos/edificio-murano/fachada.jpg',
-    featureImg: '/img/proyectos/edificio-murano/foto-cocina.jpg',
     pageHero: '/img/proyectos/edificio-murano/foto-sala-cocina.jpg',   // real photo of the delivered flat, differs from the home hero
     ficha: [['ubicacion', 'Ubicación', 'Magisterio, Cusco'], ['uso', 'Uso', 'Vivienda'], ['dorm', 'Departamentos', '1 y 3 dorm.'], ['entrega', 'Entrega', '2023']],
     planImgs: [
