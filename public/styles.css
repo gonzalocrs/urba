@@ -950,5 +950,5 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 /* Home obras entregadas: same cards as Proyectos, two across (Gonzalo 2026-11-02) */
 .home-obras{background:var(--blanco)}
 .home-obras .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-.home-obras .ph{aspect-ratio:4/3}
+.home-obras .cards{max-width:54rem;margin:0 auto;gap:3rem clamp(2rem,5vw,4.5rem)}
 @media (max-width:600px){.home-obras .cards{grid-template-columns:1fr}}
