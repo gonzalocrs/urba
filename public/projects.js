@@ -83,7 +83,12 @@ const PROJECTS = [
     cover: '/img/proyectos/sierra-hotel/cover.jpg',
     pageHero: '/img/proyectos/sierra-hotel/foto-4.jpg',   // project page hero: different from the home hero so the click feels like arriving somewhere new
     ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['uso', 'Uso', 'Hotel'], ['entrega', 'Entrega', '2024']],
-    planImgs: [{ title: 'Plantas: primer piso, típica y azotea', img: '/img/proyectos/sierra-hotel/floor-plans.svg' }, { title: 'Elevación principal', img: '/img/proyectos/sierra-hotel/elevation.svg' }],
+    planImgs: [
+      { title: 'Primer piso', img: '/img/proyectos/sierra-hotel/planta-1.svg' },
+      { title: 'Piso típico 2 al 6', img: '/img/proyectos/sierra-hotel/planta-tipica.svg' },
+      { title: '7mo piso', img: '/img/proyectos/sierra-hotel/planta-7.svg' },
+      { title: 'Elevación principal', img: '/img/proyectos/sierra-hotel/elevation.svg' }
+    ],
     spaces: [
       { title: 'Fachada', text: 'Base, cuerpo y remate: tres partes que leen la ciudad. La base toma las texturas rústicas de Cusco y el cuerpo reinterpreta su paleta cálida con una composición sobria.', img: '/img/proyectos/sierra-hotel/fachada.jpg' },
       { title: 'Materialidad', text: 'Listones cálidos, carpinterías oscuras y volúmenes limpios. Una arquitectura contemporánea que pertenece a su lugar.', img: '/img/proyectos/sierra-hotel/foto-4-crop.jpg' },
