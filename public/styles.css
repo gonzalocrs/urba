@@ -914,3 +914,8 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .feature{scroll-margin-top:var(--header)}
 @media (max-width:700px){.archive-index a{grid-template-columns:2.25rem 1fr}.archive-index a span:not(.ai-n){grid-column:2}}
 .page-head:has(+ .is-feature){margin-bottom:0}
+/* Proyectos page: the home 'Obras entregadas' tiles, three across */
+.obras.archive{padding-top:clamp(3rem,6vw,5rem)}
+.obras.archive .grid3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:96rem;gap:clamp(1.5rem,4vw,4.5rem)}
+.page-head:has(+ .obras){margin-bottom:0}
+@media (max-width:860px){.obras.archive .grid3{grid-template-columns:1fr}}
