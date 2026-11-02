@@ -51,7 +51,8 @@ def main():
     pg = fitz.open(pdf)[0]
     groups, boxes = {}, {}
     for d in pg.get_drawings():
-        if not d['rect'].intersects(clip) or d['rect'] not in clip + (-2, -2, 2, 2): continue
+        r = d['rect'] + (-.01, -.01, .01, .01)   # pure horizontal/vertical lines have empty rects, which never 'intersect'
+        if not r.intersects(clip) or r not in clip + (-2, -2, 2, 2): continue
         if d['rect'].width > clip.width * .95 and d['rect'].height > clip.height * .95: continue  # sheet frame
         groups.setdefault(key(d), []).append(path_d(d['items'], x0, y0))
         boxes[key(d)] = boxes.get(key(d), fitz.Rect(d['rect'])) | d['rect']
