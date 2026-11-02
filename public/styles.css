@@ -919,3 +919,6 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .obras.archive .grid3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:96rem;gap:clamp(1.5rem,4vw,4.5rem)}
 .page-head:has(+ .obras){margin-bottom:0}
 @media (max-width:860px){.obras.archive .grid3{grid-template-columns:1fr}}
+/* Home hero picks its project in JS: fade in once chosen so the fallback never flashes */
+.js .hero-photo>img,.js .hero-photo .hero-photo-text{opacity:0;transition:opacity .6s ease}
+.js .hero-photo.ready>img,.js .hero-photo.ready .hero-photo-text{opacity:1}

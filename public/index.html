@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
+<script>document.documentElement.classList.add('js')</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Urba Inmobiliaria · Creamos espacios, construimos comunidad</title>
@@ -82,13 +83,18 @@ mountTalk(document.getElementById('talk'), document.getElementById('talk-word'),
   g.innerHTML = shots.filter(x => x.p.page !== false && x.img === (x.p.cover || x.p.hero)).slice(0, 2).map(x => `<a class="g3" href="${x.p.page === false ? '/entregados.html' : projectUrl(x.p)}"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"></div><p><strong>${esc(x.p.name)}</strong><span>${esc(x.p.district)}${x.p.kicker ? ' · ' + esc(x.p.kicker.split('·').pop().trim()) : ''}</span></p></a>`).join('');
 })();
 (function(){
-  const p = PROJECTS.find(x => x.featured) || PROJECTS.find(x => x.hero); if (!p) return;
+  // A different project on every visit: cycle through them, remembered per browser (random if storage is blocked)
+  const list = [...forSale(), ...delivered().filter(x => x.page !== false)].filter(x => x.hero); if (!list.length) return;
+  let n; try { n = (+(localStorage.getItem('urba-hero') ?? -1) + 1) % list.length; localStorage.setItem('urba-hero', n); } catch (_) { n = Math.floor(Math.random() * list.length); }
+  const p = list[n];
   const sec = document.querySelector('.hero-photo'), t = document.getElementById('hero-text');
   sec.querySelector('img').src = p.hero; sec.querySelector('img').alt = p.name;
   const kind = (p.kicker || '').split('·')[0].trim(), year = (p.kicker || '').split('·')[1];
   t.innerHTML = `<p class="hero-kicker">${esc(STAGES[p.stage] === 'Entregado' ? 'Obra entregada' : STAGES[p.stage])}</p><h1>${esc(p.name)}</h1>`
     + `<p class="hero-sub">${esc([kind || bedroomsText(p.bedrooms), p.district].filter(Boolean).join(' · '))}${year ? ', ' + esc(year.trim()) : ''}</p>`
     + `<a class="btn-pill" href="${projectUrl(p)}">Ver proyecto <span aria-hidden="true">↗</span></a>`;
+  const img = sec.querySelector('img'), show = () => sec.classList.add('ready');
+  if (img.complete) show(); else { img.addEventListener('load', show); img.addEventListener('error', show); setTimeout(show, 2500); }
 })();
 if (window.urbaInk) urbaInk(['celeste', 'naranja', 'amarillo'][Math.floor(Math.random() * 3)]);
 </script>
