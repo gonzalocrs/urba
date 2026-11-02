@@ -166,7 +166,7 @@ function projectCard(p){
 function featureCard(p, i, nav){
   const intro = (p.intro || '').split(/(?<=\.)\s/)[0];
   const stage = p.stage === 'entregado' ? 'Obra entregada' : (STAGES[p.stage] || '');
-  return `<article class="feature${i ? '' : ' on'}" data-k="${i || 0}">
+  return `<article class="feature${i ? '' : ' on'}" data-k="${i || 0}" id="p-${esc(p.slug)}">
     <a class="feature-img" href="${projectUrl(p)}"><img src="${esc(p.featureImg || p.cover || p.hero)}" alt="${esc(p.name)}" loading="lazy"></a>
     <div class="feature-body">
       <p class="eyebrow">${esc(stage)} · ${esc(p.district)}</p>

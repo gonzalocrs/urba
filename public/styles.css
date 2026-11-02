@@ -897,3 +897,20 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .feature-nav button{all:unset;cursor:pointer;font-family:var(--font-ui);font-size:var(--fs-sm);color:var(--muted);padding-bottom:.3rem;border-bottom:1px solid transparent}
 .feature-nav button:hover{color:var(--grafito)}
 .feature-nav button[aria-current]{color:var(--grafito);border-bottom-color:var(--grafito)}
+/* Proyectos page: every project as a full-bleed split, image side alternating */
+.features.stack .feature:nth-child(even) .feature-img{order:2}
+.features.stack .feature:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
+.features.stack .feature:nth-child(even) .feature-body{background:var(--blanco)}
+.block-tight.is-feature{margin:0}
+@media (max-width:860px){.features.stack .feature:nth-child(even){grid-template-columns:1fr}.features.stack .feature:nth-child(even) .feature-img{order:0}}
+/* Proyectos as an active archive: numbered index on top, one panel per project */
+.archive-index{list-style:none;margin:2rem 0 0;padding:0;max-width:56rem}
+.archive-index a{display:grid;grid-template-columns:3rem minmax(0,1.3fr) minmax(0,1.3fr) auto;gap:1rem;align-items:baseline;padding:.9rem 0;text-decoration:none;color:var(--grafito);font-family:var(--font-ui)}
+.archive-index strong{font-weight:500;font-size:var(--fs-h3)}
+.archive-index span{color:var(--muted);font-size:var(--fs-sm)}
+.archive-index a:hover strong{text-decoration:underline;text-underline-offset:.25em}
+.ai-n{font-variant-numeric:tabular-nums;color:var(--muted)}
+.is-feature.block-tight{padding-top:0}
+.feature{scroll-margin-top:var(--header)}
+@media (max-width:700px){.archive-index a{grid-template-columns:2.25rem 1fr}.archive-index a span:not(.ai-n){grid-column:2}}
+.page-head:has(+ .is-feature){margin-bottom:0}
