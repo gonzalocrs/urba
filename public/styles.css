@@ -922,3 +922,7 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 /* Home hero picks its project in JS: fade in once chosen so the fallback never flashes */
 .js .hero-photo>img,.js .hero-photo .hero-photo-text{opacity:0;transition:opacity .6s ease}
 .js .hero-photo.ready>img,.js .hero-photo.ready .hero-photo-text{opacity:1}
+/* thinner home bands (Gonzalo 2026-11-02) */
+.statement-band{padding:clamp(3rem,6vw,5rem) 0}
+.is-feature .feature{min-height:min(58vh,34rem)}
+.is-feature .feature-body{padding:clamp(2rem,4vw,4rem) clamp(2rem,6vw,6rem)}
