@@ -946,3 +946,4 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .obras.archive{background:var(--soft);color:var(--grafito);padding-top:clamp(1rem,3vw,2rem)}
 .obras.archive .g3{color:var(--grafito)}
 .obras.archive .g3 p span{color:var(--muted)}
+.ns-stats{grid-template-columns:repeat(5,minmax(0,1fr))}@media (max-width:860px){.ns-stats{grid-template-columns:1fr 1fr}.ns-stats li:nth-child(5){border-left:0;padding-left:0}}
