@@ -935,9 +935,10 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .split-full .split-text{padding:clamp(2rem,5vw,4rem)}
 .split-full .still{width:min(100%,10rem);gap:clamp(.9rem,1.8vw,1.4rem)}
 /* HdV panel floats inside the page instead of bleeding to the edges (Gonzalo 2026-11-02) */
-.is-feature{background:var(--blanco);padding:clamp(4rem,8vw,7rem) 0!important}
+.is-feature{background:var(--soft);padding:clamp(4rem,8vw,7rem) 0!important}
 .is-feature .wrap-wide{max-width:calc(var(--wrap) + 2*var(--gutter));padding:0 var(--gutter);margin:0 auto}
 .is-feature .feature{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:center;min-height:0}
 .is-feature .feature-img{aspect-ratio:4/3;height:auto;}
 .is-feature .feature-body{padding:0;background:none}
 @media (max-width:860px){.is-feature .feature{grid-template-columns:1fr}.is-feature .feature-img{height:auto}}
+.statement-band{background:var(--blanco)}
