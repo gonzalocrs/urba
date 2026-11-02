@@ -62,7 +62,7 @@ const lots = p.lots || [], lm = p.lotMap || {};
 const items = [...dwgs, ...units.map(u => ({ kind: 'unit', u, img: u.plan })), ...lots.map(l => ({ kind: 'lot', l }))];
 const idxRow = (it, i) => `<li><button type="button" class="ix" data-i="${i}"${it.kind === 'unit' ? ` data-beds="${it.u.beds}"` : ''}${i ? '' : ' aria-current="true"'}>${it.kind === 'lot' ? `<span class="sr">Lote </span>${esc(it.l.code)}` : esc(it.kind === 'dwg' ? it.title : it.u.code)}</button></li>`;
 const mapHtml = (code) => `<div class="pl-plate pl-map"><svg viewBox="${lm.viewBox}" role="img" aria-label="Plano de lotes de ${esc(p.name)}">${(([x, y, w, h]) => `<image href="${esc(lm.img)}" x="${x}" y="${y}" width="${w}" height="${h}"/>`)(lm.viewBox.split(' '))}${lots.map((l, j) => lm.polys[l.code] ? `<polygon points="${lm.polys[l.code]}" data-j="${j}" class="${l.code === code ? 'on' : ''}${l.status ? ' st-' + esc(l.status) : ''}"><title>Lote ${esc(l.code)} · ${l.area} m²</title></polygon>` : '').join('')}</svg></div>`;
-const plateHtml = (it) => it.kind === 'lot' ? mapHtml(it.l.code) : `<div class="pl-plate">${it.img ? `<img src="${esc(it.img)}" alt="${esc(it.kind === 'dwg' ? it.title : 'Plano del departamento ' + it.u.code)}">` : `<p>Plano del ${esc(it.u.code)}<br><small>disponible pronto</small></p>`}</div>`;
+const plateHtml = (it) => it.kind === 'lot' ? mapHtml(it.l.code) : `<div class="pl-plate">${it.img ? `<img src="${esc(it.img)}" alt="${esc(it.kind === 'dwg' ? it.title : 'Plano del departamento ' + it.u.code)}">` : ''}</div>`;
 const shareBtn = `<button type="button" class="btn-pill btn-pill-line pf-share">Compartir</button>`;
 const specsHtml = (it) => {
   if (it.kind === 'dwg') return `<p class="pf-type">${esc(p.name)}</p><h3 class="pf-name">${esc(it.title)}</h3><div class="pf-btns">${p.plans ? `<a class="btn-pill btn-pill-dark" href="${esc(p.plans)}" download>Descargar planos</a>` : ''}${shareBtn}</div>`;
@@ -86,7 +86,7 @@ const reelGroups = (p.gallery || [
   { title: 'Exteriores', imgs: (p.spaces || []).filter(x => x.img).map(x => x.img) },
   { title: 'Áreas comunes', imgs: (p.amenities || []).map(a => a.img || ''), labels: (p.amenities || []).map(a => a.title) },
   { title: 'Interiores', imgs: [] }
-]).slice(0, 3).map(g => ({ ...g, imgs: pad(g.imgs || []) }));
+]).map(g => ({ ...g, imgs: (g.imgs || []).filter(Boolean).slice(0, SLOTS) })).filter(g => g.imgs.length).slice(0, 3);   // no empty slots: only real images
 const reelFrames = reelGroups;
 function mountReel() {
   const box = document.getElementById('reel'); if (!box) return;
