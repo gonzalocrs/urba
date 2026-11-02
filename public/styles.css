@@ -952,3 +952,12 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .home-obras .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 .home-obras .cards{max-width:54rem;margin:0 auto;gap:3rem clamp(2rem,5vw,4.5rem)}
 @media (max-width:600px){.home-obras .cards{grid-template-columns:1fr}}
+/* lot plan: architect-style selection (Gonzalo 2026-11-02 "looks fake") */
+.pl-map{background:#fff}
+.pl-map polygon{mix-blend-mode:multiply;fill:transparent;stroke:transparent}
+.pl-map polygon:hover{fill:rgba(40,40,41,.06)}
+.pl-map polygon.on{fill:color-mix(in srgb,var(--accent,#f9ec00) 70%,transparent);stroke:var(--grafito);stroke-width:2.4;vector-effect:non-scaling-stroke}
+.pg-lots .pg-card{height:auto;min-height:0;aspect-ratio:967/420;align-self:start}
+.pg-lots .pl-map{inset:0;height:auto}
+.pg-lots .pl-map svg{padding:clamp(.75rem,2.5%,2rem)}
+@media (max-width:900px){.pg-lots .pg-card{min-height:0}}

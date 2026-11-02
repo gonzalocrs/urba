@@ -15,7 +15,7 @@
 
 
 <link rel="preload" href="/fonts/bonn-bf-medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css?v=20261102b">
+<link rel="stylesheet" href="/styles.css?v=20261102e">
 </head>
 <body class="theme-celeste">
 <header class="site-header" data-site-header></header>
@@ -24,7 +24,7 @@
 <section class="hero-photo" aria-label="Proyecto destacado">
   <img src="/img/proyectos/horizontes-del-valle/valle-nevado.jpg" alt="" fetchpriority="high">
   <div class="hero-photo-text" id="hero-text">
-    <p class="hero-kicker">En venta</p>
+    <p class="hero-kicker">En desarrollo</p>
     <h1>Horizontes del Valle</h1>
     <p class="hero-sub">Lotes · Urubamba</p>
     <a class="btn-pill" href="/proyecto.html?p=horizontes-del-valle">Ver proyecto <span aria-hidden="true">↗</span></a>
@@ -38,7 +38,7 @@
 </div></section>
 
 <section class="block" id="proyectos"><div class="wrap-wide">
-  <div class="sec-head"><div><p class="eyebrow">En venta</p><h2 class="title">Encuentra tu próximo espacio</h2></div></div>
+  <div class="sec-head"><div><p class="eyebrow">En desarrollo</p><h2 class="title">Encuentra tu próximo espacio</h2></div></div>
   <form class="filters" id="filters" aria-label="Filtrar proyectos"></form>
   <div class="cards" id="cards"></div>
   <p id="empty" class="muted" hidden>No encontramos proyectos con esos filtros.</p>
@@ -68,8 +68,8 @@
 </section>
 </main>
 <footer class="site-footer" data-site-footer></footer>
-<script src="/projects.js?v=20261102b"></script>
-<script src="/site.js?v=20261102b"></script>
+<script src="/projects.js?v=20261102e"></script>
+<script src="/site.js?v=20261102e"></script>
 <script>
 const HERO = [...forSale(), ...delivered().filter(x => x.page !== false)].filter(x => x.hero);
 let heroN; try { heroN = (+(localStorage.getItem('urba-hero') ?? -1) + 1) % HERO.length; localStorage.setItem('urba-hero', heroN); } catch (_) { heroN = Math.floor(Math.random() * HERO.length); }
