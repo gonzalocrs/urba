@@ -934,4 +934,4 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .split-full{min-height:min(60vh,36rem)}
 .split-full .making-panel{padding:clamp(2rem,4vw,3.5rem)}
 .split-full .split-text{padding:clamp(2rem,5vw,4rem)}
-.split-full .still{width:min(100%,15rem);gap:clamp(1.25rem,2.5vw,2rem)}
+.split-full .still{width:min(100%,10rem);gap:clamp(.9rem,1.8vw,1.4rem)}
