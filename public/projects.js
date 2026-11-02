@@ -80,6 +80,7 @@ const PROJECTS = [
     intro: 'Transformamos una estructura existente en un hotel, rediseñando por completo su distribución interior y su fachada. La materialidad conecta el edificio con el carácter arquitectónico de Cusco: una base de texturas rústicas, un cuerpo que reinterpreta la misma paleta cálida con una composición contemporánea y un remate de materiales naturales y vidrio de piso a techo que enmarca las montañas.',
     hero: '/img/proyectos/sierra-hotel/fachada.jpg', heroMobile: '/img/proyectos/sierra-hotel/fachada.jpg',
     cover: '/img/proyectos/sierra-hotel/cover.jpg',
+    featureImg: '/img/proyectos/sierra-hotel/foto-4.jpg',   // real photo, so the home panel doesn't repeat the hero render
     pageHero: '/img/proyectos/sierra-hotel/foto-4.jpg',   // project page hero: different from the home hero so the click feels like arriving somewhere new
     ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['uso', 'Uso', 'Hotel'], ['entrega', 'Entrega', '2024']],
     planImgs: [{ title: 'Plantas: primer piso, típica y azotea', img: '/img/proyectos/sierra-hotel/floor-plans.svg' }, { title: 'Elevación principal', img: '/img/proyectos/sierra-hotel/elevation.svg' }],
@@ -109,6 +110,7 @@ const PROJECTS = [
     address: 'Parque Amauta 206, Urb. Magisterial 1ra Etapa, San Sebastián, Cusco',
     intro: '',
     hero: '/img/proyectos/edificio-murano/fachada.jpg', heroMobile: '/img/proyectos/edificio-murano/fachada.jpg', cover: '/img/proyectos/edificio-murano/fachada.jpg',
+    featureImg: '/img/proyectos/edificio-murano/foto-cocina.jpg',
     pageHero: '/img/proyectos/edificio-murano/foto-sala-cocina.jpg',   // real photo of the delivered flat, differs from the home hero
     ficha: [['ubicacion', 'Ubicación', 'Magisterio, Cusco'], ['uso', 'Uso', 'Vivienda'], ['dorm', 'Departamentos', '1 y 3 dorm.'], ['entrega', 'Entrega', '2023']],
     planImgs: [
@@ -179,7 +181,7 @@ function featureCard(p, i, nav){
 }
 
 // Rotating feature panel: crossfades between projects, click a name to jump
-function mountFeatures(c, list){
+function mountFeatures(c, list, start){
   c.className = 'features rot'; c.closest('section').classList.add('is-feature');
   c.innerHTML = list.map((p, i) => featureCard(p, i, list)).join('');
   c.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
@@ -189,7 +191,7 @@ function mountFeatures(c, list){
   const play = () => { clearTimeout(t); if (!still) t = setTimeout(() => { go(k + 1); play(); }, 6000); };
   c.addEventListener('click', e => { const b = e.target.closest('.feature-nav button'); if (b) { go(+b.dataset.k); play(); } });
   c.addEventListener('mouseenter', () => clearTimeout(t)); c.addEventListener('mouseleave', play);
-  play();
+  go(start || 0); play();
 }
 
 // Filter bar (district / bedrooms / stage) used on home, listing and project pages
