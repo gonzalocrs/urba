@@ -5,7 +5,7 @@ const URBA = {
   whatsapp: '51974979393',            // digits only, with country code
   salesEmail: 'contacto@urba.pe',
   email: 'contacto@urba.pe',
-  address: 'Cusco, Perú',
+  address: 'Lima, Perú',
   company: 'Consorcio Mecano S.A.C.',
   ruc: '',                            // TODO RUC
   instagram: '', facebook: '', linkedin: ''
