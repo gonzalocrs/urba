@@ -15,7 +15,7 @@
 
 
 <link rel="preload" href="/fonts/bonn-bf-medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css?v=20261102i">
+<link rel="stylesheet" href="/styles.css?v=20261102j">
 </head>
 <body class="theme-celeste">
 <header class="site-header" data-site-header></header>
@@ -68,8 +68,8 @@
 </section>
 </main>
 <footer class="site-footer" data-site-footer></footer>
-<script src="/projects.js?v=20261102i"></script>
-<script src="/site.js?v=20261102i"></script>
+<script src="/projects.js?v=20261102j"></script>
+<script src="/site.js?v=20261102j"></script>
 <script>
 const HERO = [...forSale(), ...delivered().filter(x => x.page !== false)].filter(x => x.hero);
 let heroN; try { heroN = (+(localStorage.getItem('urba-hero') ?? -1) + 1) % HERO.length; localStorage.setItem('urba-hero', heroN); } catch (_) { heroN = Math.floor(Math.random() * HERO.length); }

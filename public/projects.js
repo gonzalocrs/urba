@@ -113,14 +113,14 @@ const PROJECTS = [
     pageHero: '/img/proyectos/edificio-murano/foto-sala-cocina.jpg',   // real photo of the delivered flat, differs from the home hero
     ficha: [['ubicacion', 'Ubicación', 'Magisterio, Cusco'], ['uso', 'Uso', 'Vivienda'], ['dorm', 'Departamentos', '1 y 3 dorm.'], ['entrega', 'Entrega', '2023']],
     planImgs: [
-      { title: 'Semisótano', img: '/img/proyectos/edificio-murano/planos/semisotano.svg?v=2' },
-      { title: 'Primer nivel', img: '/img/proyectos/edificio-murano/planos/nivel-1.svg?v=2' },
-      { title: 'Segundo nivel', img: '/img/proyectos/edificio-murano/planos/nivel-2.svg?v=2' },
-      { title: 'Típico 3 al 8', img: '/img/proyectos/edificio-murano/planos/tipico-3-8.svg?v=2' }
+      { title: 'Semisótano', img: '/img/proyectos/edificio-murano/planos/semisotano.svg?v=3' },
+      { title: 'Primer nivel', img: '/img/proyectos/edificio-murano/planos/nivel-1.svg?v=3' },
+      { title: 'Segundo nivel', img: '/img/proyectos/edificio-murano/planos/nivel-2.svg?v=3' },
+      { title: 'Típico 3 al 8', img: '/img/proyectos/edificio-murano/planos/tipico-3-8.svg?v=3' }
     ],
     units: [                                // typologies from the 2021 sheets; delivered, so no price shown
-      { code: '301 al 801', type: 'Flat', floorLabel: 'Pisos 3 al 8', beds: 3, baths: 3, area: 148, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x01.svg?v=2' },
-      { code: '102 al 802', type: 'Flat', floorLabel: 'Pisos 1 al 8', beds: 1, baths: 1, area: 65, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x02.svg?v=2' }
+      { code: '301 al 801', type: 'Flat', floorLabel: 'Pisos 3 al 8', beds: 3, baths: 3, area: 148, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x01.svg?v=3' },
+      { code: '102 al 802', type: 'Flat', floorLabel: 'Pisos 1 al 8', beds: 1, baths: 1, area: 65, price: 0, plan: '/img/proyectos/edificio-murano/planos/unidad-x02.svg?v=3' }
     ],
     spaces: [
       { title: 'Fachada', text: '', img: '/img/proyectos/edificio-murano/fachada.jpg' },

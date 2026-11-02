@@ -54,8 +54,12 @@ def main():
         r = d['rect'] + (-.01, -.01, .01, .01)   # pure horizontal/vertical lines have empty rects, which never 'intersect'
         if not r.intersects(clip) or r not in clip + (-2, -2, 2, 2): continue
         if d['rect'].width > clip.width * .95 and d['rect'].height > clip.height * .95: continue  # sheet frame
-        groups.setdefault(key(d), []).append(path_d(d['items'], x0, y0))
-        boxes[key(d)] = boxes.get(key(d), fitz.Rect(d['rect'])) | d['rect']
+        k = key(d)
+        if d['rect'].is_empty:   # lone straight line (e.g. a railing): draw it once, thin
+            if rules.get(k) not in ('cut', 'cutline'): continue
+            k = 'single'
+        groups.setdefault(k, []).append(path_d(d['items'], x0, y0))
+        boxes[k] = boxes.get(k, fitz.Rect(d['rect'])) | d['rect']
     W, H = x1 - x0, y1 - y0; vx = vy = 0
     body = []
     if debug:
@@ -68,8 +72,8 @@ def main():
     else:
         by, bb = {}, fitz.Rect()
         for k, ds in groups.items():
-            if k not in rules: print('unmapped (dropped):', k, len(ds), file=sys.stderr)
-            c = rules.get(k, 'drop')
+            if k not in rules and k != 'single': print('unmapped (dropped):', k, len(ds), file=sys.stderr)
+            c = 'line' if k == 'single' else rules.get(k, 'drop')
             if c != 'drop': by.setdefault(c, []).extend(ds); bb |= boxes[k]
         m = 6  # tight viewBox around what we kept
         vx, vy, W, H = bb.x0 - x0 - m, bb.y0 - y0 - m, bb.width + 2 * m, bb.height + 2 * m
