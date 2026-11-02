@@ -45,6 +45,10 @@
 </div></section>
 
 
+<section class="obras">
+  <div class="wrap-wide sec-head"><div><p class="eyebrow">Obras entregadas</p><h2 class="title">Espacios que ya son comunidad</h2></div><a class="link-arrow" href="/entregados.html">Ver obras</a></div>
+  <div class="wrap-wide"><div class="grid3" id="grid3"></div></div>
+</section>
 <section class="split-full">
   <div class="making-panel"><div class="still" role="img" aria-label="El logo de Urba, de completo a solo sus puntos de construcción"><div class="still-row r1"><span></span></div><div class="still-row r2"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:75.91%;top:52.34%"></i><i style="left:32.73%;top:61.98%"></i></div><div class="still-row r3"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:75.91%;top:52.34%"></i><i style="left:32.73%;top:61.98%"></i></div><div class="still-row r4"><span></span><i style="left:0.00%;top:-1.38%"></i><i style="left:22.27%;top:16.53%"></i><i style="left:49.09%;top:16.53%"></i><i style="left:95.00%;top:26.17%"></i><i style="left:32.73%;top:61.98%"></i></div></div></div>
   <div class="split-text"><p class="eyebrow">Quiénes somos</p><h2 class="title">Un logo siempre en construcción</h2><p>Una idea se convierte en proyecto, el proyecto en edificio, y al terminarlo volvemos a empezar. Por eso nuestro logo siempre se está construyendo, como nosotros.</p><a class="link-arrow" href="/nosotros.html">Saber más</a></div>
@@ -69,9 +73,19 @@
 <script>
 const HERO = [...forSale(), ...delivered().filter(x => x.page !== false)].filter(x => x.hero);
 let heroN; try { heroN = (+(localStorage.getItem('urba-hero') ?? -1) + 1) % HERO.length; localStorage.setItem('urba-hero', heroN); } catch (_) { heroN = Math.floor(Math.random() * HERO.length); }
-if (forSale().length < 3) { document.getElementById('filters').hidden = true; mountFeatures(document.getElementById('cards'), [...forSale(), ...delivered().filter(p => p.page !== false)], heroN + 1); }
+if (forSale().length < 3) { document.getElementById('filters').hidden = true; mountFeatures(document.getElementById('cards'), forSale());
+  // if the hero is already the valley, use another valley shot in the panel
+  const fi = document.querySelector('#cards .feature img'); if (fi && HERO[heroN] === forSale()[0]) fi.src = '/img/proyectos/horizontes-del-valle/valle-cerros.jpg'; }
 else mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));
 mountTalk(document.getElementById('talk'), document.getElementById('talk-word'), document.getElementById('talk-direct'));
+(function(){
+  const shots = [];
+  // round-robin across delivered projects so each one shows up before any repeats
+  const lists = delivered().map(p => [...new Set([p.cover, ...(p.spaces || []).filter(x => x.title !== 'Fachada').map(x => x.img), p.hero].filter(Boolean))].map(img => ({ img, p })));
+  for (let i = 0; lists.some(l => l[i]); i++) lists.forEach(l => { if (l[i]) shots.push(l[i]); });
+  const g = document.getElementById('grid3'); if (!g) return;
+  g.innerHTML = shots.filter(x => x.p.page !== false && x.img === (x.p.cover || x.p.hero)).slice(0, 2).map(x => `<a class="g3" href="${x.p.page === false ? '/entregados.html' : projectUrl(x.p)}"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"></div><p><strong>${esc(x.p.name)}</strong><span>${esc(x.p.district)}${x.p.kicker ? ' · ' + esc(x.p.kicker.split('·').pop().trim()) : ''}</span></p></a>`).join('');
+})();
 (function(){
   // A different project on every visit: cycle through them, remembered per browser (random if storage is blocked)
   if (!HERO.length) return;
