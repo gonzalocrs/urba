@@ -947,3 +947,8 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .obras.archive .g3{color:var(--grafito)}
 .obras.archive .g3 p span{color:var(--muted)}
 .ns-stats{grid-template-columns:repeat(5,minmax(0,1fr))}@media (max-width:860px){.ns-stats{grid-template-columns:1fr 1fr}.ns-stats li:nth-child(5){border-left:0;padding-left:0}}
+/* Home obras entregadas: same cards as Proyectos, two across (Gonzalo 2026-11-02) */
+.home-obras{background:var(--blanco)}
+.home-obras .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.home-obras .ph{aspect-ratio:4/3}
+@media (max-width:600px){.home-obras .cards{grid-template-columns:1fr}}
