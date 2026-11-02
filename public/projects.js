@@ -72,7 +72,7 @@ const PROJECTS = [
     district: 'Cusco',
     stage: 'entregado',
     headline: 'Sierra Hotel, Cusco',
-    kicker: 'Hotel · 2023',
+    kicker: 'Hotel · 2024',
     bedrooms: [],
     areas: '',
     floors: '',
@@ -81,7 +81,7 @@ const PROJECTS = [
     hero: '/img/proyectos/sierra-hotel/fachada.jpg', heroMobile: '/img/proyectos/sierra-hotel/fachada.jpg',
     cover: '/img/proyectos/sierra-hotel/cover.jpg',
     pageHero: '/img/proyectos/sierra-hotel/foto-4.jpg',   // project page hero: different from the home hero so the click feels like arriving somewhere new
-    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['uso', 'Uso', 'Hotel'], ['entrega', 'Entrega', '2023']],
+    ficha: [['ubicacion', 'Ubicación', 'Cusco, Perú'], ['uso', 'Uso', 'Hotel'], ['entrega', 'Entrega', '2024']],
     planImgs: [{ title: 'Plantas: primer piso, típica y azotea', img: '/img/proyectos/sierra-hotel/floor-plans.svg' }, { title: 'Elevación principal', img: '/img/proyectos/sierra-hotel/elevation.svg' }],
     spaces: [
       { title: 'Fachada', text: 'Base, cuerpo y remate: tres partes que leen la ciudad. La base toma las texturas rústicas de Cusco y el cuerpo reinterpreta su paleta cálida con una composición sobria.', img: '/img/proyectos/sierra-hotel/fachada.jpg' },
