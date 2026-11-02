@@ -26,6 +26,6 @@
 <footer class="site-footer" data-site-footer></footer>
 <script src="/projects.js"></script>
 <script src="/site.js"></script>
-<script>document.getElementById('cards').innerHTML = [...forSale(), ...delivered()].map(projectCard).join('');</script>
+<script>document.getElementById('cards').innerHTML = [...forSale(), ...delivered()].filter(p => p.page !== false).map(projectCard).join('');</script>
 </body>
 </html>
