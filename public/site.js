@@ -14,7 +14,6 @@ const URBA = {
 const NAV = [
   ['/proyectos.html', 'Proyectos'],
   ['/nosotros.html', 'Nosotros'],
-  ['/entregados.html', 'Entregados'],
   ['/contacto.html', 'Contacto']
 ];
 

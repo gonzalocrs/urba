@@ -21,20 +21,11 @@
 <main>
 
 <section class="page-head band"><div class="iso" aria-hidden="true"></div><div class="wrap"><h1 class="title">Proyectos</h1></div></section>
-<section class="wrap block-tight">
-  <form class="filters" id="filters" aria-label="Filtrar proyectos"></form>
-  <div class="cards" id="cards"></div>
-  <p id="empty" class="muted" hidden>No encontramos proyectos con esos filtros.</p>
-</section>
+<section class="wrap block-tight"><div class="cards" id="cards"></div></section>
 </main>
 <footer class="site-footer" data-site-footer></footer>
 <script src="/projects.js"></script>
 <script src="/site.js"></script>
-<script>if (forSale().length < 3) { document.getElementById('filters').hidden = true;
-  // Archive: same tiles as the home 'Obras entregadas' block, every project with a page
-  const list = [...forSale(), ...delivered().filter(p => p.page !== false)], sec = document.getElementById('cards').closest('section');
-  sec.className = 'obras archive'; sec.innerHTML = `<div class="wrap-wide"><div class="grid3">${list.map(p => { const k = (p.kicker || '').split('·'); const meta = [k[0] && k[0].trim(), p.district, p.stage === 'entregado' ? (k[1] || '').trim() : STAGES[p.stage]].filter(Boolean).join(' · ');
-    return `<a class="g3" href="${projectUrl(p)}"><div class="g3-img"><img src="${esc(p.cover || p.hero)}" alt="${esc(p.name)}" loading="lazy"></div><p><strong>${esc(p.name)}</strong><span>${esc(meta)}</span></p></a>`; }).join('')}</div></div>`; }
-else mountFilters(document.getElementById('filters'), document.getElementById('cards'), forSale, document.getElementById('empty'));</script>
+<script>document.getElementById('cards').innerHTML = [...forSale(), ...delivered()].map(projectCard).join('');</script>
 </body>
 </html>

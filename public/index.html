@@ -46,7 +46,7 @@
 
 
 <section class="obras">
-  <div class="wrap-wide sec-head"><div><p class="eyebrow">Obras entregadas</p><h2 class="title">Espacios que ya son comunidad</h2></div><a class="link-arrow" href="/entregados.html">Ver obras</a></div>
+  <div class="wrap-wide sec-head"><div><p class="eyebrow">Obras entregadas</p><h2 class="title">Espacios que ya son comunidad</h2></div><a class="link-arrow" href="/proyectos.html">Ver proyectos</a></div>
   <div class="wrap-wide"><div class="grid3" id="grid3"></div></div>
 </section>
 <section class="split-full">
@@ -84,7 +84,7 @@ mountTalk(document.getElementById('talk'), document.getElementById('talk-word'),
   const lists = delivered().map(p => [...new Set([p.cover, ...(p.spaces || []).filter(x => x.title !== 'Fachada').map(x => x.img), p.hero].filter(Boolean))].map(img => ({ img, p })));
   for (let i = 0; lists.some(l => l[i]); i++) lists.forEach(l => { if (l[i]) shots.push(l[i]); });
   const g = document.getElementById('grid3'); if (!g) return;
-  g.innerHTML = shots.filter(x => x.p.page !== false && x.img === (x.p.cover || x.p.hero)).slice(0, 2).map(x => `<a class="g3" href="${x.p.page === false ? '/entregados.html' : projectUrl(x.p)}"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"></div><p><strong>${esc(x.p.name)}</strong><span>${esc(x.p.district)}${x.p.kicker ? ' · ' + esc(x.p.kicker.split('·').pop().trim()) : ''}</span></p></a>`).join('');
+  g.innerHTML = shots.filter(x => x.p.page !== false && x.img === (x.p.cover || x.p.hero)).slice(0, 2).map(x => `<a class="g3" href="${x.p.page === false ? '/proyectos.html' : projectUrl(x.p)}"><div class="g3-img"><img src="${esc(x.img)}" alt="${esc(x.p.name)}, ${esc(x.p.district)}" loading="lazy"></div><p><strong>${esc(x.p.name)}</strong><span>${esc(x.p.district)}${x.p.kicker ? ' · ' + esc(x.p.kicker.split('·').pop().trim()) : ''}</span></p></a>`).join('');
 })();
 (function(){
   // A different project on every visit: cycle through them, remembered per browser (random if storage is blocked)
