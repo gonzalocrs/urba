@@ -942,3 +942,7 @@ div.pl-specs{display:flex;justify-content:flex-end;margin-top:1.5rem}
 .is-feature .feature-body{padding:0;background:none}
 @media (max-width:860px){.is-feature .feature{grid-template-columns:1fr}.is-feature .feature-img{height:auto}}
 .statement-band{background:var(--blanco)}
+/* Proyectos archive on light background (Gonzalo 2026-11-02) */
+.obras.archive{background:var(--soft);color:var(--grafito);padding-top:clamp(1rem,3vw,2rem)}
+.obras.archive .g3{color:var(--grafito)}
+.obras.archive .g3 p span{color:var(--muted)}
